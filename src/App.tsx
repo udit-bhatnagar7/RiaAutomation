@@ -4,15 +4,15 @@
  */
 
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { 
-  CheckCircle2, 
-  ShieldCheck, 
-  Zap, 
-  FileText, 
-  Search, 
-  Layout, 
-  ArrowRight, 
-  BarChart3, 
+import {
+  CheckCircle2,
+  ShieldCheck,
+  Zap,
+  FileText,
+  Search,
+  Layout,
+  ArrowRight,
+  BarChart3,
   AlertCircle,
   Users,
   Building2,
@@ -34,7 +34,7 @@ import {
 } from "lucide-react";
 import { useRef, useState, useEffect, ReactNode, MouseEvent } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import DemoPage from "./DemoPage";
+import DemoPage, { WatchRiaThinkSection, RoleSwitcher, JourneyTimeline } from "./DemoPage";
 
 interface FadeInProps {
   children: ReactNode;
@@ -44,15 +44,15 @@ interface FadeInProps {
 
 const FadeIn = ({ children, delay = 0, direction = "up" }: FadeInProps) => {
   const variants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: direction === "up" ? 20 : direction === "down" ? -20 : 0,
       x: direction === "left" ? 20 : direction === "right" ? -20 : 0,
       filter: "blur(4px)"
     },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       x: 0,
       filter: "blur(0px)",
       transition: { duration: 0.5, delay, ease: [0.21, 0.47, 0.32, 0.98] }
@@ -147,13 +147,13 @@ const RiaStudio = () => {
         {/* Compare Mode Toggle */}
         <div className="flex justify-center mb-12">
           <div className="bg-white p-1 rounded-full border border-divider shadow-sm flex items-center">
-            <button 
+            <button
               onClick={() => setCompareMode(false)}
               className={`px-6 py-2 rounded-full text-xs font-bold transition-all ${!compareMode ? "bg-brand-blue text-white shadow-lg" : "text-text-muted hover:text-text-primary"}`}
             >
               STUDIO VIEW
             </button>
-            <button 
+            <button
               onClick={() => setCompareMode(true)}
               className={`px-6 py-2 rounded-full text-xs font-bold transition-all ${compareMode ? "bg-brand-blue text-white shadow-lg" : "text-text-muted hover:text-text-primary"}`}
             >
@@ -169,11 +169,10 @@ const RiaStudio = () => {
               <button
                 key={tool.id}
                 onClick={() => handleToolChange(i)}
-                className={`w-full flex flex-col items-center gap-2 p-4 rounded-2xl transition-all duration-300 border ${
-                  activeTool === i 
-                    ? "bg-white border-brand-blue shadow-xl shadow-brand-blue/5 text-brand-blue" 
-                    : "bg-transparent border-transparent text-text-muted hover:bg-white/50 hover:border-divider"
-                }`}
+                className={`w-full flex flex-col items-center gap-2 p-4 rounded-2xl transition-all duration-300 border ${activeTool === i
+                  ? "bg-white border-brand-blue shadow-xl shadow-brand-blue/5 text-brand-blue"
+                  : "bg-transparent border-transparent text-text-muted hover:bg-white/50 hover:border-divider"
+                  }`}
               >
                 <tool.icon className="w-6 h-6" />
                 <span className="text-[10px] font-bold uppercase tracking-wider text-center">{tool.id}</span>
@@ -185,7 +184,7 @@ const RiaStudio = () => {
           <div className={`${compareMode ? "lg:col-span-10" : "lg:col-span-7"}`}>
             <AnimatePresence mode="wait">
               {compareMode ? (
-                <motion.div 
+                <motion.div
                   key="compare"
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -207,7 +206,7 @@ const RiaStudio = () => {
                   ))}
                 </motion.div>
               ) : (
-                <motion.div 
+                <motion.div
                   key="studio"
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -219,7 +218,7 @@ const RiaStudio = () => {
                   {/* ... existing canvas content ... */}
                   <AnimatePresence mode="wait">
                     {isProcessing && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -227,7 +226,7 @@ const RiaStudio = () => {
                       >
                         <div className="relative flex flex-col items-center">
                           <div className="w-16 h-16 border-4 border-brand-blue/20 border-t-brand-blue rounded-full animate-spin mb-4" />
-                          <motion.div 
+                          <motion.div
                             className="absolute inset-0 flex items-center justify-center"
                             animate={{ scale: [1, 1.2, 1] }}
                             transition={{ duration: 1, repeat: Infinity }}
@@ -237,7 +236,7 @@ const RiaStudio = () => {
                           <span className="text-[10px] font-bold text-brand-blue uppercase tracking-widest">AI Processing...</span>
                         </div>
                         {/* Scanning Line */}
-                        <motion.div 
+                        <motion.div
                           className="absolute left-0 right-0 h-px bg-brand-blue shadow-[0_0_15px_rgba(59,91,255,0.5)] z-50"
                           initial={{ top: "0%" }}
                           animate={{ top: "100%" }}
@@ -248,28 +247,28 @@ const RiaStudio = () => {
                   </AnimatePresence>
 
                   {/* Before Image */}
-                  <img 
-                    src={currentTool.before} 
-                    alt="Before" 
+                  <img
+                    src={currentTool.before}
+                    alt="Before"
                     className="absolute inset-0 w-full h-full object-cover"
                     referrerPolicy="no-referrer"
                   />
 
                   {/* After Image (Masked) */}
-                  <div 
+                  <div
                     className="absolute inset-0 w-full h-full overflow-hidden"
                     style={{ clipPath: `inset(0 ${100 - revealPosition}% 0 0)` }}
                   >
-                    <img 
-                      src={typeof currentTool.after === 'string' ? currentTool.after : currentTool.after[stagingStyle as keyof typeof currentTool.after]} 
-                      alt="After" 
+                    <img
+                      src={typeof currentTool.after === 'string' ? currentTool.after : currentTool.after[stagingStyle as keyof typeof currentTool.after]}
+                      alt="After"
                       className="absolute inset-0 w-full h-full object-cover"
                       referrerPolicy="no-referrer"
                     />
-                    
+
                     {/* Tool-specific effects */}
                     {activeTool === 0 && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         className="absolute inset-0 bg-brand-blue/5 pointer-events-none"
@@ -278,7 +277,7 @@ const RiaStudio = () => {
                       </motion.div>
                     )}
                     {activeTool === 1 && (
-                      <motion.div 
+                      <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent w-1/3 -skew-x-12 pointer-events-none"
                         animate={{ left: ["-100%", "200%"] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -287,7 +286,7 @@ const RiaStudio = () => {
                   </div>
 
                   {/* Drag Handle */}
-                  <div 
+                  <div
                     className="absolute top-0 bottom-0 w-1 bg-white shadow-xl z-30 flex items-center justify-center"
                     style={{ left: `${revealPosition}%` }}
                   >
@@ -310,7 +309,7 @@ const RiaStudio = () => {
                   {/* Floating Price Card */}
                   <AnimatePresence>
                     {!isProcessing && (
-                      <motion.div 
+                      <motion.div
                         initial={{ y: 50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 bg-white p-4 rounded-2xl shadow-2xl border border-divider flex items-center gap-6"
@@ -355,11 +354,10 @@ const RiaStudio = () => {
                         <button
                           key={style}
                           onClick={() => setStagingStyle(style)}
-                          className={`text-left px-3 py-2 rounded-lg text-[10px] font-bold transition-all border ${
-                            stagingStyle === style 
-                              ? "bg-brand-blue text-white border-brand-blue" 
-                              : "bg-bg-primary text-text-secondary border-divider hover:border-brand-blue/30"
-                          }`}
+                          className={`text-left px-3 py-2 rounded-lg text-[10px] font-bold transition-all border ${stagingStyle === style
+                            ? "bg-brand-blue text-white border-brand-blue"
+                            : "bg-bg-primary text-text-secondary border-divider hover:border-brand-blue/30"
+                            }`}
                         >
                           {style}
                         </button>
@@ -385,19 +383,6 @@ const RiaStudio = () => {
                   <button className="w-full py-3 bg-brand-blue text-white rounded-xl text-xs font-bold hover:bg-brand-blue-dark transition-colors shadow-lg shadow-brand-blue/20">
                     Apply to Listing
                   </button>
-                </div>
-              </div>
-
-              <div className="p-6 bg-brand-blue/5 border border-brand-blue/10 rounded-2xl group cursor-pointer hover:bg-brand-blue/10 transition-colors">
-                <div className="flex items-center gap-2 mb-3">
-                  <ZapIcon className="w-4 h-4 text-brand-blue" />
-                  <span className="text-[10px] font-bold uppercase text-brand-blue">Bundle & Save</span>
-                </div>
-                <h5 className="font-bold text-sm mb-1">Media Boost Package</h5>
-                <p className="text-[10px] text-text-secondary mb-4">Includes Enhancement, Day to Dusk, and Virtual Staging.</p>
-                <div className="flex items-end gap-1">
-                  <span className="text-xl font-bold">$199</span>
-                  <span className="text-[10px] text-text-muted mb-1">per listing</span>
                 </div>
               </div>
             </div>
@@ -457,8 +442,8 @@ function LandingPage() {
           </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-text-secondary">
             <a href="#features" className="hover:text-brand-blue transition-colors">Features</a>
-            <a href="#how-it-works" className="hover:text-brand-blue transition-colors">How it Works</a>
-            <Link to="/demo" className="hover:text-brand-blue transition-colors">Interactive Demo</Link>
+            {/* <a href="#how-it-works" className="hover:text-brand-blue transition-colors">How it Works</a>
+            <Link to="/demo" className="hover:text-brand-blue transition-colors">Interactive Demo</Link> */}
             <button className="btn-primary py-2 text-sm">Get Started</button>
           </div>
         </div>
@@ -527,9 +512,9 @@ function LandingPage() {
                   <div className="grid grid-cols-3 gap-3">
                     {[1, 2, 3].map((i) => (
                       <div key={i} className="relative group">
-                        <img 
-                          src={`https://picsum.photos/seed/house${i}/200/150`} 
-                          alt="House" 
+                        <img
+                          src={`https://picsum.photos/seed/house${i}/200/150`}
+                          alt="House"
                           className="rounded-lg w-full aspect-video object-cover border border-border-subtle"
                           referrerPolicy="no-referrer"
                         />
@@ -622,62 +607,8 @@ function LandingPage() {
 
       <RiaStudio />
 
-      {/* How it Works - Updated to link to Demo */}
-      <section id="how-it-works" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="flex-1">
-              <FadeIn direction="left">
-                <h2 className="text-4xl font-bold tracking-tight mb-8">How it works</h2>
-                <div className="space-y-12">
-                  {[
-                    { step: "01", title: "Upload", desc: "Drop in your photos, inspection reports, and property notes." },
-                    { step: "02", title: "Build + Improve", desc: "AI assembles the listing and suggests optimizations for remarks and media." },
-                    { step: "03", title: "Review + Save Draft", desc: "Verify the data and export directly to your MLS as a ready-to-go draft." },
-                  ].map((step, i) => (
-                    <div key={i} className="flex gap-6">
-                      <div className="text-4xl font-bold text-brand-blue/20">{step.step}</div>
-                      <div>
-                        <h4 className="text-xl font-bold mb-2">{step.title}</h4>
-                        <p className="text-text-secondary text-sm">{step.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-12">
-                  <Link to="/demo" className="inline-flex items-center gap-2 text-brand-blue font-bold hover:gap-3 transition-all">
-                    Experience the interactive demo <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </FadeIn>
-            </div>
-            <div className="flex-1 w-full max-w-md">
-              <FadeIn direction="right">
-                <Link to="/demo" className="block relative aspect-square bg-bg-accent rounded-3xl overflow-hidden border border-border-subtle group">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-3/4 h-3/4 glass-card p-6 flex flex-col gap-4 group-hover:scale-105 transition-transform duration-500">
-                      <div className="h-4 w-1/2 bg-bg-accent rounded animate-pulse" />
-                      <div className="h-4 w-3/4 bg-bg-accent rounded animate-pulse" />
-                      <div className="h-32 w-full bg-bg-accent rounded-xl animate-pulse" />
-                      <div className="flex gap-2">
-                        <div className="h-12 w-12 bg-bg-accent rounded animate-pulse" />
-                        <div className="h-12 w-12 bg-bg-accent rounded animate-pulse" />
-                        <div className="h-12 w-12 bg-bg-accent rounded animate-pulse" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/5 transition-colors flex items-center justify-center">
-                    <div className="bg-white px-4 py-2 rounded-full shadow-xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2 text-xs font-bold text-brand-blue">
-                      <Sparkles className="w-3 h-3" />
-                      Launch Demo
-                    </div>
-                  </div>
-                </Link>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* How it Works - Replaced with Watch Ria Think section */}
+      <WatchRiaThinkSection isDemoPage={false} />
 
       {/* Listing Readiness Score */}
       <section className="py-24 bg-bg-accent/50">
@@ -702,7 +633,7 @@ function LandingPage() {
                           <span className={`text-lg font-bold ${stat.color}`}>{stat.value}%</span>
                         </div>
                         <div className="h-2 bg-bg-accent rounded-full overflow-hidden">
-                          <motion.div 
+                          <motion.div
                             className={`h-full ${stat.color.replace('text', 'bg')}`}
                             initial={{ width: 0 }}
                             whileInView={{ width: `${stat.value}%` }}
@@ -723,8 +654,8 @@ function LandingPage() {
                   <div className="relative w-64 h-64">
                     <svg className="w-full h-full" viewBox="0 0 100 100">
                       <circle cx="50" cy="50" r="45" fill="none" stroke="#E6EAF0" strokeWidth="8" />
-                      <motion.circle 
-                        cx="50" cy="50" r="45" fill="none" stroke="#3B5BFF" strokeWidth="8" 
+                      <motion.circle
+                        cx="50" cy="50" r="45" fill="none" stroke="#3B5BFF" strokeWidth="8"
                         strokeDasharray="283"
                         initial={{ strokeDashoffset: 283 }}
                         whileInView={{ strokeDashoffset: 283 - (283 * 0.94) }}
@@ -780,64 +711,9 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Designed For */}
-      <section className="py-24 bg-bg-primary">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <FadeIn>
-              <h2 className="text-4xl font-bold tracking-tight">Designed for</h2>
-            </FadeIn>
-          </div>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { title: "Agents", desc: "Go live faster with stronger presentation.", icon: Users },
-              { title: "Coordinators", desc: "Manage 3x more listings with half the effort.", icon: ClipboardCheck },
-              { title: "Brokerages", desc: "Ensure brand consistency across all offices.", icon: Building2 },
-              { title: "Compliance", desc: "Reduce audit risks and MLS violation fines.", icon: ShieldCheck },
-            ].map((role, i) => (
-              <div key={i}>
-                <FadeIn delay={i * 0.1}>
-                  <div className="glass-card p-8 text-center hover:border-brand-blue/30 transition-all cursor-default">
-                    <div className="w-12 h-12 bg-bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
-                      <role.icon className="w-6 h-6 text-brand-blue" />
-                    </div>
-                    <h4 className="font-bold mb-2">{role.title}</h4>
-                    <p className="text-xs text-text-secondary leading-relaxed">{role.desc}</p>
-                  </div>
-                </FadeIn>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RoleSwitcher />
 
-      {/* Roadmap Teaser */}
-      <section className="py-24 bg-white">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <FadeIn>
-            <h2 className="text-3xl font-bold tracking-tight mb-12">Built for the full seller journey.</h2>
-            <div className="relative">
-              <div className="absolute top-1/2 left-0 w-full h-px bg-divider -z-10" />
-              <div className="flex justify-between">
-                {[
-                  { label: "Pre-Listing", status: "Active" },
-                  { label: "MLS Draft", status: "Active" },
-                  { label: "Marketing", status: "Upcoming" },
-                  { label: "Closing", status: "Upcoming" },
-                ].map((milestone, i) => (
-                  <div key={i} className="flex flex-col items-center gap-4">
-                    <div className={`w-3 h-3 rounded-full border-2 ${milestone.status === 'Active' ? 'bg-brand-blue border-brand-blue' : 'bg-white border-divider'}`} />
-                    <div className="flex flex-col">
-                      <span className={`text-xs font-bold ${milestone.status === 'Active' ? 'text-text-primary' : 'text-text-muted'}`}>{milestone.label}</span>
-                      {milestone.status === 'Upcoming' && <span className="text-[8px] text-text-muted uppercase tracking-widest font-bold">Soon</span>}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <JourneyTimeline />
 
       {/* Final CTA */}
       <section className="py-32 bg-white border-t border-divider">

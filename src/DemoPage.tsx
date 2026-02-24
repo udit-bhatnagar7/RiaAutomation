@@ -4,14 +4,14 @@
  */
 
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { 
-  Upload, 
-  FileText, 
-  CheckCircle2, 
-  AlertCircle, 
-  Sparkles, 
-  ArrowRight, 
-  ShieldCheck, 
+import {
+  Upload,
+  FileText,
+  CheckCircle2,
+  AlertCircle,
+  Sparkles,
+  ArrowRight,
+  ShieldCheck,
   Search,
   ChevronRight,
   Download,
@@ -51,13 +51,12 @@ const StepTimeline = ({ activeStep }: { activeStep: number }) => {
       {steps.map((step, i) => {
         const isActive = activeStep === i;
         const isPast = activeStep > i;
-        
+
         return (
           <div key={step.id} className="flex gap-6 items-start">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 z-10 ${
-              isActive ? "bg-brand-blue text-white scale-110 shadow-lg shadow-brand-blue/20" : 
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 z-10 ${isActive ? "bg-brand-blue text-white scale-110 shadow-lg shadow-brand-blue/20" :
               isPast ? "bg-status-success text-white" : "bg-white border border-border-subtle text-text-muted"
-            }`}>
+              }`}>
               {isPast ? <CheckCircle2 className="w-4 h-4" /> : `0${step.id}`}
             </div>
             <div className={`transition-all duration-500 ${isActive ? "opacity-100 translate-x-2" : "opacity-40"}`}>
@@ -74,7 +73,7 @@ const StepTimeline = ({ activeStep }: { activeStep: number }) => {
 const LiveUIDemo = ({ step }: { step: number }) => {
   const [typingText, setTypingText] = useState("");
   const fullText = "Stunning 4-bedroom colonial in the heart of Oakwood. Recently renovated kitchen with quartz countertops and stainless steel appliances. Spacious backyard perfect for entertaining...";
-  
+
   useEffect(() => {
     if (step === 1) {
       let i = 0;
@@ -108,7 +107,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
       <div className="flex-1 p-6 overflow-y-auto">
         <AnimatePresence mode="wait">
           {step === 0 && (
-            <motion.div 
+            <motion.div
               key="step1"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -117,7 +116,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
             >
               <div className="w-20 h-20 bg-bg-accent rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden">
                 <Upload className="text-brand-blue w-8 h-8" />
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-brand-blue/10"
                   initial={{ top: "100%" }}
                   animate={{ top: "0%" }}
@@ -126,10 +125,10 @@ const LiveUIDemo = ({ step }: { step: number }) => {
               </div>
               <h3 className="font-bold text-lg mb-2">Drop listing assets here</h3>
               <p className="text-sm text-text-secondary max-w-xs">PDFs, JPEGs, and property notes. Ria handles the extraction.</p>
-              
+
               <div className="mt-8 flex gap-3">
                 {[1, 2, 3].map(i => (
-                  <motion.div 
+                  <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -140,7 +139,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                   </motion.div>
                 ))}
               </div>
-              <motion.p 
+              <motion.p
                 className="mt-6 text-[10px] font-bold text-brand-blue uppercase tracking-widest"
                 animate={{ opacity: [0.4, 1, 0.4] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -151,7 +150,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
           )}
 
           {step === 1 && (
-            <motion.div 
+            <motion.div
               key="step2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -165,7 +164,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                   { label: "Square Feet", value: "2,840", source: "Floor Plan", warning: true },
                   { label: "Year Built", value: "1974", source: "Public Record" }
                 ].map((field, i) => (
-                  <motion.div 
+                  <motion.div
                     key={i}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -184,7 +183,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-sm">{field.value}</span>
                       {field.warning && (
-                        <motion.div 
+                        <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           className="flex items-center gap-1 text-[8px] font-bold text-status-warning"
@@ -220,7 +219,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
           )}
 
           {step === 2 && (
-            <motion.div 
+            <motion.div
               key="step3"
               initial={{ opacity: 0, scale: 1.02 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -247,9 +246,9 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                   {[1, 2, 3].map(i => (
                     <div key={i} className="space-y-2">
                       <div className="aspect-video bg-bg-accent rounded-lg overflow-hidden relative border border-border-subtle">
-                        <img 
-                          src={`https://picsum.photos/seed/house${i+10}/200/150`} 
-                          alt="House" 
+                        <img
+                          src={`https://picsum.photos/seed/house${i + 10}/200/150`}
+                          alt="House"
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         />
@@ -283,14 +282,14 @@ const LiveUIDemo = ({ step }: { step: number }) => {
               </div>
 
               <div className="mt-auto pt-6">
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full py-4 bg-brand-blue text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-brand-blue/20 relative overflow-hidden group"
                 >
                   <Download className="w-5 h-5" />
                   Export to MLS Draft
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 bg-white/20"
                     initial={{ x: "-100%" }}
                     whileHover={{ x: "100%" }}
@@ -308,7 +307,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
 
 const Counter = ({ from, to, label, active }: { from: string, to: string, label: string, active: boolean }) => {
   const [current, setCurrent] = useState(from);
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setCurrent(to);
@@ -322,7 +321,7 @@ const Counter = ({ from, to, label, active }: { from: string, to: string, label:
       <div className="flex items-center gap-1.5">
         <span className={`text-[10px] line-through opacity-40 ${active ? "text-white" : "text-text-muted"}`}>{from}</span>
         <ArrowRight className={`w-2.5 h-2.5 ${active ? "text-white" : "text-brand-blue"}`} />
-        <motion.span 
+        <motion.span
           key={current}
           initial={{ opacity: 0, x: -5 }}
           animate={{ opacity: 1, x: 0 }}
@@ -373,7 +372,7 @@ const RolePreview = ({ role }: { role: string }) => {
       <div className="absolute -top-8 left-0 right-0 flex flex-col items-center gap-2">
         <span className="text-[10px] font-bold text-brand-blue uppercase tracking-widest opacity-60">Role-aware intelligence</span>
         <div className="w-full h-px bg-divider relative overflow-hidden">
-          <motion.div 
+          <motion.div
             key={role}
             initial={{ left: "-100%" }}
             animate={{ left: "100%" }}
@@ -397,7 +396,7 @@ const RolePreview = ({ role }: { role: string }) => {
                     <p className="text-xs text-text-muted">1248 Oakwood Ave • Draft</p>
                   </div>
                 </div>
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   className="px-3 py-1 bg-status-success text-white text-[10px] font-bold rounded-full shadow-lg shadow-status-success/20"
@@ -405,7 +404,7 @@ const RolePreview = ({ role }: { role: string }) => {
                   READY TO PUBLISH
                 </motion.div>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div className="p-5 bg-bg-primary rounded-2xl border border-brand-blue/20 relative overflow-hidden group">
@@ -433,7 +432,7 @@ const RolePreview = ({ role }: { role: string }) => {
                       </div>
                     </div>
                     <div className="h-2 bg-divider rounded-full overflow-hidden">
-                      <motion.div 
+                      <motion.div
                         initial={{ width: "82%" }}
                         animate={{ width: `${score}%` }}
                         className="h-full bg-brand-blue"
@@ -448,7 +447,7 @@ const RolePreview = ({ role }: { role: string }) => {
                     {[1, 2].map(i => (
                       <div key={i} className="aspect-square bg-bg-accent rounded-xl relative overflow-hidden group">
                         <img src={`https://picsum.photos/seed/agent-ui-${i}/300/300`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                        <motion.div 
+                        <motion.div
                           initial={{ y: 20, opacity: 0 }}
                           animate={{ y: 0, opacity: 1 }}
                           transition={{ delay: 0.5 + i * 0.1 }}
@@ -459,7 +458,7 @@ const RolePreview = ({ role }: { role: string }) => {
                       </div>
                     ))}
                   </div>
-                  <motion.button 
+                  <motion.button
                     animate={{ boxShadow: ["0 0 0px rgba(59,91,255,0)", "0 0 15px rgba(59,91,255,0.3)", "0 0 0px rgba(59,91,255,0)"] }}
                     transition={{ duration: 2, repeat: Infinity }}
                     className="w-full py-3 bg-brand-blue text-white rounded-xl text-xs font-bold shadow-xl shadow-brand-blue/20"
@@ -482,14 +481,14 @@ const RolePreview = ({ role }: { role: string }) => {
                   BULK REVIEW (3)
                 </button>
               </div>
-              
+
               <div className="grid gap-3">
                 {[
                   { addr: "482 Pine St", progress: 85, status: "DRAFT READY", type: "Single Family" },
                   { addr: "129 Market Ave", progress: 40, status: "IN REVIEW", type: "Condo" },
                   { addr: "901 Ocean Blvd", progress: 100, status: "COMPLETED", type: "Luxury" }
                 ].map((listing, i) => (
-                  <motion.div 
+                  <motion.div
                     key={i}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -497,9 +496,8 @@ const RolePreview = ({ role }: { role: string }) => {
                     className="p-4 bg-bg-primary rounded-2xl border border-divider flex items-center justify-between group hover:border-brand-blue/30 transition-colors"
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                        listing.progress === 100 ? "bg-status-success/10 text-status-success" : "bg-brand-blue/10 text-brand-blue"
-                      }`}>
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${listing.progress === 100 ? "bg-status-success/10 text-status-success" : "bg-brand-blue/10 text-brand-blue"
+                        }`}>
                         <FileText className="w-5 h-5" />
                       </div>
                       <div>
@@ -514,25 +512,24 @@ const RolePreview = ({ role }: { role: string }) => {
                           <span>{listing.progress}%</span>
                         </div>
                         <div className="h-1.5 bg-divider rounded-full overflow-hidden">
-                          <motion.div 
+                          <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${listing.progress}%` }}
                             transition={{ duration: 1, delay: 0.3 + i * 0.1 }}
-                            className={`h-full ${listing.progress === 100 ? "bg-status-success" : "bg-brand-blue"}`} 
+                            className={`h-full ${listing.progress === 100 ? "bg-status-success" : "bg-brand-blue"}`}
                           />
                         </div>
                       </div>
-                      <div className={`px-2 py-1 rounded text-[8px] font-bold ${
-                        listing.status === "COMPLETED" ? "bg-status-success/10 text-status-success" : 
+                      <div className={`px-2 py-1 rounded text-[8px] font-bold ${listing.status === "COMPLETED" ? "bg-status-success/10 text-status-success" :
                         listing.status === "DRAFT READY" ? "bg-brand-blue/10 text-brand-blue" : "bg-status-warning/10 text-status-warning"
-                      }`}>
+                        }`}>
                         {listing.status}
                       </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
-              
+
               <div className="p-4 bg-brand-blue/5 border border-brand-blue/10 rounded-2xl flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <BarChart3 className="w-5 h-5 text-brand-blue" />
@@ -545,7 +542,7 @@ const RolePreview = ({ role }: { role: string }) => {
 
           {role === "Brokerages" && (
             <motion.div key="brokerages" {...variants} transition={transition} className="space-y-8">
-              <motion.div 
+              <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 className="absolute top-0 left-0 right-0 h-1.5 bg-brand-blue origin-left"
@@ -563,7 +560,7 @@ const RolePreview = ({ role }: { role: string }) => {
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="p-6 border border-brand-blue/20 bg-brand-blue/5 rounded-2xl relative overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.05, 1] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute top-4 right-4 px-2 py-0.5 bg-brand-blue text-white text-[8px] font-bold rounded-full flex items-center gap-1 shadow-lg shadow-brand-blue/20"
@@ -582,7 +579,7 @@ const RolePreview = ({ role }: { role: string }) => {
                       { label: "Color Palette", status: "Compliant" },
                       { label: "Remark Tone", status: "Standardized" }
                     ].map((item, i) => (
-                      <motion.div 
+                      <motion.div
                         key={i}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -594,7 +591,7 @@ const RolePreview = ({ role }: { role: string }) => {
                       </motion.div>
                     ))}
                   </div>
-                  <motion.div 
+                  <motion.div
                     className="absolute -right-8 -bottom-8 w-24 h-24 bg-brand-blue/10 rounded-full blur-2xl"
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 4, repeat: Infinity }}
@@ -642,7 +639,7 @@ const RolePreview = ({ role }: { role: string }) => {
               <div className="space-y-4">
                 <AnimatePresence mode="wait">
                   {!complianceResolved ? (
-                    <motion.div 
+                    <motion.div
                       key="alert"
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -663,7 +660,7 @@ const RolePreview = ({ role }: { role: string }) => {
                       </div>
                     </motion.div>
                   ) : (
-                    <motion.div 
+                    <motion.div
                       key="resolved"
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -692,11 +689,11 @@ const RolePreview = ({ role }: { role: string }) => {
                       <span className="text-xl font-bold text-status-success">{complianceScore}%</span>
                     </div>
                     <div className="h-2 bg-divider rounded-full overflow-hidden">
-                      <motion.div 
+                      <motion.div
                         initial={{ width: "92%" }}
                         animate={{ width: `${complianceScore}%` }}
                         transition={{ duration: 1.5 }}
-                        className="h-full bg-status-success" 
+                        className="h-full bg-status-success"
                       />
                     </div>
                   </div>
@@ -711,7 +708,7 @@ const RolePreview = ({ role }: { role: string }) => {
                 </div>
 
                 <div className="p-4 bg-bg-accent rounded-xl border border-divider text-center">
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="text-[10px] font-bold text-text-muted tracking-wider"
@@ -728,7 +725,7 @@ const RolePreview = ({ role }: { role: string }) => {
   );
 };
 
-const RoleSwitcher = () => {
+export const RoleSwitcher = () => {
   const [activeRole, setActiveRole] = useState("Agents");
   const roles = [
     { id: "Agents", icon: Users, desc: "For high-volume producers", metric: { label: "Time to publish", from: "2h", to: "12m" } },
@@ -751,24 +748,22 @@ const RoleSwitcher = () => {
             <button
               key={role.id}
               onClick={() => setActiveRole(role.id)}
-              className={`flex items-center gap-5 px-6 py-4 rounded-full transition-all duration-300 border ${
-                activeRole === role.id 
-                  ? "bg-brand-blue text-white border-brand-blue shadow-xl shadow-brand-blue/20 scale-105 z-10" 
-                  : "bg-white text-text-primary border-divider hover:border-brand-blue/30"
-              }`}
+              className={`flex items-center gap-5 px-6 py-4 rounded-full transition-all duration-300 border ${activeRole === role.id
+                ? "bg-brand-blue text-white border-brand-blue shadow-xl shadow-brand-blue/20 scale-105 z-10"
+                : "bg-white text-text-primary border-divider hover:border-brand-blue/30"
+                }`}
             >
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
-                activeRole === role.id ? "bg-white/20" : "bg-bg-accent text-brand-blue"
-              }`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${activeRole === role.id ? "bg-white/20" : "bg-bg-accent text-brand-blue"
+                }`}>
                 <role.icon className="w-5 h-5" />
               </div>
               <div className="text-left pr-2">
                 <h4 className="font-bold text-sm mb-0.5">{role.id}</h4>
-                <Counter 
-                  from={role.metric.from} 
-                  to={role.metric.to} 
-                  label={role.metric.label} 
-                  active={activeRole === role.id} 
+                <Counter
+                  from={role.metric.from}
+                  to={role.metric.to}
+                  label={role.metric.label}
+                  active={activeRole === role.id}
                 />
               </div>
             </button>
@@ -860,15 +855,13 @@ const VisualIntelligenceStudio = () => {
                   setActiveTool(i);
                   setShowAfter(true);
                 }}
-                className={`w-full text-left p-5 rounded-xl transition-all duration-300 border flex items-center gap-4 ${
-                  activeTool === i 
-                    ? "bg-white border-brand-blue shadow-lg shadow-brand-blue/5 translate-x-2" 
-                    : "bg-transparent border-transparent hover:bg-white/50 hover:border-divider"
-                }`}
+                className={`w-full text-left p-5 rounded-xl transition-all duration-300 border flex items-center gap-4 ${activeTool === i
+                  ? "bg-white border-brand-blue shadow-lg shadow-brand-blue/5 translate-x-2"
+                  : "bg-transparent border-transparent hover:bg-white/50 hover:border-divider"
+                  }`}
               >
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                  activeTool === i ? "bg-brand-blue text-white" : "bg-white text-brand-blue border border-divider"
-                }`}>
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${activeTool === i ? "bg-brand-blue text-white" : "bg-white text-brand-blue border border-divider"
+                  }`}>
                   <tool.icon className="w-5 h-5" />
                 </div>
                 <div>
@@ -924,10 +917,10 @@ const VisualIntelligenceStudio = () => {
                             referrerPolicy="no-referrer"
                           />
                         </AnimatePresence>
-                        
+
                         {/* Tool-specific overlays */}
                         {showAfter && activeTool === 0 && (
-                          <motion.div 
+                          <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             className="absolute inset-0 pointer-events-none"
@@ -935,9 +928,9 @@ const VisualIntelligenceStudio = () => {
                             <div className="absolute inset-0 bg-brand-blue/5 border-2 border-brand-blue/20 m-4 rounded-lg border-dashed animate-pulse" />
                           </motion.div>
                         )}
-                        
+
                         {showAfter && activeTool === 1 && (
-                          <motion.div 
+                          <motion.div
                             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent w-1/4 -skew-x-12 pointer-events-none"
                             animate={{ left: ["-100%", "200%"] }}
                             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -945,13 +938,13 @@ const VisualIntelligenceStudio = () => {
                         )}
 
                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex bg-white/90 backdrop-blur p-1 rounded-full shadow-lg border border-divider z-20">
-                          <button 
+                          <button
                             onClick={() => setShowAfter(false)}
                             className={`px-4 py-1.5 rounded-full text-[10px] font-bold transition-all ${!showAfter ? "bg-brand-blue text-white" : "text-text-muted hover:text-text-primary"}`}
                           >
                             BEFORE
                           </button>
-                          <button 
+                          <button
                             onClick={() => setShowAfter(true)}
                             className={`px-4 py-1.5 rounded-full text-[10px] font-bold transition-all ${showAfter ? "bg-brand-blue text-white" : "text-text-muted hover:text-text-primary"}`}
                           >
@@ -971,7 +964,7 @@ const VisualIntelligenceStudio = () => {
                         <p className="text-xs text-text-secondary leading-relaxed mb-6">
                           {currentTool.desc}
                         </p>
-                        
+
                         <div className="space-y-4 mb-8">
                           <div>
                             <p className="text-[10px] font-bold text-text-muted uppercase mb-2">What Ria Does</p>
@@ -1032,12 +1025,12 @@ const VisualIntelligenceStudio = () => {
   );
 };
 
-const JourneyTimeline = () => {
+export const JourneyTimeline = () => {
   const [activeStage, setActiveStage] = useState(0);
   const stages = [
-    { 
-      id: "Pre-Listing", 
-      status: "Active", 
+    {
+      id: "Pre-Listing",
+      status: "Active",
       icon: FileText,
       desc: "Assemble property data and documents.",
       preview: (
@@ -1067,9 +1060,9 @@ const JourneyTimeline = () => {
         </div>
       )
     },
-    { 
-      id: "MLS Draft", 
-      status: "Active", 
+    {
+      id: "MLS Draft",
+      status: "Active",
       icon: Layout,
       desc: "Validated, optimized, and ready to save.",
       preview: (
@@ -1095,9 +1088,9 @@ const JourneyTimeline = () => {
         </div>
       )
     },
-    { 
-      id: "Marketing", 
-      status: "Soon", 
+    {
+      id: "Marketing",
+      status: "Soon",
       icon: Megaphone,
       desc: "Auto-generated assets for social & print.",
       preview: (
@@ -1121,9 +1114,9 @@ const JourneyTimeline = () => {
         </div>
       )
     },
-    { 
-      id: "Closing", 
-      status: "Soon", 
+    {
+      id: "Closing",
+      status: "Soon",
       icon: Handshake,
       desc: "End-to-end offer and closing tracking.",
       preview: (
@@ -1161,24 +1154,24 @@ const JourneyTimeline = () => {
 
         <div className="relative mb-20">
           {/* The Line */}
-          <div className="absolute top-1/2 left-0 w-full h-0.5 bg-divider -translate-y-1/2" />
-          <motion.div 
-            className="absolute top-1/2 left-0 h-0.5 bg-brand-blue -translate-y-1/2 origin-left"
+          <div className="absolute top-6 left-0 w-full h-0.5 bg-divider -translate-y-1/2" />
+          <motion.div
+            className="absolute top-6 left-0 h-0.5 bg-brand-blue -translate-y-1/2 origin-left"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
           />
-          
+
           {/* Elite Version: Flowing Energy Effect */}
-          <motion.div 
-            className="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-transparent via-white/80 to-transparent -translate-y-1/2 w-32 blur-sm z-10"
-            animate={{ 
+          <motion.div
+            className="absolute top-6 left-0 h-0.5 bg-gradient-to-r from-transparent via-white/80 to-transparent -translate-y-1/2 w-32 blur-sm z-10"
+            animate={{
               left: ["-10%", "110%"],
             }}
-            transition={{ 
-              duration: 3, 
-              repeat: Infinity, 
+            transition={{
+              duration: 3,
+              repeat: Infinity,
               ease: "linear",
               repeatDelay: 1
             }}
@@ -1190,18 +1183,17 @@ const JourneyTimeline = () => {
               const isActive = activeStage === i;
               const isSoon = stage.status === "Soon";
               const isPast = activeStage > i;
-              
+
               return (
                 <div key={stage.id} className="flex flex-col items-center">
                   <button
                     onClick={() => setActiveStage(i)}
-                    className={`group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
-                      isActive 
-                        ? "bg-brand-blue text-white shadow-xl shadow-brand-blue/30 scale-110" 
-                        : isPast 
-                          ? "bg-brand-blue/10 border-2 border-brand-blue text-brand-blue"
-                          : "bg-white border-2 border-divider text-text-muted hover:border-brand-blue/30"
-                    } ${isSoon && !isActive ? "opacity-50" : ""}`}
+                    className={`group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${isActive
+                      ? "bg-brand-blue text-white shadow-xl shadow-brand-blue/30 scale-110"
+                      : isPast
+                        ? "bg-brand-blue/10 border-2 border-brand-blue text-brand-blue"
+                        : "bg-white border-2 border-divider text-text-muted hover:border-brand-blue/30"
+                      } ${isSoon && !isActive ? "opacity-50" : ""}`}
                   >
                     <stage.icon className="w-5 h-5" />
                     {isSoon && (
@@ -1210,7 +1202,7 @@ const JourneyTimeline = () => {
                       </span>
                     )}
                     {isActive && (
-                      <motion.div 
+                      <motion.div
                         layoutId="activeGlow"
                         className="absolute inset-0 rounded-full bg-brand-blue/20 blur-lg -z-10"
                       />
@@ -1277,7 +1269,7 @@ const JourneyTimeline = () => {
   );
 };
 
-export default function DemoPage() {
+export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: boolean }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -1291,6 +1283,97 @@ export default function DemoPage() {
     return () => clearInterval(interval);
   }, [isPaused]);
 
+  return (
+    <div id={isDemoPage ? undefined : "how-it-works"}>
+      <section className={`${isDemoPage ? 'pt-32' : 'pt-24'} pb-12 px-6`}>
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-xs font-semibold mb-6"
+          >
+            <Sparkles className="w-3 h-3" />
+            <span>INTERACTIVE PRODUCT TOUR</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-6xl font-bold tracking-tight text-text-primary mb-6"
+          >
+            Watch Ria think.
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-xl text-text-secondary"
+          >
+            Experience how Ria transforms raw property data into a compliant, high-performing MLS listing.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* The Live Demo Section */}
+      <section className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-20 pb-24">
+        {/* Left Side: Timeline */}
+        <div className="py-12">
+          <StepTimeline activeStep={activeStep} />
+
+          <div className="mt-16 p-6 bg-white rounded-2xl border border-border-subtle shadow-sm">
+            <h5 className="font-bold text-sm mb-4 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-brand-blue" />
+              Operational Intelligence
+            </h5>
+            <p className="text-xs text-text-secondary leading-relaxed">
+              Ria doesn't just fill forms. It cross-references every data point against your uploaded documents to ensure 100% accuracy and compliance.
+            </p>
+          </div>
+
+          <div className="mt-8 flex items-center gap-4">
+            <button
+              onClick={() => setIsPaused(!isPaused)}
+              className="text-[10px] font-bold text-brand-blue uppercase tracking-widest px-4 py-2 bg-brand-blue/5 rounded-full hover:bg-brand-blue/10 transition-colors"
+            >
+              {isPaused ? "Resume Tour" : "Pause Tour"}
+            </button>
+            <div className="flex gap-2">
+              {[0, 1, 2].map((i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setActiveStep(i);
+                    setIsPaused(true);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all ${activeStep === i ? "w-6 bg-brand-blue" : "bg-divider"}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side: Live UI Panel */}
+        <div className="md:pt-12">
+          <div className="sticky top-32">
+            <LiveUIDemo step={activeStep} />
+
+            <div className="mt-8 flex items-center justify-between text-[10px] font-bold text-text-muted uppercase tracking-widest px-2">
+              <span>Auto-playing demo</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[8px] opacity-50">Step {activeStep + 1} of 3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default function DemoPage() {
   return (
     <div className="min-h-screen bg-bg-primary">
       {/* Simple Nav */}
@@ -1309,88 +1392,7 @@ export default function DemoPage() {
       </nav>
 
       <main className="relative">
-        {/* Hero Section of Demo Page */}
-        <section className="pt-32 pb-12 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-xs font-semibold mb-6"
-            >
-              <Sparkles className="w-3 h-3" />
-              <span>INTERACTIVE PRODUCT TOUR</span>
-            </motion.div>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl font-bold tracking-tight text-text-primary mb-6"
-            >
-              Watch Ria think.
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-text-secondary"
-            >
-              Experience how Ria transforms raw property data into a compliant, high-performing MLS listing.
-            </motion.p>
-          </div>
-        </section>
-
-        {/* The Live Demo Section */}
-        <section className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-20 pb-24">
-          {/* Left Side: Timeline */}
-          <div className="py-12">
-            <StepTimeline activeStep={activeStep} />
-            
-            <div className="mt-16 p-6 bg-white rounded-2xl border border-border-subtle shadow-sm">
-              <h5 className="font-bold text-sm mb-4 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brand-blue" />
-                Operational Intelligence
-              </h5>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                Ria doesn't just fill forms. It cross-references every data point against your uploaded documents to ensure 100% accuracy and compliance.
-              </p>
-            </div>
-
-            <div className="mt-8 flex items-center gap-4">
-              <button 
-                onClick={() => setIsPaused(!isPaused)}
-                className="text-[10px] font-bold text-brand-blue uppercase tracking-widest px-4 py-2 bg-brand-blue/5 rounded-full hover:bg-brand-blue/10 transition-colors"
-              >
-                {isPaused ? "Resume Tour" : "Pause Tour"}
-              </button>
-              <div className="flex gap-2">
-                {[0, 1, 2].map((i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveStep(i);
-                      setIsPaused(true);
-                    }}
-                    className={`w-2 h-2 rounded-full transition-all ${activeStep === i ? "w-6 bg-brand-blue" : "bg-divider"}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side: Live UI Panel */}
-          <div className="md:pt-12">
-            <div className="sticky top-32">
-              <LiveUIDemo step={activeStep} />
-              
-              <div className="mt-8 flex items-center justify-between text-[10px] font-bold text-text-muted uppercase tracking-widest px-2">
-                <span>Auto-playing demo</span>
-                <div className="flex items-center gap-2">
-                  <span className="text-[8px] opacity-50">Step {activeStep + 1} of 3</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <WatchRiaThinkSection isDemoPage={true} />
 
         <RoleSwitcher />
 
