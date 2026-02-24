@@ -1015,9 +1015,6 @@ const VisualIntelligenceStudio = () => {
             <button className="px-8 py-4 bg-brand-blue text-white rounded-full font-bold shadow-xl shadow-brand-blue/20 hover:scale-105 transition-transform">
               Enhance My Listing with Ria
             </button>
-            <button className="px-8 py-4 bg-white text-text-primary border border-divider rounded-full font-bold hover:bg-bg-accent transition-colors">
-              See Before & After Examples
-            </button>
           </div>
         </div>
       </div>
