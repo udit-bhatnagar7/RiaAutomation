@@ -205,7 +205,7 @@ const RiaStudio = () => {
                     { label: "STAGED", img: (tools[0].after as any)["Modern Neutral"] }
                   ].map((item, i) => (
                     <div key={i} className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-divider shadow-lg bg-white group">
-                      <img src={item.img} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                      <img src={item.img} alt={item.label} loading="lazy" width="400" height="300" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                       <div className="absolute top-4 left-4 px-3 py-1 bg-black/50 backdrop-blur text-white text-[10px] font-bold rounded-full">
                         {item.label}
                       </div>
@@ -257,7 +257,10 @@ const RiaStudio = () => {
                   {/* Before Image */}
                   <img
                     src={currentTool.before}
-                    alt="Before"
+                    alt="Before AI Enhancement"
+                    loading="lazy"
+                    width="800"
+                    height="600"
                     className="absolute inset-0 w-full h-full object-cover"
                     referrerPolicy="no-referrer"
                   />
@@ -269,7 +272,10 @@ const RiaStudio = () => {
                   >
                     <img
                       src={typeof currentTool.after === 'string' ? currentTool.after : currentTool.after[stagingStyle as keyof typeof currentTool.after]}
-                      alt="After"
+                      alt="After AI Enhancement"
+                      loading="lazy"
+                      width="800"
+                      height="600"
                       className="absolute inset-0 w-full h-full object-cover"
                       referrerPolicy="no-referrer"
                     />
@@ -444,7 +450,7 @@ const ProductDropdown = () => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <button className="flex items-center gap-1 hover:text-brand-blue transition-colors py-4">
+      <button aria-expanded={isOpen} className="flex items-center gap-1 hover:text-brand-blue transition-colors py-4">
         Product
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
@@ -609,7 +615,7 @@ function LandingPage() {
                       <Layout className="text-brand-blue w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-sm">Listing Draft #482</h3>
+                      <div className="font-semibold text-sm">Listing Draft #482</div>
                       <p className="text-xs text-text-muted">1248 Oakwood Ave, San Francisco</p>
                     </div>
                   </div>
@@ -636,7 +642,10 @@ function LandingPage() {
                       <div key={i} className="relative group">
                         <img
                           src={`https://picsum.photos/seed/house${i}/200/150`}
-                          alt="House"
+                          alt={`House ${i} Preview`}
+                          loading="lazy"
+                          width="200"
+                          height="150"
                           className="rounded-lg w-full aspect-video object-cover border border-border-subtle"
                           referrerPolicy="no-referrer"
                         />
@@ -1105,7 +1114,7 @@ const MediaIntelligencePreview = ({ active }: { active: boolean }) => {
   return (
     <div className="space-y-3 bg-bg-primary/50 p-3 rounded-xl">
       <div className="relative aspect-video bg-white rounded border border-divider overflow-hidden">
-        <img src="https://picsum.photos/seed/media-intel/300/200" className="w-full h-full object-cover opacity-50" referrerPolicy="no-referrer" />
+        <img src="https://picsum.photos/seed/media-intel/300/200" alt="Media Intelligence Analysis" loading="lazy" width="300" height="200" className="w-full h-full object-cover opacity-50" referrerPolicy="no-referrer" />
         <AnimatePresence>
           {active && (
             <>
@@ -1395,11 +1404,12 @@ const LiveListingAuditSection = () => {
               >
                 <button
                   onClick={() => setActiveCategory(activeCategory === i ? null : i)}
+                  aria-expanded={activeCategory === i}
                   className="w-full p-6 flex items-center justify-between text-left group"
                 >
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-lg font-bold group-hover:text-brand-blue transition-colors">{cat.id}</h4>
+                      <h3 className="text-lg font-bold group-hover:text-brand-blue transition-colors">{cat.id}</h3>
                       <span className={`text-lg font-bold transition-all ${activeCategory === i ? "scale-110 text-brand-blue" : "text-text-primary"}`}>{cat.score}%</span>
                     </div>
                     <div className="h-1.5 bg-divider rounded-full overflow-hidden">
@@ -1684,6 +1694,7 @@ const RiaEngine = () => {
                       }}
                       onMouseEnter={() => !isActive && setIsPaused(true)}
                       onMouseLeave={() => !isActive && !isPaused && setIsPaused(false)}
+                      aria-label={`Switch to ${stage.id} stage`}
                       className={`absolute inset-0 rounded-full flex items-center justify-center transition-all duration-300 border-2 origin-center ${isActive
                         ? "bg-brand-blue border-brand-blue text-white shadow-xl shadow-brand-blue/30 scale-125"
                         : isPast
@@ -2021,13 +2032,13 @@ const EngineStageContent = ({ stage }: { stage: number }) => {
         </div>
         <div className="grid grid-cols-2 gap-4 h-full">
           <div className="aspect-[3/4] bg-bg-accent rounded-2xl relative overflow-hidden group border border-divider">
-            <img src="https://picsum.photos/seed/room-before/400/600" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <img src="https://picsum.photos/seed/room-before/400/600" alt="Room before staging" loading="lazy" width="400" height="600" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
               <span className="text-[10px] font-bold text-white uppercase">Before</span>
             </div>
           </div>
           <div className="aspect-[3/4] bg-bg-accent rounded-2xl relative overflow-hidden group border border-brand-blue/30">
-            <img src="https://picsum.photos/seed/room-after/400/600" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <img src="https://picsum.photos/seed/room-after/400/600" alt="Room after virtual staging" loading="lazy" width="400" height="600" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

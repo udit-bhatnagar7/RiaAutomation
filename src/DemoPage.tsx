@@ -60,7 +60,7 @@ const StepTimeline = ({ activeStep }: { activeStep: number }) => {
               {isPast ? <CheckCircle2 className="w-4 h-4" /> : `0${step.id}`}
             </div>
             <div className={`transition-all duration-500 ${isActive ? "opacity-100 translate-x-2" : "opacity-40"}`}>
-              <h4 className={`font-bold ${isActive ? "text-text-primary" : "text-text-muted"}`}>{step.title}</h4>
+              <h3 className={`font-bold ${isActive ? "text-text-primary" : "text-text-muted"}`}>{step.title}</h3>
               <p className="text-xs text-text-secondary mt-1">{step.sub}</p>
             </div>
           </div>
@@ -123,7 +123,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                 />
               </div>
-              <h3 className="font-bold text-lg mb-2">Drop listing assets here</h3>
+              <h2 className="font-bold text-lg mb-2">Drop listing assets here</h2>
               <p className="text-sm text-text-secondary max-w-xs">PDFs, JPEGs, and property notes. Ria handles the extraction.</p>
 
               <div className="mt-8 flex gap-3">
@@ -232,7 +232,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                       <CheckCircle2 className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold">MLS Draft Ready</h4>
+                      <h3 className="text-sm font-bold">MLS Draft Ready</h3>
                       <p className="text-[10px] text-text-secondary">All 248 fields validated and compliant.</p>
                     </div>
                   </div>
@@ -248,7 +248,10 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                       <div className="aspect-video bg-bg-accent rounded-lg overflow-hidden relative border border-border-subtle">
                         <img
                           src={`https://picsum.photos/seed/house${i + 10}/200/150`}
-                          alt="House"
+                          alt={`House interior ${i}`}
+                          loading="lazy"
+                          width="200"
+                          height="150"
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         />
@@ -392,7 +395,7 @@ const RolePreview = ({ role }: { role: string }) => {
                     <Layout className="w-6 h-6 text-brand-blue" />
                   </div>
                   <div>
-                    <h4 className="text-base font-bold">Listing Preview</h4>
+                    <h3 className="text-base font-bold">Listing Preview</h3>
                     <p className="text-xs text-text-muted">1248 Oakwood Ave • Draft</p>
                   </div>
                 </div>
@@ -446,7 +449,7 @@ const RolePreview = ({ role }: { role: string }) => {
                   <div className="grid grid-cols-2 gap-3">
                     {[1, 2].map(i => (
                       <div key={i} className="aspect-square bg-bg-accent rounded-xl relative overflow-hidden group">
-                        <img src={`https://picsum.photos/seed/agent-ui-${i}/300/300`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                        <img src={`https://picsum.photos/seed/agent-ui-${i}/300/300`} alt="Agent UI Interface" loading="lazy" width="300" height="300" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                         <motion.div
                           initial={{ y: 20, opacity: 0 }}
                           animate={{ y: 0, opacity: 1 }}
@@ -474,7 +477,7 @@ const RolePreview = ({ role }: { role: string }) => {
             <motion.div key="coordinators" {...variants} transition={transition} className="space-y-6">
               <div className="flex items-center justify-between mb-2">
                 <div>
-                  <h4 className="text-base font-bold">Multi-Listing Dashboard</h4>
+                  <h3 className="text-base font-bold">Multi-Listing Dashboard</h3>
                   <p className="text-xs text-text-muted">Operational Overview • 12 Active</p>
                 </div>
                 <button className="px-4 py-2 bg-brand-blue/10 text-brand-blue text-[10px] font-bold rounded-lg hover:bg-brand-blue/20 transition-colors">
@@ -549,7 +552,7 @@ const RolePreview = ({ role }: { role: string }) => {
               />
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-base font-bold">Brand Governance</h4>
+                  <h3 className="text-base font-bold">Brand Governance</h3>
                   <p className="text-xs text-text-muted">Standardizing 18 Offices</p>
                 </div>
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-bg-accent rounded-lg text-xs font-bold border border-divider">
@@ -627,7 +630,7 @@ const RolePreview = ({ role }: { role: string }) => {
             <motion.div key="compliance" {...variants} transition={transition} className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-base font-bold">Compliance Audit Trail</h4>
+                  <h3 className="text-base font-bold">Compliance Audit Trail</h3>
                   <p className="text-xs text-text-muted">Risk Mitigation Engine</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -758,7 +761,7 @@ export const RoleSwitcher = () => {
                 <role.icon className="w-5 h-5" />
               </div>
               <div className="text-left pr-2">
-                <h4 className="font-bold text-sm mb-0.5">{role.id}</h4>
+                <h3 className="font-bold text-sm mb-0.5">{role.id}</h3>
                 <Counter
                   from={role.metric.from}
                   to={role.metric.to}
@@ -865,7 +868,7 @@ const VisualIntelligenceStudio = () => {
                   <tool.icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className={`font-bold text-sm ${activeTool === i ? "text-text-primary" : "text-text-muted"}`}>{tool.id}</h4>
+                  <h3 className={`font-bold text-sm ${activeTool === i ? "text-text-primary" : "text-text-muted"}`}>{tool.id}</h3>
                 </div>
                 {activeTool === i && (
                   <motion.div layoutId="activeArrow" className="ml-auto">
@@ -880,7 +883,7 @@ const VisualIntelligenceStudio = () => {
                 <Zap className="w-4 h-4 text-brand-blue" />
                 <span className="text-xs font-bold uppercase text-brand-blue">Bundle & Save</span>
               </div>
-              <h5 className="font-bold text-sm mb-1">Media Boost Package</h5>
+              <h4 className="font-bold text-sm mb-1">Media Boost Package</h4>
               <p className="text-[10px] text-text-secondary mb-4">Includes Enhancement, Day to Dusk, and Virtual Staging.</p>
               <div className="flex items-end gap-1">
                 <span className="text-xl font-bold">$199</span>
@@ -1321,10 +1324,10 @@ export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: bool
           <StepTimeline activeStep={activeStep} />
 
           <div className="mt-16 p-6 bg-white rounded-2xl border border-border-subtle shadow-sm">
-            <h5 className="font-bold text-sm mb-4 flex items-center gap-2">
+            <h4 className="font-bold text-sm mb-4 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-brand-blue" />
               Operational Intelligence
-            </h5>
+            </h4>
             <p className="text-xs text-text-secondary leading-relaxed">
               Ria doesn't just fill forms. It cross-references every data point against your uploaded documents to ensure 100% accuracy and compliance.
             </p>
@@ -1389,6 +1392,7 @@ export default function DemoPage() {
       </nav>
 
       <main className="relative">
+        <h1 className="sr-only">Ria Interactive Demo</h1>
         <WatchRiaThinkSection isDemoPage={true} />
 
         <RoleSwitcher />
