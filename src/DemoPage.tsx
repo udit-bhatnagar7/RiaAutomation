@@ -46,14 +46,35 @@ const StepTimeline = ({ activeStep }: { activeStep: number }) => {
   ];
 
   return (
-    <div className="space-y-12 relative">
+    <motion.div
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      variants={{
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.15
+          }
+        }
+      }}
+      className="space-y-12 relative"
+    >
       <div className="absolute left-4 top-2 bottom-2 w-px bg-divider -z-10" />
       {steps.map((step, i) => {
         const isActive = activeStep === i;
         const isPast = activeStep > i;
 
         return (
-          <div key={step.id} className="flex gap-6 items-start">
+          <motion.div
+            key={step.id}
+            variants={{
+              hidden: { opacity: 0, x: -20 },
+              show: { opacity: 1, x: 0 }
+            }}
+            className="flex gap-6 items-start"
+          >
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 z-10 ${isActive ? "bg-brand-blue text-white scale-110 shadow-lg shadow-brand-blue/20" :
               isPast ? "bg-status-success text-white" : "bg-white border border-border-subtle text-text-muted"
               }`}>
@@ -63,10 +84,10 @@ const StepTimeline = ({ activeStep }: { activeStep: number }) => {
               <h3 className={`font-bold ${isActive ? "text-text-primary" : "text-text-muted"}`}>{step.title}</h3>
               <p className="text-xs text-text-secondary mt-1">{step.sub}</p>
             </div>
-          </div>
+          </motion.div>
         );
       })}
-    </div>
+    </motion.div>
   );
 };
 
@@ -745,13 +766,33 @@ export const RoleSwitcher = () => {
         </div>
 
         {/* Horizontal Role Selector - Pill Style */}
-        <div className="flex flex-wrap justify-center gap-4 mb-24">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          className="flex flex-wrap justify-center gap-4 mb-24"
+        >
           {roles.map((role) => (
-            <button
+            <motion.button
               key={role.id}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveRole(role.id)}
               className={`flex items-center gap-5 px-6 py-4 rounded-full transition-all duration-300 border ${activeRole === role.id
-                ? "bg-brand-blue text-white border-brand-blue shadow-xl shadow-brand-blue/20 scale-105 z-10"
+                ? "bg-brand-blue text-white border-brand-blue shadow-xl shadow-brand-blue/20 z-10"
                 : "bg-white text-text-primary border-divider hover:border-brand-blue/30"
                 }`}
             >
@@ -768,9 +809,9 @@ export const RoleSwitcher = () => {
                   active={activeRole === role.id}
                 />
               </div>
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         <div className="max-w-5xl mx-auto">
           <RolePreview role={activeRole} />
@@ -841,24 +882,43 @@ const VisualIntelligenceStudio = () => {
     <section className="py-24 bg-[#F7F9FC]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight mb-4">Transform Every Listing Photo Into a Market-Ready Asset</h2>
+          <h2 className="text-4xl font-bold tracking-tight mb-4">Studio-Grade Media. Zero Editing Required.</h2>
           <p className="text-text-secondary max-w-2xl mx-auto">
-            Ria enhances, stages, refines, and optimizes your media — ready for MLS and marketing.
+            Ria automatically edits and stages your raw photos for maximum market appeal.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left: Tool Selector */}
-          <div className="lg:col-span-4 space-y-3">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+            className="lg:col-span-4 space-y-3"
+          >
             {tools.map((tool, i) => (
-              <button
+              <motion.button
                 key={tool.id}
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  show: { opacity: 1, x: 0 }
+                }}
+                whileHover={{ x: 8 }}
                 onClick={() => {
                   setActiveTool(i);
                   setShowAfter(true);
                 }}
                 className={`w-full text-left p-5 rounded-xl transition-all duration-300 border flex items-center gap-4 ${activeTool === i
-                  ? "bg-white border-brand-blue shadow-lg shadow-brand-blue/5 translate-x-2"
+                  ? "bg-white border-brand-blue shadow-lg shadow-brand-blue/5 z-10"
                   : "bg-transparent border-transparent hover:bg-white/50 hover:border-divider"
                   }`}
               >
@@ -874,7 +934,7 @@ const VisualIntelligenceStudio = () => {
                     <ChevronRight className="w-4 h-4 text-brand-blue" />
                   </motion.div>
                 )}
-              </button>
+              </motion.button>
             ))}
 
             <div className="mt-8 p-6 bg-brand-blue/5 border border-brand-blue/10 rounded-2xl">
@@ -889,7 +949,7 @@ const VisualIntelligenceStudio = () => {
                 <span className="text-[10px] text-text-muted mb-1">per listing</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right: Preview Panel */}
           <div className="lg:col-span-8">
@@ -1015,7 +1075,7 @@ const VisualIntelligenceStudio = () => {
           <h3 className="text-2xl font-bold mb-4">Upgrade your listing presentation in minutes.</h3>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button className="px-8 py-4 bg-brand-blue text-white rounded-full font-bold shadow-xl shadow-brand-blue/20 hover:scale-105 transition-transform">
-              Enhance My Listing with Ria
+              Optimize Your First Listing
             </button>
           </div>
         </div>
@@ -1147,7 +1207,7 @@ export const JourneyTimeline = () => {
     <section className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight mb-4">From prep to closing — Ria stays with the listing.</h2>
+          <h2 className="text-4xl font-bold tracking-tight mb-4">From prep to closing - Ria stays with the listing.</h2>
           <p className="text-text-secondary">Built to manage every stage of the listing lifecycle.</p>
         </div>
 
@@ -1177,15 +1237,39 @@ export const JourneyTimeline = () => {
           />
 
           {/* Nodes */}
-          <div className="relative flex justify-between">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.2
+                }
+              }
+            }}
+            className="relative flex justify-between"
+          >
             {stages.map((stage, i) => {
               const isActive = activeStage === i;
               const isSoon = stage.status === "Soon";
               const isPast = activeStage > i;
 
               return (
-                <div key={stage.id} className="flex flex-col items-center">
-                  <button
+                <motion.div
+                  key={stage.id}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.8 },
+                    show: { opacity: 1, scale: 1 }
+                  }}
+                  className="flex flex-col items-center"
+                >
+                  <motion.button
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label={`View ${stage.id} stage details`}
                     onClick={() => setActiveStage(i)}
                     className={`group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${isActive
                       ? "bg-brand-blue text-white shadow-xl shadow-brand-blue/30 scale-110"
@@ -1206,16 +1290,16 @@ export const JourneyTimeline = () => {
                         className="absolute inset-0 rounded-full bg-brand-blue/20 blur-lg -z-10"
                       />
                     )}
-                  </button>
+                  </motion.button>
                   <div className="mt-4 text-center">
                     <p className={`text-xs font-bold transition-colors ${isActive ? "text-text-primary" : "text-text-muted"}`}>
                       {stage.id}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
 
         {/* Preview Panel */}
@@ -1345,12 +1429,15 @@ export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: bool
               {[0, 1, 2].map((i) => (
                 <button
                   key={i}
+                  aria-label={`Switch to story step ${i + 1}`}
                   onClick={() => {
                     setActiveStep(i);
                     setIsPaused(true);
                   }}
-                  className={`w-2 h-2 rounded-full transition-all ${activeStep === i ? "w-6 bg-brand-blue" : "bg-divider"}`}
-                />
+                  className={`w-6 h-6 flex items-center justify-center rounded-full transition-all`}
+                >
+                  <div className={`rounded-full transition-all ${activeStep === i ? "w-6 h-2 bg-brand-blue" : "w-2 h-2 bg-divider"}`} />
+                </button>
               ))}
             </div>
           </div>
@@ -1386,9 +1473,14 @@ export default function DemoPage() {
             </div>
             <span className="font-bold text-xl tracking-tight">Ria</span>
           </Link>
-          <Link to="/" className="text-sm font-medium text-text-secondary hover:text-brand-blue transition-colors">
-            Back to Home
-          </Link>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link to="/" className="text-sm font-medium text-text-secondary hover:text-brand-blue transition-colors">
+              Back to Home
+            </Link>
+          </motion.div>
         </div>
       </nav>
 
@@ -1408,10 +1500,21 @@ export default function DemoPage() {
             <h2 className="text-4xl font-bold tracking-tight mb-6">Ready to automate your workflow?</h2>
             <p className="text-lg text-text-secondary mb-10">Join 5,000+ agents using Ria to go live faster.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-primary">Get Started with Ria</button>
-              <Link to="/" className="btn-secondary flex items-center justify-center gap-2">
-                Back to Home
-              </Link>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-primary"
+              >
+                Draft a Listing
+              </motion.button>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link to="/" className="btn-secondary flex items-center justify-center gap-2">
+                  Back to Home
+                </Link>
+              </motion.div>
             </div>
           </div>
         </section>

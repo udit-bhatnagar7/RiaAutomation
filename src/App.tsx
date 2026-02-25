@@ -44,6 +44,8 @@ import { useRef, useState, useEffect, ReactNode, MouseEvent } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import DemoPage, { WatchRiaThinkSection, RoleSwitcher, JourneyTimeline } from "./DemoPage";
 
+const professionalEase = [0.22, 1, 0.36, 1];
+
 interface FadeInProps {
   children: ReactNode;
   delay?: number;
@@ -145,9 +147,9 @@ const RiaStudio = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <FadeIn>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Transform Every Listing Photo Into a Market-Ready Asset</h2>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Studio-Grade Media. Zero Editing Required.</h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
-              Ria enhances, stages, refines, and optimizes your media — ready for MLS and marketing.
+              Ria automatically edits and stages your raw photos for maximum market appeal.
             </p>
           </FadeIn>
         </div>
@@ -408,7 +410,7 @@ const RiaStudio = () => {
             <h3 className="text-2xl font-bold mb-4">Upgrade your listing presentation in minutes.</h3>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button className="px-8 py-4 bg-brand-blue text-white rounded-full font-bold shadow-xl shadow-brand-blue/20 hover:scale-105 transition-transform">
-                Enhance My Listing with Ria
+                Optimize Your First Listing
               </button>
             </div>
           </FadeIn>
@@ -579,30 +581,61 @@ function LandingPage() {
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-text-secondary">
             <Link to="/login" className="hover:text-brand-blue transition-colors">Login</Link>
-            <button className="btn-primary py-2 text-sm">Get Started</button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Try Ria application for free"
+              className="btn-primary py-2 text-sm"
+            >
+              Try Ria Free
+            </motion.button>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 overflow-hidden" ref={ref}>
+      <section className="pt-28 pb-22 px-6 overflow-hidden" ref={ref}>
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <FadeIn direction="up">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-xs font-semibold mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-xs font-semibold">
                 <Zap className="w-3 h-3" />
-                <span>NEW: MLS COMPLIANCE ENGINE 2.0</span>
+                <span>MLS COMPLIANCE ENGINE</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight text-text-primary mb-6">
-                Meet Ria your AI Listing Manager. Go live in <span className="text-brand-blue">under 5 minutes.</span>
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: professionalEase }}
+                  className="text-4xl text-brand-blue"
+                >
+                  Ria Your AI Listing Manager.
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1, ease: professionalEase }}
+                  className="block text-6xl "
+                >
+                  Prepare complete, compliant listings in <span className="text-brand-blue">minutes.</span>
+                </motion.span>
               </h1>
-              <p className="text-lg md:text-xl text-text-secondary mb-10 max-w-xl leading-relaxed">
-                Upload docs and photos. Ria assembles, validates, optimizes, and prepares your MLS draft—so you review, not retype.
-              </p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: professionalEase }}
+                className="text-lg md:text-xl text-text-secondary mb-10 max-w-xl leading-relaxed"
+              >
+                Simply drop in your raw files. Ria instantly synthesizes tax records, photos, and compliance rules into a flawless, ready-to-publish MLS draft.
+              </motion.p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="btn-primary flex items-center justify-center gap-2">
-                  Get Started with Ria <ArrowRight className="w-4 h-4" />
-                </button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-primary flex items-center justify-center gap-2"
+                >
+                  Draft a Listing <ArrowRight className="w-4 h-4" />
+                </motion.button>
               </div>
               <p className="mt-4 text-xs text-text-muted">
                 Draft only. You stay in control of submission.
@@ -692,25 +725,43 @@ function LandingPage() {
             </FadeIn>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+            className="grid md:grid-cols-3 gap-8"
+          >
             {[
               { title: "Go live in minutes, not hours", desc: "Automate the tedious assembly of property data, tax records, and disclosures.", icon: Zap },
               { title: "Reduce MLS revisions", desc: "Our compliance engine catches errors before you hit submit, preventing costly delays.", icon: ShieldCheck },
               { title: "Stronger presentation", desc: "AI-optimized remarks and auto-tagged media ensure your listing stands out from day one.", icon: Sparkles },
             ].map((benefit, i) => (
-              <div key={i}>
-                <FadeIn delay={i * 0.1}>
-                  <div className="glass-card p-8 hover:-translate-y-1 transition-transform duration-300">
-                    <div className="w-12 h-12 bg-bg-accent rounded-xl flex items-center justify-center mb-6">
-                      <benefit.icon className="text-brand-blue w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
-                    <p className="text-text-secondary text-sm leading-relaxed">{benefit.desc}</p>
+              <motion.div
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0 }
+                }}
+              >
+                <div className="glass-card p-8 hover:-translate-y-1 transition-transform duration-300">
+                  <div className="w-12 h-12 bg-bg-accent rounded-xl flex items-center justify-center mb-6">
+                    <benefit.icon className="text-brand-blue w-6 h-6" />
                   </div>
-                </FadeIn>
-              </div>
+                  <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
+                  <p className="text-text-secondary text-sm leading-relaxed">{benefit.desc}</p>
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -736,9 +787,13 @@ function LandingPage() {
             <h2 className="text-5xl font-bold tracking-tight mb-6">Launch a winning listing in under 5 minutes.</h2>
             <p className="text-xl text-text-secondary mb-10">Complete. Compliant. Optimized. MLS draft saved.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-primary flex items-center justify-center gap-2">
-                Get Started with Ria <ArrowRight className="w-4 h-4" />
-              </button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-primary flex items-center justify-center gap-2"
+              >
+                Draft a Listing <ArrowRight className="w-4 h-4" />
+              </motion.button>
             </div>
           </FadeIn>
         </div>
@@ -792,7 +847,7 @@ const IntelligenceLayersSection = () => {
       icon: Search,
       bg: "bg-brand-blue/10",
       color: "text-brand-blue",
-      bullets: ["Auto-fill from tax data", "Historical price analysis", "Neighborhood insights"],
+      bullets: ["Automated tax record synthesis", "Historical price analysis", "Neighborhood insights"],
       preview: <ListingIntelligencePreview active={getActiveState(0)} />
     },
     {
@@ -800,7 +855,7 @@ const IntelligenceLayersSection = () => {
       icon: Sparkles,
       bg: "bg-indigo-500/10",
       color: "text-indigo-500",
-      bullets: ["Tone-specific generation", "SEO keyword injection", "Character limit management"],
+      bullets: ["Tone-specific generation", "Local search optimization", "Character limit management"],
       preview: <RemarkOptimizerPreview active={getActiveState(1)} />
     },
     {
@@ -840,21 +895,25 @@ const IntelligenceLayersSection = () => {
             Intelligence Layers
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Inside Ria’s Intelligence Engine</h2>
-          <p className="text-text-secondary max-w-2xl mx-auto">Four systems working together to prepare every listing with surgical precision.</p>
+          <p className="text-text-secondary max-w-2xl mx-auto">Four interconnected systems engineering your listing for maximum visibility and zero compliance risk.</p>
         </div>
 
         {/* Central Brain Layout */}
         <div className="relative max-w-5xl mx-auto min-h-[700px] flex items-center justify-center hidden lg:flex">
           {/* Connector Lines (SVG) */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ filter: 'drop-shadow(0 0 8px rgba(59,91,255,0.2))' }}>
-            <ConnectorLine start="50%,50%" end="20%,25%" active={hoveredModule === 0} />
-            <ConnectorLine start="50%,50%" end="80%,25%" active={hoveredModule === 1} />
-            <ConnectorLine start="50%,50%" end="20%,75%" active={hoveredModule === 2} />
-            <ConnectorLine start="50%,50%" end="80%,75%" active={hoveredModule === 3} />
+            <ConnectorLine start="50%,50%" end="20%,25%" active={hoveredModule !== null ? hoveredModule === 0 : true} />
+            <ConnectorLine start="50%,50%" end="80%,25%" active={hoveredModule !== null ? hoveredModule === 1 : false} />
+            <ConnectorLine start="50%,50%" end="20%,75%" active={hoveredModule !== null ? hoveredModule === 2 : false} />
+            <ConnectorLine start="50%,50%" end="80%,75%" active={hoveredModule !== null ? hoveredModule === 3 : true} />
           </svg>
 
           {/* Center Node */}
           <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", damping: 12, stiffness: 100 }}
             className="relative z-20 w-32 h-32 bg-white rounded-full shadow-2xl border border-divider flex items-center justify-center"
             animate={{
               boxShadow: hoveredModule !== null || activeIndex !== null ? "0 0 40px rgba(59,91,255,0.2)" : "0 0 20px rgba(0,0,0,0.05)",
@@ -879,33 +938,58 @@ const IntelligenceLayersSection = () => {
 
           {/* Modules */}
           <div className="absolute inset-0">
-            {modules.map((module, i) => (
+            {modules.map((module, i) => {
+              const isActive = hoveredModule !== null ? hoveredModule === i : (i === 0 || i === 3);
+              return (
+                <ModuleCard
+                  key={module.id}
+                  module={module}
+                  index={i}
+                  isActive={isActive}
+                  isHovered={hoveredModule === i}
+                  onHover={() => setHoveredModule(i)}
+                  onLeave={() => setHoveredModule(null)}
+                />
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Mobile Layout */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          className="grid md:grid-cols-2 gap-6 lg:hidden"
+        >
+          {modules.map((module, i) => (
+            <motion.div
+              key={module.id}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
+              }}
+            >
               <ModuleCard
-                key={module.id}
                 module={module}
                 index={i}
                 isHovered={hoveredModule === i}
                 onHover={() => setHoveredModule(i)}
                 onLeave={() => setHoveredModule(null)}
+                mobile
               />
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile Layout */}
-        <div className="grid md:grid-cols-2 gap-6 lg:hidden">
-          {modules.map((module, i) => (
-            <ModuleCard
-              key={module.id}
-              module={module}
-              index={i}
-              isHovered={hoveredModule === i}
-              onHover={() => setHoveredModule(i)}
-              onLeave={() => setHoveredModule(null)}
-              mobile
-            />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -930,7 +1014,7 @@ const ConnectorLine = ({ start, end, active }: { start: string, end: string, act
   );
 };
 
-const ModuleCard = ({ module, index, isHovered, onHover, onLeave, mobile }: any) => {
+const ModuleCard = ({ module, index, isActive, isHovered, onHover, onLeave, mobile }: any) => {
   const positions = [
     "top-[5%] left-[5%]",   // 0: Top Left
     "top-[5%] right-[5%]",  // 1: Top Right
@@ -990,40 +1074,42 @@ const ModuleCard = ({ module, index, isHovered, onHover, onLeave, mobile }: any)
         scale: isHovered ? 1.02 : 1
       }}
     >
-      <div className={`bg-white rounded-[18px] border transition-all duration-300 overflow-hidden ${isHovered ? "border-brand-blue shadow-[0_40px_80px_rgba(0,0,0,0.08)] -translate-y-1" : "border-divider shadow-[0_20px_40px_rgba(0,0,0,0.04)]"
+      <div className={`bg-white rounded-[18px] border transition-all duration-300 overflow-hidden ${isActive ? "border-brand-blue shadow-[0_40px_80px_rgba(0,0,0,0.08)] -translate-y-1" : "border-divider shadow-[0_20px_40px_rgba(0,0,0,0.04)]"
         }`}>
         <div className="p-6">
-          <div className="flex items-center gap-4 mb-4">
+          <div className={`flex items-center gap-4 transition-all duration-300 ${isActive ? "mb-4" : "mb-0"}`}>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${module.bg} ${module.color}`}>
               <module.icon className="w-6 h-6" />
             </div>
             <h3 className="font-bold text-lg">{module.id}</h3>
           </div>
 
-          <div className="space-y-3 mb-6">
-            {module.bullets.map((bullet: string, i: number) => (
-              <motion.div
-                key={bullet}
-                initial={{ opacity: 0, x: -10 }}
-                animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                transition={{ delay: isHovered ? 0.2 + i * 0.08 : 0 }}
-                className="flex items-center gap-2 text-xs text-text-secondary"
-              >
-                <div className={`w-1 h-1 rounded-full ${module.color.replace('text-', 'bg-')}`} />
-                {bullet}
-              </motion.div>
-            ))}
-          </div>
-
           <AnimatePresence>
-            {isHovered && (
+            {isActive && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                className="pt-4 border-t border-divider overflow-hidden"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="overflow-hidden"
               >
-                {module.preview}
+                <div className="space-y-3 mb-6 pt-2">
+                  {module.bullets.map((bullet: string, i: number) => (
+                    <motion.div
+                      key={bullet}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + i * 0.05 }}
+                      className="flex items-center gap-2 text-xs text-text-secondary"
+                    >
+                      <div className={`w-1 h-1 rounded-full ${module.color.replace('text-', 'bg-')}`} />
+                      {bullet}
+                    </motion.div>
+                  ))}
+                </div>
+                <div className="pt-4 border-t border-divider">
+                  {module.preview}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -1272,7 +1358,6 @@ const LiveListingAuditSection = () => {
     }
   ];
 
-  const professionalEase = [0.22, 1, 0.36, 1];
 
   const fixes = [
     { id: 0, text: "Upload Lead-Based Paint Disclosure", priority: "High" },
@@ -1302,7 +1387,7 @@ const LiveListingAuditSection = () => {
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Live Listing Audit Panel</h2>
           <p className="text-text-secondary max-w-2xl mx-auto">
-            Ria evaluates over 200+ data points before preparing your MLS draft — ensuring every listing is compliant and market-ready.
+            Ria cross-references 200+ regional data points to eliminate compliance risks before you hit publish.
           </p>
         </div>
 
@@ -1390,7 +1475,7 @@ const LiveListingAuditSection = () => {
                   className="inline-flex items-center gap-2 px-4 py-2 bg-status-success/10 text-status-success rounded-full mb-6 border border-status-success/20"
                 >
                   <CheckCircle2 className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase tracking-wide">MLS Draft Ready — Minor Improvements Suggested</span>
+                  <span className="text-xs font-bold uppercase tracking-wide">MLS Draft Ready - Minor Improvements Suggested</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -1427,6 +1512,7 @@ const LiveListingAuditSection = () => {
                 <button
                   onClick={() => setActiveCategory(activeCategory === i ? null : i)}
                   aria-expanded={activeCategory === i}
+                  aria-label={`${activeCategory === i ? 'Collapse' : 'Expand'} ${cat.id} audit details`}
                   className="w-full p-6 flex items-center justify-between text-left group"
                 >
                   <div className="flex-1">
@@ -1614,7 +1700,7 @@ const LiveListingAuditSection = () => {
 
           <div className="mt-8 text-center">
             <p className="text-[10px] text-text-muted font-bold uppercase tracking-widest">
-              Ria evaluates over 200+ data points before preparing your MLS draft.
+              Ria cross-references 200+ regional data points before preparing your MLS draft.
             </p>
           </div>
         </motion.div>
@@ -2156,10 +2242,12 @@ const EngineStageContent = ({ stage }: { stage: number }) => {
 export default function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/demo" element={<DemoPage />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/demo" element={<DemoPage />} />
+        </Routes>
+      </main>
     </Router>
   );
 }

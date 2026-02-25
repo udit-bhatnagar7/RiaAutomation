@@ -3,24 +3,29 @@
 
 @theme {
   --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
-  
+
   --color-bg-primary: #F7F9FC;
   --color-bg-secondary: #FFFFFF;
   --color-bg-accent: #F1F4F9;
-  
+
   --color-border-subtle: #E6EAF0;
   --color-divider: #EDF1F6;
-  
+
   --color-brand-blue: #3B5BFF;
   --color-brand-cyan: #00B3E6;
-  
-  --color-status-success: #0F9D58; /* Changed for contrast */
-  --color-status-warning: #D97706; /* Changed for contrast */
-  --color-status-error: #DC2626; /* Changed for contrast */
-  
+
+  --color-status-success: #0F9D58;
+  /* Changed for contrast */
+  --color-status-warning: #D97706;
+  /* Changed for contrast */
+  --color-status-error: #DC2626;
+  /* Changed for contrast */
+
   --color-text-primary: #0F172A;
-  --color-text-secondary: #475569; /* Darkened for contrast */
-  --color-text-muted: #64748B; /* Darkened for contrast */
+  --color-text-secondary: #334155;
+  /* Slate-700 for 4.5:1 contrast */
+  --color-text-muted: #475569;
+  /* Slate-600 for 4.5:1 contrast */
 }
 
 @layer base {
@@ -30,7 +35,7 @@
 }
 
 .glass-card {
-  @apply bg-white border border-border-subtle shadow-[0_30px_60px_-15px_rgba(0,0,0,0.06)] rounded-2xl;
+  @apply bg-white border border-border-subtle shadow-[0_30px_60px_-15px_rgba(0, 0, 0, 0.06)] rounded-2xl;
 }
 
 .btn-primary {
