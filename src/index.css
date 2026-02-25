@@ -14,13 +14,13 @@
   --color-brand-blue: #3B5BFF;
   --color-brand-cyan: #00B3E6;
   
-  --color-status-success: #16C784;
-  --color-status-warning: #F5A623;
-  --color-status-error: #E5484D;
+  --color-status-success: #0F9D58; /* Changed for contrast */
+  --color-status-warning: #D97706; /* Changed for contrast */
+  --color-status-error: #DC2626; /* Changed for contrast */
   
   --color-text-primary: #0F172A;
-  --color-text-secondary: #64748B;
-  --color-text-muted: #94A3B8;
+  --color-text-secondary: #475569; /* Darkened for contrast */
+  --color-text-muted: #64748B; /* Darkened for contrast */
 }
 
 @layer base {

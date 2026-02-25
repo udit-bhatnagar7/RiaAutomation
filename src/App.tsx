@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence, useInView } from "motion/react";
 import {
   CheckCircle2,
   ShieldCheck,
@@ -141,7 +141,7 @@ const RiaStudio = () => {
   const currentTool = tools[activeTool];
 
   return (
-    <section className="py-32 bg-[#F7F9FC] overflow-hidden">
+    <section className="py-24 bg-[#F7F9FC] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <FadeIn>
@@ -450,7 +450,7 @@ const ProductDropdown = () => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <button aria-expanded={isOpen} className="flex items-center gap-1 hover:text-brand-blue transition-colors py-4">
+      <button aria-expanded={isOpen} className="flex items-center gap-1 hover:text-brand-blue transition-colors py-4 text-sm font-medium text-text-secondary">
         Product
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
@@ -468,10 +468,10 @@ const ProductDropdown = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-1/2 -translate-x-1/2 pt-2 hidden md:block" // Hidden on mobile for fallback
+            className="absolute top-full left-0 pt-2 hidden md:block"
           >
-            <div className="w-[640px] bg-[#0F172A] border border-slate-700/50 rounded-2xl p-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-6 block">
+            <div className="w-[640px] bg-white border border-[#E6EAF0] rounded-2xl p-6 shadow-xl">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest mb-6 block">
                 CORE PRODUCTS
               </span>
 
@@ -480,16 +480,16 @@ const ProductDropdown = () => {
                   <Link
                     to={item.title === "Virtual Staging" ? "/demo" : "#"}
                     key={i}
-                    className="flex gap-4 group/item items-start p-2 -m-2 rounded-xl hover:bg-slate-800/50 transition-colors"
+                    className="flex gap-4 group/item items-start p-2 -m-2 rounded-xl hover:bg-bg-primary transition-colors"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center shrink-0 border border-slate-700 group-hover/item:border-slate-600 transition-colors">
-                      <item.icon className="w-5 h-5 text-slate-300 group-hover/item:text-white transition-colors" />
+                    <div className="w-10 h-10 rounded-xl bg-bg-primary flex items-center justify-center shrink-0 border border-[#E6EAF0] group-hover/item:border-brand-blue/30 transition-colors">
+                      <item.icon className="w-5 h-5 text-brand-blue" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-white mb-1 group-hover/item:text-brand-blue transition-colors">
+                      <h4 className="text-sm font-semibold text-text-primary mb-1 group-hover/item:text-brand-blue transition-colors">
                         {item.title}
                       </h4>
-                      <p className="text-xs text-slate-400 leading-relaxed">
+                      <p className="text-xs text-text-secondary leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
@@ -509,7 +509,7 @@ const ProductDropdown = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden bg-[#0F172A] rounded-xl mt-2 p-4 space-y-4"
+              className="overflow-hidden bg-white border border-[#E6EAF0] shadow-sm rounded-xl mt-2 p-4 space-y-4"
             >
               {products.map((item, i) => (
                 <Link
@@ -517,11 +517,11 @@ const ProductDropdown = () => {
                   key={i}
                   className="flex gap-3 items-center"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
-                    <item.icon className="w-4 h-4 text-slate-300" />
+                  <div className="w-8 h-8 rounded-lg bg-bg-primary border border-[#E6EAF0] flex items-center justify-center shrink-0">
+                    <item.icon className="w-4 h-4 text-brand-blue" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-semibold text-white">
+                    <h4 className="text-xs font-semibold text-text-primary">
                       {item.title}
                     </h4>
                   </div>
@@ -539,23 +539,27 @@ function LandingPage() {
   const [score, setScore] = useState(72);
   const [typingText, setTypingText] = useState("");
   const fullText = "Stunning 4-bedroom colonial in the heart of Oakwood. Recently renovated kitchen with quartz countertops and stainless steel appliances. Spacious backyard perfect for entertaining...";
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   useEffect(() => {
+    if (!isInView) return;
     const timer = setTimeout(() => {
       if (score < 94) setScore(prev => prev + 1);
     }, 50);
     return () => clearTimeout(timer);
-  }, [score]);
+  }, [score, isInView]);
 
   useEffect(() => {
+    if (!isInView) return;
     let i = 0;
     const interval = setInterval(() => {
       setTypingText(fullText.slice(0, i));
       i++;
-      if (i > fullText.length) clearInterval(interval);
+      if (i > fullText.length + 100) i = 0;
     }, 20);
     return () => clearInterval(interval);
-  }, []);
+  }, [isInView]);
 
   return (
     <div className="min-h-screen selection:bg-brand-blue/10 selection:text-brand-blue">
@@ -581,7 +585,7 @@ function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 overflow-hidden">
+      <section className="pt-32 pb-20 px-6 overflow-hidden" ref={ref}>
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <FadeIn direction="up">
@@ -765,6 +769,22 @@ function LandingPage() {
 
 const IntelligenceLayersSection = () => {
   const [hoveredModule, setHoveredModule] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-100px" });
+
+  useEffect(() => {
+    if (!isInView || hoveredModule !== null) return;
+    const timer = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % 4);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [isInView, hoveredModule]);
+
+  const getActiveState = (index: number) => {
+    if (hoveredModule !== null) return hoveredModule === index;
+    return activeIndex === index;
+  };
 
   const modules = [
     {
@@ -773,7 +793,7 @@ const IntelligenceLayersSection = () => {
       bg: "bg-brand-blue/10",
       color: "text-brand-blue",
       bullets: ["Auto-fill from tax data", "Historical price analysis", "Neighborhood insights"],
-      preview: <ListingIntelligencePreview active={hoveredModule === 0} />
+      preview: <ListingIntelligencePreview active={getActiveState(0)} />
     },
     {
       id: "Remark Optimizer",
@@ -781,7 +801,7 @@ const IntelligenceLayersSection = () => {
       bg: "bg-indigo-500/10",
       color: "text-indigo-500",
       bullets: ["Tone-specific generation", "SEO keyword injection", "Character limit management"],
-      preview: <RemarkOptimizerPreview active={hoveredModule === 1} />
+      preview: <RemarkOptimizerPreview active={getActiveState(1)} />
     },
     {
       id: "Media Intelligence",
@@ -789,7 +809,7 @@ const IntelligenceLayersSection = () => {
       bg: "bg-emerald-500/10",
       color: "text-emerald-500",
       bullets: ["Auto-room labeling", "Virtual staging suggestions", "Image quality enhancement"],
-      preview: <MediaIntelligencePreview active={hoveredModule === 2} />
+      preview: <MediaIntelligencePreview active={getActiveState(2)} />
     },
     {
       id: "Compliance Guard",
@@ -797,12 +817,12 @@ const IntelligenceLayersSection = () => {
       bg: "bg-emerald-500/10",
       color: "text-emerald-500",
       bullets: ["Local MLS rule validation", "Fair Housing check", "Disclosure tracking"],
-      preview: <ComplianceGuardPreview active={hoveredModule === 3} />
+      preview: <ComplianceGuardPreview active={getActiveState(3)} />
     }
   ];
 
   return (
-    <section className="py-32 bg-[#F7F9FC] overflow-hidden relative">
+    <section className="py-32 bg-[#F7F9FC] overflow-hidden relative" ref={ref}>
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl" />
@@ -837,7 +857,7 @@ const IntelligenceLayersSection = () => {
           <motion.div
             className="relative z-20 w-32 h-32 bg-white rounded-full shadow-2xl border border-divider flex items-center justify-center"
             animate={{
-              boxShadow: hoveredModule !== null ? "0 0 40px rgba(59,91,255,0.2)" : "0 0 20px rgba(0,0,0,0.05)",
+              boxShadow: hoveredModule !== null || activeIndex !== null ? "0 0 40px rgba(59,91,255,0.2)" : "0 0 20px rgba(0,0,0,0.05)",
               scale: hoveredModule !== null ? 1.05 : 1
             }}
           >
@@ -1076,7 +1096,7 @@ const RemarkOptimizerPreview = ({ active }: { active: boolean }) => {
       const interval = setInterval(() => {
         setText(fullText.slice(0, i));
         i++;
-        if (i > fullText.length) clearInterval(interval);
+        if (i > fullText.length + 50) i = 0;
       }, 30);
       return () => clearInterval(interval);
     } else {
@@ -1202,7 +1222,7 @@ const ComplianceGuardPreview = ({ active }: { active: boolean }) => {
 const LiveListingAuditSection = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const [score, setScore] = useState(0);
-  const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState<number | null>(1);
   const [completedFixes, setCompletedFixes] = useState<number[]>([]);
 
   const categories = [
@@ -1252,10 +1272,12 @@ const LiveListingAuditSection = () => {
     }
   ];
 
+  const professionalEase = [0.22, 1, 0.36, 1];
+
   const fixes = [
-    "Upload Lead-Based Paint Disclosure",
-    "Revise 'walking distance' in remarks",
-    "Add missing Virtual Tour URL (Optional)"
+    { id: 0, text: "Upload Lead-Based Paint Disclosure", priority: "High" },
+    { id: 1, text: "Revise 'walking distance' in remarks", priority: "High" },
+    { id: 2, text: "Add missing Virtual Tour URL (Optional)", priority: "Medium" }
   ];
 
   const toggleFix = (index: number) => {
@@ -1528,7 +1550,7 @@ const LiveListingAuditSection = () => {
 
         {/* Fix Before Publishing Checklist */}
         <motion.div
-          className="mt-12 bg-[#F9FBFF] p-8 rounded-[18px] border border-[#E6EAF0] shadow-sm relative overflow-hidden"
+          className="mt-12 bg-[#F9FBFF] p-8 rounded-[18px] border border-[#E6EAF0] shadow-[0_20px_40px_rgba(0,0,0,0.02)] relative overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -1545,37 +1567,48 @@ const LiveListingAuditSection = () => {
               </div>
             </div>
             <div className="flex flex-col items-end">
-              <span className="text-xs font-bold text-brand-blue mb-2">{completedFixes.length} of {fixes.length} improvements completed</span>
-              <div className="w-48 h-1.5 bg-divider rounded-full overflow-hidden">
+              <div className="flex items-center gap-4 mb-2">
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">
+                  Improve to 98% by resolving {fixes.length - completedFixes.length} issues
+                </span>
+                <span className="text-xs font-bold text-brand-blue">{completedFixes.length} of {fixes.length}</span>
+              </div>
+              <div className="w-64 h-1.5 bg-divider rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-brand-blue"
                   animate={{ width: `${(completedFixes.length / fixes.length) * 100}%` }}
+                  transition={{ duration: 0.4, ease: professionalEase }}
                 />
               </div>
             </div>
           </div>
 
           <div className="grid md:grid-cols-1 gap-3">
-            {fixes.map((fix, i) => (
-              <motion.div
-                key={i}
-                onClick={() => toggleFix(i)}
-                className={`flex items-center gap-4 p-4 rounded-xl border transition-all cursor-pointer group ${completedFixes.includes(i)
-                  ? "bg-white border-status-success/30 opacity-60"
-                  : "bg-white border-[#E6EAF0] hover:border-brand-blue/30"
-                  }`}
-              >
-                <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-all ${completedFixes.includes(i)
-                  ? "bg-status-success border-status-success text-white"
-                  : "border-divider group-hover:border-brand-blue"
-                  }`}>
-                  {completedFixes.includes(i) && <CheckCircle2 className="w-4 h-4" />}
-                </div>
-                <span className={`text-sm font-medium transition-all ${completedFixes.includes(i) ? "text-text-muted line-through" : "text-text-primary"
-                  }`}>
-                  {fix}
-                </span>
-              </motion.div>
+            {["High", "Medium"].map(priority => (
+              <div key={priority} className="space-y-3">
+                <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">{priority} Priority</p>
+                {fixes.filter(f => f.priority === priority).map((fix) => (
+                  <motion.div
+                    key={fix.id}
+                    onClick={() => toggleFix(fix.id)}
+                    className={`flex items-center gap-4 p-4 rounded-xl border transition-all cursor-pointer group relative ${completedFixes.includes(fix.id)
+                      ? "bg-white border-status-success/30 opacity-60"
+                      : `bg-white border-[#E6EAF0] hover:border-brand-blue/30 ${priority === 'High' ? 'border-l-4 border-l-amber-500' : ''}`
+                      }`}
+                  >
+                    <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-all ${completedFixes.includes(fix.id)
+                      ? "bg-status-success border-status-success text-white"
+                      : "border-divider group-hover:border-brand-blue"
+                      }`}>
+                      {completedFixes.includes(fix.id) && <CheckCircle2 className="w-4 h-4" />}
+                    </div>
+                    <span className={`text-sm font-medium transition-all ${completedFixes.includes(fix.id) ? "text-text-muted line-through" : "text-text-primary"
+                      }`}>
+                      {fix.text}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
             ))}
           </div>
 
@@ -1593,6 +1626,8 @@ const LiveListingAuditSection = () => {
 const RiaEngine = () => {
   const [activeStage, setActiveStage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-200px" });
 
   const stages = [
     {
@@ -1622,15 +1657,15 @@ const RiaEngine = () => {
   ];
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !isInView) return;
     const interval = setInterval(() => {
       setActiveStage((prev) => (prev + 1) % stages.length);
     }, 8000);
     return () => clearInterval(interval);
-  }, [isPaused, stages.length]);
+  }, [isPaused, isInView, stages.length]);
 
   return (
-    <section className="py-24 bg-[#F7F9FC] overflow-hidden">
+    <section className="py-24 bg-[#F7F9FC] overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <motion.div
@@ -1797,8 +1832,12 @@ const EngineStageContent = ({ stage }: { stage: number }) => {
   const [typingText, setTypingText] = useState("");
   const [showWarning, setShowWarning] = useState(false);
   const [warningResolved, setWarningResolved] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-100px" });
 
   useEffect(() => {
+    if (!isInView) return;
+
     if (stage === 0) {
       setFields([]);
       setCounter(0);
@@ -1841,17 +1880,20 @@ const EngineStageContent = ({ stage }: { stage: number }) => {
         setTypingText(fullText.slice(0, i));
         i++;
         if (i > fullText.length) {
-          clearInterval(interval);
           setMarketabilityScore(94);
+        }
+        if (i > fullText.length + 80) {
+          i = 0;
+          setMarketabilityScore(72);
         }
       }, 20);
       return () => clearInterval(interval);
     }
-  }, [stage]);
+  }, [stage, isInView]);
 
   if (stage === 0) {
     return (
-      <div className="grid md:grid-cols-2 gap-12 items-center h-full">
+      <div className="grid md:grid-cols-2 gap-12 items-center h-full" ref={ref}>
         <div className="space-y-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-2xl font-bold">Assemble</h3>
@@ -1915,7 +1957,7 @@ const EngineStageContent = ({ stage }: { stage: number }) => {
 
   if (stage === 1) {
     return (
-      <div className="grid md:grid-cols-2 gap-12 items-center h-full">
+      <div className="grid md:grid-cols-2 gap-12 items-center h-full" ref={ref}>
         <div className="space-y-6">
           <h3 className="text-2xl font-bold">Validate</h3>
           <div className="space-y-4">
@@ -1993,7 +2035,7 @@ const EngineStageContent = ({ stage }: { stage: number }) => {
 
   if (stage === 2) {
     return (
-      <div className="grid md:grid-cols-2 gap-12 items-center h-full">
+      <div className="grid md:grid-cols-2 gap-12 items-center h-full" ref={ref}>
         <div className="space-y-6">
           <h3 className="text-2xl font-bold">Optimize</h3>
           <div className="p-5 bg-bg-primary rounded-2xl border border-divider">
@@ -2056,7 +2098,7 @@ const EngineStageContent = ({ stage }: { stage: number }) => {
 
   if (stage === 3) {
     return (
-      <div className="flex flex-col items-center justify-center h-full text-center space-y-8">
+      <div className="flex flex-col items-center justify-center h-full text-center space-y-8" ref={ref}>
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}

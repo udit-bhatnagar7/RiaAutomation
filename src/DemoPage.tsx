@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence, useInView } from "motion/react";
 import {
   Upload,
   FileText,
@@ -202,7 +202,6 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                   <span className="text-[10px] font-bold text-text-muted uppercase">Public Remarks</span>
                   <div className="flex gap-2">
                     <span className="text-[10px] font-medium text-brand-blue px-2 py-0.5 bg-brand-blue/5 rounded">Luxury Tone</span>
-                    <span className="text-[10px] font-medium text-brand-blue px-2 py-0.5 bg-brand-blue/5 rounded">SEO Optimized</span>
                   </div>
                 </div>
                 <p className="text-xs text-text-secondary leading-relaxed min-h-[80px]">
@@ -1146,7 +1145,7 @@ export const JourneyTimeline = () => {
 
   return (
     <section className="py-24 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight mb-4">From prep to closing — Ria stays with the listing.</h2>
           <p className="text-text-secondary">Built to manage every stage of the listing lifecycle.</p>
@@ -1272,19 +1271,21 @@ export const JourneyTimeline = () => {
 export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: boolean }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-100px" });
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !isInView) return;
 
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % 3);
     }, 6000); // 6 seconds per step to allow animations to play out
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, isInView]);
 
   return (
-    <div id={isDemoPage ? undefined : "how-it-works"}>
+    <div id={isDemoPage ? undefined : "how-it-works"} ref={ref}>
       <section className={`${isDemoPage ? 'pt-32' : 'pt-24'} pb-12 px-6`}>
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -1301,7 +1302,7 @@ export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: bool
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-6xl font-bold tracking-tight text-text-primary mb-6"
+            className="text-5xl md:text-6xl font-bold tracking-tight text-text-primary"
           >
             Watch Ria think.
           </motion.h2>
