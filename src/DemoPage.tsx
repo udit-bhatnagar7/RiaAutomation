@@ -33,10 +33,107 @@ import {
   Eraser,
   Maximize2,
   Layers,
-  Zap
+  Zap,
+  Quote,
+  Lock,
+  CircleCheck
 } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, ReactNode, MouseEvent } from "react";
 import { Link } from "react-router-dom";
+import { useSpring, useMotionValue } from "motion/react";
+
+const professionalEase = [0.22, 1, 0.36, 1];
+
+const Magnetic = ({ children, strength = 0.5 }: { children: ReactNode; strength?: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 15, stiffness: 150 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  const handleMouseMove = (e: MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = ref.current?.getBoundingClientRect() || { left: 0, top: 0, width: 0, height: 0 };
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+
+    x.set((clientX - centerX) * strength);
+    y.set((clientY - centerY) * strength);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: springX, y: springY }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const StaggerContainer = ({ children, delayChildren = 0, staggerChildren = 0.1, className = "" }: { children: ReactNode; delayChildren?: number; staggerChildren?: number; className?: string }) => {
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={{
+        visible: {
+          transition: {
+            delayChildren,
+            staggerChildren
+          }
+        }
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const StaggerItem = ({ children, direction = "up", className = "" }: { children: ReactNode; direction?: "up" | "down" | "left" | "right"; className?: string }) => {
+  const variants = {
+    hidden: {
+      opacity: 0,
+      y: direction === "up" ? 30 : direction === "down" ? -30 : 0,
+      x: direction === "left" ? 30 : direction === "right" ? -30 : 0,
+      filter: "blur(8px)"
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.6, ease: professionalEase }
+    }
+  };
+
+  return <motion.div variants={variants} className={className}>{children}</motion.div>;
+};
+
+const RevealSection = ({ children, className = "" }: { children: ReactNode; className?: string }) => {
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-150px" }}
+      transition={{ duration: 0.8, ease: professionalEase }}
+      className={className}
+    >
+      {children}
+    </motion.section>
+  );
+};
 
 const StepTimeline = ({ activeStep }: { activeStep: number }) => {
   const steps = [
@@ -1149,11 +1246,11 @@ export const JourneyTimeline = () => {
     },
     {
       id: "Marketing",
-      status: "Soon",
+      status: "In development",
       icon: Megaphone,
       desc: "Auto-generated assets for social & print.",
       preview: (
-        <div className="space-y-4 opacity-60">
+        <div className="space-y-4 opacity-40">
           <div className="grid grid-cols-2 gap-3">
             <div className="aspect-square bg-bg-accent rounded-lg flex flex-col items-center justify-center p-4 border border-dashed border-divider">
               <Share2 className="w-6 h-6 text-text-muted mb-2" />
@@ -1175,11 +1272,11 @@ export const JourneyTimeline = () => {
     },
     {
       id: "Closing",
-      status: "Soon",
+      status: "In development",
       icon: Handshake,
       desc: "End-to-end offer and closing tracking.",
       preview: (
-        <div className="space-y-4 opacity-60">
+        <div className="space-y-4 opacity-40">
           <div className="p-4 bg-bg-accent rounded-xl border border-dashed border-divider">
             <div className="flex items-center gap-2 mb-4">
               <Clock className="w-4 h-4 text-text-muted" />
@@ -1207,8 +1304,8 @@ export const JourneyTimeline = () => {
     <section className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight mb-4">From prep to closing - Ria stays with the listing.</h2>
-          <p className="text-text-secondary">Built to manage every stage of the listing lifecycle.</p>
+          <h2 className="text-4xl font-bold tracking-tight mb-4">Built to manage the entire listing lifecycle.</h2>
+          <p className="text-text-secondary">Today, Ria handles pre-listing and MLS draft creation. Next: marketing automation and closing coordination. Request early access to shape what we build.</p>
         </div>
 
         <div className="relative mb-20">
@@ -1254,7 +1351,7 @@ export const JourneyTimeline = () => {
           >
             {stages.map((stage, i) => {
               const isActive = activeStage === i;
-              const isSoon = stage.status === "Soon";
+              const isInDev = stage.status === "In development";
               const isPast = activeStage > i;
 
               return (
@@ -1276,12 +1373,12 @@ export const JourneyTimeline = () => {
                       : isPast
                         ? "bg-brand-blue/10 border-2 border-brand-blue text-brand-blue"
                         : "bg-white border-2 border-divider text-text-muted hover:border-brand-blue/30"
-                      } ${isSoon && !isActive ? "opacity-50" : ""}`}
+                      } ${isInDev && !isActive ? "opacity-50" : ""}`}
                   >
                     <stage.icon className="w-5 h-5" />
-                    {isSoon && (
+                    {isInDev && (
                       <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-bg-accent text-text-muted text-[8px] font-bold rounded-full border border-divider whitespace-nowrap">
-                        SOON
+                        IN DEV
                       </span>
                     )}
                     {isActive && (
@@ -1333,7 +1430,7 @@ export const JourneyTimeline = () => {
                         <CheckCircle2 className="w-3 h-3 text-status-success" /> {item}
                       </li>
                     ))}
-                    {activeStage >= 2 && ["Future integration", "Brokerage requests", "Coming 2026"].map(item => (
+                    {activeStage >= 2 && ["In development — request early access"].map(item => (
                       <li key={item} className="flex items-center gap-2 text-xs text-text-muted italic">
                         <div className="w-1 h-1 bg-divider rounded-full" /> {item}
                       </li>
@@ -1347,6 +1444,139 @@ export const JourneyTimeline = () => {
             </motion.div>
           </AnimatePresence>
         </div>
+      </div>
+    </section>
+  );
+};
+
+const SocialProof = () => {
+  return (
+    <section className="py-32 bg-[#FAFAF8] border-t border-divider overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-[10px] font-bold uppercase tracking-widest mb-4"
+          >
+            <Handshake className="w-3 h-3" />
+            Social Proof
+          </motion.div>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Used by agents who don’t want to go back.</h2>
+          <p className="text-text-secondary max-w-2xl mx-auto">Real agents. Real listings. Real time saved.</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 mb-24">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-white h-full p-8 rounded-2xl border border-[#E6EAF0] shadow-sm hover:shadow-md hover:border-brand-blue/20 transition-all group"
+          >
+            <Quote className="w-8 h-8 text-brand-blue/10 mb-6 group-hover:text-brand-blue/20 transition-colors" />
+            <p className="text-lg text-text-primary mb-8 leading-relaxed italic">“Ria cut my listing prep from 3 hours to 12 minutes. I’m never going back to manual data entry.”</p>
+            <div className="flex items-center gap-4">
+              <img alt="Sarah Jenkins" className="w-12 h-12 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://picsum.photos/seed/sarah/100/100" referrerPolicy="no-referrer" />
+              <div>
+                <h4 className="font-bold text-text-primary">Sarah Jenkins</h4>
+                <p className="text-xs text-text-muted uppercase tracking-wider font-medium">Private Beta User · CA Coastal Properties</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-white h-full p-8 rounded-2xl border border-[#E6EAF0] shadow-sm hover:shadow-md hover:border-brand-blue/20 transition-all group"
+          >
+            <Quote className="w-8 h-8 text-brand-blue/10 mb-6 group-hover:text-brand-blue/20 transition-colors" />
+            <p className="text-lg text-text-primary mb-8 leading-relaxed italic">“The compliance checks alone are worth it. It's like having a second pair of eyes that never gets tired.”</p>
+            <div className="flex items-center gap-4">
+              <img alt="Marcus Thorne" className="w-12 h-12 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://picsum.photos/seed/marcus/100/100" referrerPolicy="no-referrer" />
+              <div>
+                <h4 className="font-bold text-text-primary">Marcus Thorne</h4>
+                <p className="text-xs text-text-muted uppercase tracking-wider font-medium">Top Producer · Luxury Realty Group</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="py-12 border-y border-divider mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              { val: "94%", label: "Average readiness score" },
+              { val: "12 min", label: "Avg time to MLS-ready draft" },
+              { val: "75%", label: "Reduction in listing prep time" }
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-4xl font-bold text-text-primary mb-2">{stat.val}</div>
+                <p className="text-xs font-bold text-text-muted uppercase tracking-widest">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-12">
+          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6">
+            <div className="flex items-center gap-2 opacity-60 grayscale hover:grayscale-0 transition-all">
+              <Lock className="w-4 h-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">Encrypted at rest & in transit</span>
+            </div>
+            <div className="flex items-center gap-2 opacity-60 grayscale hover:grayscale-0 transition-all">
+              <ShieldCheck className="w-4 h-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">MLS-ready workflow engine</span>
+            </div>
+            <div className="flex items-center gap-2 opacity-60 grayscale hover:grayscale-0 transition-all">
+              <Users className="w-4 h-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">Built by licensed agents</span>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-8 pt-8 border-t border-divider/50">
+            <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest w-full text-center mb-4 opacity-50">As seen in</span>
+            {['Inman', 'HousingWire', 'RealTrends'].map(brand => (
+              <span key={brand} className="text-xl font-bold text-text-muted opacity-50 grayscale hover:opacity-80 transition-opacity cursor-default">{brand}</span>
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-24 max-w-3xl mx-auto bg-white p-10 rounded-3xl border border-divider shadow-sm relative overflow-hidden group"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 rounded-bl-full -mr-16 -mt-16 transition-all group-hover:scale-110"></div>
+          <div className="relative z-10">
+            <h3 className="text-2xl font-bold mb-6">How a 12-agent team reduced listing prep time by 75%</h3>
+            <div className="space-y-4 mb-8">
+              <div className="flex items-start gap-3">
+                <CircleCheck className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
+                <p className="text-text-secondary text-sm">Centralized all property data into a single source of truth</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <CircleCheck className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
+                <p className="text-text-secondary text-sm">Automated 90% of manual data entry for MLS fields</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <CircleCheck className="w-5 h-5 text-brand-blue shrink-0 mt-0.5" />
+                <p className="text-text-secondary text-sm">Reduced compliance review cycles from 2 days to 1 hour</p>
+              </div>
+            </div>
+            <button className="text-brand-blue font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all">
+              Read full case study <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -1486,38 +1716,55 @@ export default function DemoPage() {
 
       <main className="relative">
         <h1 className="sr-only">Ria Interactive Demo</h1>
-        <WatchRiaThinkSection isDemoPage={true} />
 
-        <RoleSwitcher />
+        <RevealSection>
+          <WatchRiaThinkSection isDemoPage={true} />
+        </RevealSection>
 
-        <JourneyTimeline />
+        <RevealSection>
+          <RoleSwitcher />
+        </RevealSection>
 
-        <VisualIntelligenceStudio />
+        <RevealSection>
+          <JourneyTimeline />
+        </RevealSection>
+
+        <RevealSection>
+          <SocialProof />
+        </RevealSection>
+
+        <RevealSection>
+          <VisualIntelligenceStudio />
+        </RevealSection>
 
         {/* Final CTA on Demo Page */}
-        <section className="py-32 bg-white border-t border-divider">
+        <RevealSection className="py-32 bg-white border-t border-divider">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-4xl font-bold tracking-tight mb-6">Ready to automate your workflow?</h2>
             <p className="text-lg text-text-secondary mb-10">Join 5,000+ agents using Ria to go live faster.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-primary"
-              >
-                Draft a Listing
-              </motion.button>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link to="/" className="btn-secondary flex items-center justify-center gap-2">
-                  Back to Home
-                </Link>
-              </motion.div>
+              <Magnetic strength={0.2}>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-primary"
+                >
+                  Draft a Listing
+                </motion.button>
+              </Magnetic>
+              <Magnetic strength={0.2}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Link to="/" className="btn-secondary flex items-center justify-center gap-2">
+                    Back to Home
+                  </Link>
+                </motion.div>
+              </Magnetic>
             </div>
           </div>
-        </section>
+        </RevealSection>
       </main>
 
       <footer className="py-12 bg-bg-primary border-t border-divider">

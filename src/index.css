@@ -26,6 +26,8 @@
   /* Slate-700 for 4.5:1 contrast */
   --color-text-muted: #475569;
   /* Slate-600 for 4.5:1 contrast */
+
+  --shadow-glass: 0 30px 60px -15px rgba(0, 0, 0, 0.06);
 }
 
 @layer base {
@@ -35,7 +37,7 @@
 }
 
 .glass-card {
-  @apply bg-white border border-border-subtle shadow-[0_30px_60px_-15px_rgba(0, 0, 0, 0.06)] rounded-2xl;
+  @apply bg-white border border-border-subtle shadow-glass rounded-2xl;
 }
 
 .btn-primary {
