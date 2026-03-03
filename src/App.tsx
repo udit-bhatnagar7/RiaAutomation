@@ -190,13 +190,18 @@ const RevealSection = ({ children, className = "" }: { children: ReactNode; clas
     </motion.section>
   );
 };
+
 const AnnouncementBanner = ({ onDismiss }: { onDismiss: () => void }) => {
   return (
     <div className="bg-[#EFF6FF] border-b border-blue-100">
       <div className="max-w-7xl mx-auto px-4 h-10 flex items-center justify-center relative">
         <div className="flex items-center gap-2 text-sm text-blue-900">
           <Sparkles className="w-4 h-4" />
-          <span><strong>New:</strong> Virtual staging now available starting at $29/image — 24-hour turnaround <a href="#virtual-staging" className="underline hover:no-underline">Learn more →</a></span>
+          <span>
+            We’re in beta — already live with selected customers.
+            Want in?
+
+            <a href="#virtual-staging" className="underline hover:no-underline">Get early access →</a></span>
         </div>
         <button
           onClick={onDismiss}
@@ -218,7 +223,7 @@ const HeroStats = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#F7F9FC] border-y border-[#E6EAF0]">
+    <section className="py-24 bg-[#F7F9FC] border-y border-[#E6EAF0] hidden">
       <div className="max-w-7xl mx-auto px-6">
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {stats.map((stat, i) => (
@@ -251,6 +256,7 @@ const HeroStats = () => {
     </section>
   );
 };
+
 const SellerCollaborationSection = () => {
   const features = [
     {
@@ -315,6 +321,7 @@ const SellerCollaborationSection = () => {
     </RevealSection>
   );
 };
+
 const RiaEngine = () => {
   const [activeStage, setActiveStage] = useState(0);
 
@@ -324,7 +331,7 @@ const RiaEngine = () => {
       icon: Upload,
       title: "Assemble",
       status: "Extracting structured data...",
-      benefit: "200+ Fields Structured",
+      benefit: "150+ Fields Structured",
       description: "Processing tax records, deeds, and previous MLS history...",
       fields: [
         { label: "Bedrooms", value: "4", source: "County Tax Record" },
@@ -363,7 +370,7 @@ const RiaEngine = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#F7F9FC] overflow-hidden">
+    <section className="py-24 bg-[#F7F9FC] overflow-hidden hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <motion.div
@@ -559,8 +566,6 @@ const RiaEngine = () => {
     </section>
   );
 };
-
-
 
 const RiaStudio = () => {
   const [activeTool, setActiveTool] = useState(0);
@@ -1068,9 +1073,9 @@ const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; 
             </Link>
             <div className="hidden md:flex items-center gap-6">
               <ProductDropdown />
-              <Link to="#pricing" className="text-gray-700 hover:text-gray-900 font-medium text-sm">Pricing</Link>
+              {/* <Link to="#pricing" className="text-gray-700 hover:text-gray-900 font-medium text-sm">Pricing</Link>
               <Link to="#resources" className="text-gray-700 hover:text-gray-900 font-medium text-sm">Resources</Link>
-              <Link to="#blog" className="text-gray-700 hover:text-gray-900 font-medium text-sm">Blog</Link>
+              <Link to="#blog" className="text-gray-700 hover:text-gray-900 font-medium text-sm">Blog</Link> */}
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -1083,7 +1088,7 @@ const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; 
               Start Free
             </motion.button>
             <Link to="/demo" className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors hidden lg:block text-sm font-bold">
-              Book a Demo
+              Book Demo
             </Link>
             <button
               className="md:hidden text-gray-700 p-2"
@@ -1109,7 +1114,7 @@ const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; 
                 <Link to="#resources" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Resources</Link>
                 <Link to="#blog" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Blog</Link>
                 <Link to="/login" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Login</Link>
-                <Link to="/demo" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Book a Demo</Link>
+                <Link to="/demo" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Book Demo</Link>
               </div>
             </motion.div>
           )}
@@ -1171,7 +1176,114 @@ const StepTimeline = ({ activeStep }: { activeStep: number }) => {
     </motion.div>
   );
 };
+export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: boolean }) => {
+  const [activeStep, setActiveStep] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-100px" });
 
+  useEffect(() => {
+    if (isPaused || !isInView) return;
+
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % 3);
+    }, 6000); // 6 seconds per step to allow animations to play out
+
+    return () => clearInterval(interval);
+  }, [isPaused, isInView]);
+
+  return (
+    <div id={isDemoPage ? undefined : "How Ria Lists Property"} ref={ref}>
+      <section className={`${isDemoPage ? 'pt-32' : 'pt-24'} pb-12 px-6`}>
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-xs font-semibold mb-6"
+          >
+            <Sparkles className="w-3 h-3" />
+            <span>INTERACTIVE PRODUCT TOUR</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl font-bold tracking-tight mb-4"
+          >
+            How it works
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-text-secondary max-w-2xl mx-auto"
+          >
+            Experience how Ria transforms raw property data into a compliant, high-performing MLS listing.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* The Live Demo Section */}
+      <section className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-20 pb-24">
+        {/* Left Side: Timeline */}
+        <div className="py-12">
+          <StepTimeline activeStep={activeStep} />
+
+          <div className="mt-16 p-6 bg-white rounded-2xl border border-border-subtle shadow-sm">
+            <h4 className="font-bold text-sm mb-4 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-brand-blue" />
+              Operational Intelligence
+            </h4>
+            <p className="text-xs text-text-secondary leading-relaxed">
+              Ria doesn't just fill forms. It cross-references every data point against your uploaded documents to ensure 100% accuracy and compliance.
+            </p>
+          </div>
+
+          <div className="mt-8 flex items-center gap-4">
+            <button
+              onClick={() => setIsPaused(!isPaused)}
+              className="text-[10px] font-bold text-brand-blue uppercase tracking-widest px-4 py-2 bg-brand-blue/5 rounded-full hover:bg-brand-blue/10 transition-colors"
+            >
+              {isPaused ? "Resume Tour" : "Pause Tour"}
+            </button>
+            <div className="flex gap-2">
+              {[0, 1, 2].map((i) => (
+                <button
+                  key={i}
+                  aria-label={`Switch to story step ${i + 1}`}
+                  onClick={() => {
+                    setActiveStep(i);
+                    setIsPaused(true);
+                  }}
+                  className={`w-6 h-6 flex items-center justify-center rounded-full transition-all`}
+                >
+                  <div className={`rounded-full transition-all ${activeStep === i ? "w-6 h-2 bg-brand-blue" : "w-2 h-2 bg-divider"}`} />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side: Live UI Panel */}
+        <div className="md:pt-12">
+          <div className="sticky top-32">
+            <LiveUIDemo step={activeStep} />
+
+            <div className="mt-8 flex items-center justify-between text-[10px] font-bold text-text-muted uppercase tracking-widest px-2">
+              <span>Auto-playing demo</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[8px] opacity-50">Step {activeStep + 1} of 3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
 const LiveUIDemo = ({ step }: { step: number }) => {
   const [typingText, setTypingText] = useState("");
   const fullText = "Stunning 4-bedroom colonial in the heart of Oakwood. Recently renovated kitchen with quartz countertops and stainless steel appliances. Spacious backyard perfect for entertaining...";
@@ -1409,114 +1521,6 @@ const LiveUIDemo = ({ step }: { step: number }) => {
   );
 };
 
-export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: boolean }) => {
-  const [activeStep, setActiveStep] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-100px" });
-
-  useEffect(() => {
-    if (isPaused || !isInView) return;
-
-    const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % 3);
-    }, 6000); // 6 seconds per step to allow animations to play out
-
-    return () => clearInterval(interval);
-  }, [isPaused, isInView]);
-
-  return (
-    <div id={isDemoPage ? undefined : "how-it-works"} ref={ref}>
-      <section className={`${isDemoPage ? 'pt-32' : 'pt-24'} pb-12 px-6`}>
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-xs font-semibold mb-6"
-          >
-            <Sparkles className="w-3 h-3" />
-            <span>INTERACTIVE PRODUCT TOUR</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl font-bold tracking-tight mb-4"
-          >
-            How it works
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-text-secondary max-w-2xl mx-auto"
-          >
-            Experience how Ria transforms raw property data into a compliant, high-performing MLS listing.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* The Live Demo Section */}
-      <section className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-20 pb-24">
-        {/* Left Side: Timeline */}
-        <div className="py-12">
-          <StepTimeline activeStep={activeStep} />
-
-          <div className="mt-16 p-6 bg-white rounded-2xl border border-border-subtle shadow-sm">
-            <h4 className="font-bold text-sm mb-4 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-brand-blue" />
-              Operational Intelligence
-            </h4>
-            <p className="text-xs text-text-secondary leading-relaxed">
-              Ria doesn't just fill forms. It cross-references every data point against your uploaded documents to ensure 100% accuracy and compliance.
-            </p>
-          </div>
-
-          <div className="mt-8 flex items-center gap-4">
-            <button
-              onClick={() => setIsPaused(!isPaused)}
-              className="text-[10px] font-bold text-brand-blue uppercase tracking-widest px-4 py-2 bg-brand-blue/5 rounded-full hover:bg-brand-blue/10 transition-colors"
-            >
-              {isPaused ? "Resume Tour" : "Pause Tour"}
-            </button>
-            <div className="flex gap-2">
-              {[0, 1, 2].map((i) => (
-                <button
-                  key={i}
-                  aria-label={`Switch to story step ${i + 1}`}
-                  onClick={() => {
-                    setActiveStep(i);
-                    setIsPaused(true);
-                  }}
-                  className={`w-6 h-6 flex items-center justify-center rounded-full transition-all`}
-                >
-                  <div className={`rounded-full transition-all ${activeStep === i ? "w-6 h-2 bg-brand-blue" : "w-2 h-2 bg-divider"}`} />
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right Side: Live UI Panel */}
-        <div className="md:pt-12">
-          <div className="sticky top-32">
-            <LiveUIDemo step={activeStep} />
-
-            <div className="mt-8 flex items-center justify-between text-[10px] font-bold text-text-muted uppercase tracking-widest px-2">
-              <span>Auto-playing demo</span>
-              <div className="flex items-center gap-2">
-                <span className="text-[8px] opacity-50">Step {activeStep + 1} of 3</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
 
 const Counter = ({ from, to, label, active }: { from: string, to: string, label: string, active: boolean }) => {
   const [current, setCurrent] = useState(from);
@@ -1932,7 +1936,7 @@ const RolePreview = ({ role }: { role: string }) => {
 
 export const SocialProof = () => {
   return (
-    <section className="section-padding bg-bg-primary border-t border-divider overflow-hidden transition-colors duration-300 py-24">
+    <section className="section-padding bg-bg-primary border-t border-divider overflow-hidden transition-colors duration-300 py-24 hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <FadeIn>
@@ -1975,7 +1979,7 @@ export const SocialProof = () => {
           </FadeIn>
         </div>
 
-        <div className="py-12 border-y border-divider mb-16">
+        <div className="py-12 border-y border-divider mb-16 hidden">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <FadeIn delay={0.1}>
               <div className="text-center">
@@ -2145,7 +2149,7 @@ const RoleSwitcher = () => {
   ];
 
   return (
-    <section className="section-padding bg-bg-primary transition-colors duration-300 overflow-hidden py-24">
+    <section className="section-padding bg-bg-primary transition-colors duration-300 overflow-hidden py-24 hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight mb-4">Designed for</h2>
@@ -2457,12 +2461,12 @@ function LandingPage() {
               </motion.p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-lg">
-                  Start Your First Listing Free
+                  Start Free
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
                 <button className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center text-lg">
-                  Book a Demo
+                  Book Demo
                 </button>
               </div>
               <p className="mt-4 text-xs text-text-muted">
@@ -2496,8 +2500,8 @@ function LandingPage() {
                   <div className="p-8">
                     <div className="flex items-center justify-between mb-8">
                       <div>
-                        <h3 className="text-sm font-bold text-text-primary mb-1">Listing Integrity Score</h3>
-                        <p className="text-[10px] text-text-secondary uppercase font-bold tracking-wider">Analysis in progress...</p>
+                        <h3 className="text-sm font-bold text-text-primary mb-1">Listing Created</h3>
+                        <p className="text-[10px] text-text-secondary uppercase font-bold tracking-wider">Ready To Publish</p>
                       </div>
                       <div className="text-right">
                         <motion.div
@@ -2506,7 +2510,7 @@ function LandingPage() {
                           animate={{ opacity: 1 }}
                         >
                           {/* {score}% */}
-                          <div class="mb-6 p-4 border border-green-200 bg-green-50 rounded-lg" data-fg-eh6d48="1.16:1.6728:/src/app/components/Hero.tsx:84:15:3813:675:e:div:e"><div class="flex items-center gap-2 text-green-700" data-fg-eh6d49="1.16:1.6728:/src/app/components/Hero.tsx:85:17:3903:564:e:div:ete"><svg class="size-5" fill="currentColor" viewBox="0 0 20 20" data-fg-eh6d50="1.16:1.6728:/src/app/components/Hero.tsx:86:19:3978:380:e:svg:e"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" data-fg-eh6d51="1.16:1.6728:/src/app/components/Hero.tsx:87:21:4063:270:e:path"></path></svg><span class="font-semibold" data-fg-eh6d52="1.16:1.6728:/src/app/components/Hero.tsx:93:19:4377:67:e:span:t">Compliant – Ready to publish</span></div></div>
+                          <div class="mb-6 p-4 border border-green-200 bg-green-50 rounded-lg" data-fg-eh6d48="1.16:1.6728:/src/app/components/Hero.tsx:84:15:3813:675:e:div:e"><div class="flex items-center gap-2 text-green-700" data-fg-eh6d49="1.16:1.6728:/src/app/components/Hero.tsx:85:17:3903:564:e:div:ete"><svg class="size-5" fill="currentColor" viewBox="0 0 20 20" data-fg-eh6d50="1.16:1.6728:/src/app/components/Hero.tsx:86:19:3978:380:e:svg:e"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" data-fg-eh6d51="1.16:1.6728:/src/app/components/Hero.tsx:87:21:4063:270:e:path"></path></svg><span class="font-semibold" data-fg-eh6d52="1.16:1.6728:/src/app/components/Hero.tsx:93:19:4377:67:e:span:t">Compliant</span></div></div>
                         </motion.div>
                       </div>
                     </div>
@@ -2529,13 +2533,102 @@ function LandingPage() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="p-4 bg-bg-accent/50 rounded-xl border border-divider">
+                      {/* <div className="p-4 bg-bg-accent/50 rounded-xl border border-divider">
                         <p className="text-[10px] font-bold text-text-muted uppercase mb-1">Compliance Checks</p>
-                        <p className="text-lg font-bold text-text-primary">142/142</p>
+                        <p className="text-lg font-bold text-text-primary">
+                          <svg class="size-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" data-fg-eh6d50="1.16:1.6728:/src/app/components/Hero.tsx:86:19:3978:380:e:svg:e"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" data-fg-eh6d51="1.16:1.6728:/src/app/components/Hero.tsx:87:21:4063:270:e:path"></path></svg>
+                        </p>
                       </div>
                       <div className="p-4 bg-bg-accent/50 rounded-xl border border-divider">
                         <p className="text-[10px] font-bold text-text-muted uppercase mb-1">Field Accuracy</p>
-                        <p className="text-lg font-bold text-text-primary">99.8%</p>
+                        <p className="text-lg font-bold text-text-primary">
+                          <svg class="size-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" data-fg-eh6d50="1.16:1.6728:/src/app/components/Hero.tsx:86:19:3978:380:e:svg:e"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" data-fg-eh6d51="1.16:1.6728:/src/app/components/Hero.tsx:87:21:4063:270:e:path"></path></svg>
+                        </p>
+                      </div> */}
+                      <div data-fg-eh6d61="1.16:1.6728:/src/app/components/Hero.tsx:109:15:5187:1277:e:div:ete">
+
+                        <div
+                          class="text-sm text-gray-500 mb-2"
+                          data-fg-eh6d62="1.16:1.6728:/src/app/components/Hero.tsx:110:17:5209:70:e:div:t"
+                        >
+                          Photos (12 uploaded)
+                        </div>
+
+                        <div
+                          class="grid grid-cols-3 gap-2"
+                          data-fg-eh6d64="1.16:1.6728:/src/app/components/Hero.tsx:111:17:5296:1147:e:div:x"
+                        >
+
+
+                          <div
+                            class="relative aspect-video bg-gray-200 rounded-lg overflow-hidden"
+                            data-fg-eh6d66="1.16:1.6728:/src/app/components/Hero.tsx:113:21:5399:999:e:div:etete"
+                          >
+                            <div
+                              class="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100"
+                              data-fg-eh6d67="1.16:1.6728:/src/app/components/Hero.tsx:114:23:5508:82:e:div"
+                            ></div>
+
+                            <div
+                              class="absolute top-2 right-2 bg-green-500 text-white p-1 rounded-full"
+                              data-fg-eh6d68="1.16:1.6728:/src/app/components/Hero.tsx:115:23:5613:532:e:div:e"
+                            >
+                              <svg
+                                class="size-3"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                ></path>
+                              </svg>
+                            </div>
+
+                            <div class="absolute bottom-2 left-2 text-xs text-gray-700 bg-white/90 px-2 py-1 rounded">
+                              Vistually staged
+                            </div>
+                          </div>
+
+
+                          <div class="relative aspect-video bg-gray-200 rounded-lg overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100"></div>
+
+                            <div class="absolute top-2 right-2 bg-green-500 text-white p-1 rounded-full">
+                              <svg class="size-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                ></path>
+                              </svg>
+                            </div>
+
+                            <div class="absolute bottom-2 left-2 text-xs text-gray-700 bg-white/90 px-2 py-1 rounded">
+                              Day to Dusk
+                            </div>
+                          </div>
+
+                          <div class="relative aspect-video bg-gray-200 rounded-lg overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100"></div>
+
+                            <div class="absolute top-2 right-2 bg-green-500 text-white p-1 rounded-full">
+                              <svg class="size-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                ></path>
+                              </svg>
+                            </div>
+
+                            <div class="absolute bottom-2 left-2 text-xs text-gray-700 bg-white/90 px-2 py-1 rounded">
+                              AI Enhanced
+                            </div>
+                          </div>
+
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2553,7 +2646,7 @@ function LandingPage() {
       <HeroStats />
 
       {/* Problem Reframe */}
-      <RevealSection className="py-24 bg-white border-y border-divider">
+      <RevealSection className="py-24 bg-white border-y border-divider hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <FadeIn>
@@ -2563,12 +2656,11 @@ function LandingPage() {
           </div>
 
           <StaggerContainer
-            className="grid md:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 gap-8"
           >
             {[
-              { title: "Draft-ready in 4 minutes", desc: "200+ MLS fields extracted and structured from your documents automatically.", icon: Zap },
+              { title: "Fast", desc: "Ready to Publish in 10 min", icon: Zap },
               { title: "Zero compliance surprises", desc: "Every listing scored and checked before it touches MLS. Fair housing, required fields, missing addenda.", icon: ShieldCheck },
-              { title: "Market-ready visuals", desc: "Virtual staging, enhancement, and day-to-dusk — from $29/image with 24-hour turnaround.", icon: Sparkles },
             ].map((benefit, i) => (
               <StaggerItem key={i}>
                 <div className="glass-card p-8 hover:-translate-y-1 transition-transform duration-300">
@@ -2611,7 +2703,7 @@ function LandingPage() {
       <RevealSection className="py-32 bg-white border-t border-divider">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <FadeIn>
-            <h2 className="text-4xl font-bold tracking-tight mb-6">Launch a winning listing in under 5 minutes.</h2>
+            <h2 className="text-4xl font-bold tracking-tight mb-6">Launch a winning listing in minutes.</h2>
             <p className="text-xl text-text-secondary mb-10">Complete. Compliant. Optimized. MLS draft saved.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Magnetic strength={0.2}>
@@ -2650,8 +2742,6 @@ function LandingPage() {
     </div>
   );
 }
-
-
 
 const IntelligenceLayersSection = () => {
   const [hoveredModule, setHoveredModule] = useState<number | null>(null);
@@ -2847,10 +2937,10 @@ const ConnectorLine = ({ start, end, active }: { start: string, end: string, act
 
 const ModuleCard = ({ module, index, isActive, isHovered, onHover, onLeave, mobile }: any) => {
   const positions = [
-    "top-[5%] left-[5%]",   // 0: Top Left
-    "top-[5%] right-[5%]",  // 1: Top Right
-    "bottom-[5%] left-[5%]", // 2: Bottom Left
-    "bottom-[5%] right-[5%]" // 3: Bottom Right
+    "top-[5%] left-[5%]",
+    "top-[5%] right-[5%]",
+    "bottom-[5%] left-[5%]",
+    "bottom-[5%] right-[5%]"
   ];
 
   const hoverOffsets = [
@@ -3139,404 +3229,329 @@ const ComplianceGuardPreview = ({ active }: { active: boolean }) => {
 const LiveListingAuditSection = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const [score, setScore] = useState(0);
-  const [activeCategory, setActiveCategory] = useState<number | null>(1);
+  const [isCalibrating, setIsCalibrating] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<number>(0);
   const [completedFixes, setCompletedFixes] = useState<number[]>([]);
+  const [logs, setLogs] = useState<string[]>([]);
+  const [activeField, setActiveField] = useState<string | null>(null);
 
   const categories = [
     {
       id: "Completeness",
       score: 96,
-      summary: "All mandatory MLS fields are populated. We enriched 14 missing fields using tax records and historical data.",
-      items: [
-        { label: "Property Type & Subtype", status: "success" },
-        { label: "Beds/Baths & Square Footage", status: "success" },
-        { label: "HOA Information", status: "success" },
-        { label: "Tax ID & Legal Description", status: "success" }
-      ]
+      confidence: 98
     },
     {
       id: "Compliance",
       score: 89,
-      summary: "2 warnings detected regarding Fair Housing language and missing state-mandated disclosures.",
-      warnings: [
-        {
-          label: "Potential Fair Housing Violation",
-          subtext: "Review remark: 'Walking distance to...'",
-          tooltip: "Phrases like 'walking distance' can be construed as discriminatory against individuals with mobility disabilities. Suggested: 'Close to...'"
-        },
-        {
-          label: "Missing Lead-Based Paint Disclosure",
-          subtext: "Property built in 1974",
-          tooltip: "Federal law requires this disclosure for properties built before 1978."
-        }
-      ],
-      passed: [
-        { label: "No Branded Media" },
-        { label: "Valid Agent Info" },
-        { label: "Photo Resolution" }
-      ]
+      confidence: 94
     },
     {
       id: "Marketability",
       score: 92,
-      summary: "Listing description is strong, but adding a virtual tour could increase engagement by 30%.",
-      bullets: [
-        "Description sentiment is overwhelmingly positive.",
-        "High-value amenities (Pool, Updated Kitchen) are highlighted.",
-        "Missing Virtual Tour link."
-      ],
-      opportunityScore: 85
+      confidence: 88
     }
   ];
 
+  const auditSteps = [
+    "Initializing neural audit engine...",
+    "Syncing with regional MLS data nodes...",
+    "Verifying tax records for 4821 Oakmont...",
+    "HEURISTIC: Checking property subtype...",
+    "COMPLIANCE: Scanning public remarks...",
+    "MATCH: Found potential Fair Housing trigger...",
+    "AUDIT: Cross-referencing HOA disclosures...",
+    "VALUATION: Analyzing marketability score..."
+  ];
+
+  useEffect(() => {
+    if (hasAnimated && logs.length === 0) {
+      auditSteps.forEach((step, i) => {
+        setTimeout(() => {
+          setLogs(prev => [...prev, step].slice(-5));
+          if (step.includes("remarks")) setActiveField("remarks");
+          if (step.includes("tax")) setActiveField("address");
+          if (step.includes("HOA")) setActiveField("hoa");
+        }, i * 1200);
+      });
+    }
+  }, [hasAnimated]);
+
+  const toggleFix = (id: number) => {
+    setIsCalibrating(true);
+    setTimeout(() => {
+      setIsCalibrating(false);
+      if (id === 1) setActiveField(null); // Clear remark warning
+    }, 1200);
+
+    if (completedFixes.includes(id)) {
+      setCompletedFixes(completedFixes.filter(i => i !== id));
+    } else {
+      setCompletedFixes([...completedFixes, id]);
+    }
+  };
+
+  const targetScore = 94 + (completedFixes.length * 2);
+
+  useEffect(() => {
+    if (hasAnimated && !isCalibrating) {
+      setScore(targetScore);
+    }
+  }, [targetScore, hasAnimated, isCalibrating]);
 
   const fixes = [
     { id: 0, text: "Upload Lead-Based Paint Disclosure", priority: "High" },
     { id: 1, text: "Revise 'walking distance' in remarks", priority: "High" },
-    { id: 2, text: "Add missing Virtual Tour URL (Optional)", priority: "Medium" }
+    { id: 2, text: "Add missing Virtual Tour URL", priority: "Medium" }
   ];
 
-  const toggleFix = (index: number) => {
-    if (completedFixes.includes(index)) {
-      setCompletedFixes(completedFixes.filter(i => i !== index));
-    } else {
-      setCompletedFixes([...completedFixes, index]);
-    }
-  };
-
   return (
-    <section className="py-24 bg-[#F7F9FC]">
+    <section className="py-32 bg-[#F8FAFD] text-[#1A1D21] overflow-hidden relative">
+      {/* Background Ambience */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-[140px] -z-10" />
+      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[140px] -z-10" />
+
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-[10px] font-bold uppercase tracking-widest mb-4"
-          >
-            <ShieldCheck className="w-3 h-3" />
-            Live Listing Audit
-          </motion.div>
-          <h2 className="text-4xl font-bold tracking-tight mb-4">Every Listing Gets a Quality Score</h2>
-          <p className="text-text-secondary max-w-2xl mx-auto">
-            Before you see your draft, Ria has already checked 200+ data points for accuracy, compliance, and marketability. Here’s what that looks like
-          </p>
+        <div className="text-center mb-20">
+          <FadeIn>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-bold uppercase tracking-widest mb-6 shadow-sm">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              Machine Intelligence Audit
+            </div>
+            <h2 className="text-5xl font-bold tracking-tight mb-6 text-slate-900">Every Listing Gets a Quality Score</h2>
+            <p className="text-[#4A4D55] max-w-2xl mx-auto text-lg leading-relaxed">
+              Ria audits 200+ regional data points to ensure your listing is accurate, compliant, and optimized for peak market exposure.
+            </p>
+          </FadeIn>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-8 items-start">
-          {/* Left: Overall Score Panel */}
-          <motion.div
-            className="lg:col-span-5 bg-white p-10 rounded-[18px] shadow-[0_40px_80px_rgba(0,0,0,0.04)] text-center border border-[#E6EAF0] sticky top-24"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            onViewportEnter={() => {
-              if (!hasAnimated) {
-                setHasAnimated(true);
-                let start = 0;
-                const end = 94;
-                const duration = 600;
-                const timer = setInterval(() => {
-                  start += 2;
-                  if (start >= end) {
-                    setScore(end);
-                    clearInterval(timer);
-                  } else {
-                    setScore(start);
-                  }
-                }, duration / (end / 2));
-              }
-            }}
-            viewport={{ once: true }}
-          >
-            <div className="relative w-56 h-56 mx-auto mb-8">
-              <svg className="w-full h-full transform -rotate-90">
-                <circle
-                  cx="112"
-                  cy="112"
-                  r="100"
-                  stroke="currentColor"
-                  strokeWidth="14"
-                  fill="transparent"
-                  className="text-divider"
-                />
-                {/* Confidence Segments */}
-                <motion.circle
-                  cx="112"
-                  cy="112"
-                  r="100"
-                  stroke="currentColor"
-                  strokeWidth="14"
-                  fill="transparent"
-                  strokeDasharray={628.32}
-                  initial={{ strokeDashoffset: 628.32 }}
-                  animate={hasAnimated ? { strokeDashoffset: 628.32 * (1 - 94 / 100) } : {}}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="text-brand-blue"
-                />
+        <div className="grid lg:grid-cols-12 gap-10 items-stretch">
+          {/* Left: Ria's Live Console */}
+          <div className="lg:col-span-3 flex flex-col">
+            <div className="flex-1 bg-white border border-[#E1E6ED] rounded-[32px] p-6 relative overflow-hidden flex flex-col min-h-[440px] shadow-[0_20px_40px_rgba(0,0,0,0.02)]">
+              <div className="flex items-center gap-2 mb-6 border-b border-[#F0F2F5] pb-4">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-[#E0443E]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-[#DEA123]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-[#1AAB29]" />
+                </div>
+                <span className="text-[10px] font-mono text-[#4A4D55] uppercase tracking-widest ml-3 font-semibold">Ria_Audit_System</span>
+              </div>
 
-                {/* Visual feedback for active categories */}
-                {activeCategory !== null && (
-                  <motion.circle
-                    cx="112"
-                    cy="112"
-                    r="100"
-                    stroke="currentColor"
-                    strokeWidth="16"
-                    fill="transparent"
-                    strokeDasharray="20 608"
-                    animate={{
-                      rotate: activeCategory * 90,
-                      opacity: [0, 1, 0]
-                    }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                    className="text-brand-blue/30"
+              <div className="space-y-4 font-mono text-[11px] flex-1">
+                <AnimatePresence initial={false}>
+                  {logs.map((log, i) => (
+                    <motion.div
+                      key={log + i}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="flex gap-3 text-[#4A4D55]"
+                    >
+                      <span className="text-brand-blue font-bold shrink-0">[{new Date().toLocaleTimeString([], { hour12: false, minute: '2-digit', second: '2-digit' })}]</span>
+                      <span className={log.includes("MATCH") || log.includes("COMPLIANCE") ? "text-amber-600 font-semibold" : ""}>
+                        {log}
+                      </span>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-[#F0F2F5]">
+                <div className="flex items-center gap-3">
+                  <motion.div
+                    animate={{ opacity: [1, 0.4, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    className="w-2 h-2 rounded-full bg-brand-blue"
                   />
-                )}
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-7xl font-bold text-text-primary tracking-tighter">{score}</span>
-                <span className="text-[8px] font-bold text-text-muted uppercase tracking-widest mt-1">Overall Readiness Score</span>
+                  <span className="text-[10px] font-bold text-brand-blue uppercase tracking-widest mt-0.5">Stream Processing active...</span>
+                </div>
               </div>
             </div>
+          </div>
 
-            <AnimatePresence>
-              {score >= 94 && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-status-success/10 text-status-success rounded-full mb-6 border border-status-success/20"
-                >
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase tracking-wide">MLS Draft Ready - Minor Improvements Suggested</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
+          {/* Center: The Neural Dial */}
+          <div className="lg:col-span-4 flex flex-col items-center justify-center py-10">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={score >= 94 ? { opacity: 1 } : {}}
-              transition={{ delay: 0.2 }}
-              className="space-y-4"
+              className="relative w-72 h-72"
+              onViewportEnter={() => setHasAnimated(true)}
+              viewport={{ once: true }}
             >
-              <div className="mt-8 p-4 bg-brand-blue/5 border border-brand-blue/10 rounded-xl flex items-center gap-3 text-left">
-                <div className="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center shrink-0">
-                  <TrendingUp className="w-5 h-5 text-brand-blue" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-brand-blue uppercase tracking-widest mb-0.5">Competitive Insight</p>
-                  <p className="text-xs text-text-primary font-medium">
-                    Top 20% of listings in your area score above 90.
-                  </p>
-                </div>
-              </div>
-              <div className="pt-6 border-t border-divider">
-                <p className="text-[10px] text-text-muted uppercase tracking-widest font-bold opacity-60">
-                  Every score is traceable to a source.
-                </p>
+              {/* Spinning Scanners */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-20px] border border-dashed border-brand-blue/15 rounded-full"
+              />
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-40px] border border-dashed border-[#E1E6ED] rounded-full"
+              />
+
+              <svg className="w-full h-full transform -rotate-90 relative z-10 filter drop-shadow-[0_10px_20px_rgba(59,130,246,0.1)]">
+                <circle cx="144" cy="144" r="130" stroke="#F1F4F9" strokeWidth="14" fill="#FFFFFF" />
+                <motion.circle
+                  cx="144" cy="144" r="130"
+                  stroke="currentColor" strokeWidth="14" fill="transparent"
+                  strokeDasharray={816.8}
+                  initial={{ strokeDashoffset: 816.8 }}
+                  animate={{ strokeDashoffset: 816.8 * (1 - score / 100) }}
+                  transition={{ duration: isCalibrating ? 0.4 : 1.5, ease: "circOut" }}
+                  strokeLinecap="round"
+                  className={`${isCalibrating ? 'text-amber-500' : 'text-brand-blue'}`}
+                />
+              </svg>
+
+              <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
+                <motion.span
+                  key={score}
+                  initial={{ scale: 0.9, opacity: 0.8 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className="text-8xl font-black text-slate-900 tracking-tighter"
+                >
+                  {score}
+                </motion.span>
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-2">Quality Index</span>
               </div>
             </motion.div>
-          </motion.div>
 
-          {/* Right: Tab-based Category Panels */}
-          <div className="lg:col-span-7">
-            <div className="flex flex-wrap gap-2 p-1 bg-bg-primary/50 border border-divider rounded-2xl mb-6">
-              {categories.map((cat, i) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(i)}
-                  className={`flex-1 min-w-[120px] py-4 px-4 rounded-xl font-bold text-xs transition-all duration-300 flex items-center justify-between ${activeCategory === i
-                    ? "bg-white text-brand-blue shadow-lg border border-divider"
-                    : "text-text-muted hover:text-text-primary"
-                    }`}
-                >
-                  <span>{cat.id}</span>
-                  <div className="flex items-center gap-2">
-                    <div className="h-1 w-8 bg-divider rounded-full overflow-hidden hidden sm:block">
-                      <motion.div
-                        className={`h-full ${cat.score >= 90 ? "bg-brand-blue" : "bg-amber-500"}`}
-                        initial={{ width: 0 }}
-                        animate={{ width: `${cat.score}%` }}
-                      />
-                    </div>
-                    <span className={activeCategory === i ? "text-brand-blue" : "opacity-40"}>{cat.score}%</span>
+            <div className="mt-12 w-full max-w-[280px]">
+              <div className="flex flex-col gap-3">
+                {categories.map((cat, i) => (
+                  <div
+                    key={cat.id}
+                    className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 ${activeCategory === i
+                      ? 'bg-white border-brand-blue/30 text-brand-blue shadow-[0_10px_30px_rgba(0,0,0,0.04)] ring-1 ring-brand-blue/5'
+                      : 'bg-white/50 border-[#E1E6ED] text-[#4A4D55]'
+                      }`}
+                  >
+                    <span className="text-[11px] font-bold uppercase tracking-wider">{cat.id}</span>
+                    <span className={`text-sm font-black ${activeCategory === i ? 'text-brand-blue' : 'text-slate-400'}`}>{cat.score}%</span>
                   </div>
-                </button>
-              ))}
+                ))}
+              </div>
             </div>
+          </div>
 
-            <AnimatePresence mode="wait">
-              {activeCategory !== null && (
-                <motion.div
-                  key={activeCategory}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="bg-white rounded-2xl border border-divider shadow-[0_20px_40px_rgba(0,0,0,0.02)] p-8 min-h-[400px]"
-                >
-                  <div className="mb-8 flex items-center justify-between">
+          {/* Right: AI Vision Preview */}
+          <div className="lg:col-span-5 flex flex-col">
+            <div className="flex-1 bg-white border border-[#E1E6ED] rounded-[40px] p-8 relative overflow-hidden flex flex-col shadow-[0_20px_80px_rgba(0,0,0,0.03)]">
+              {/* Scanner Line Overlay */}
+              <motion.div
+                animate={{ top: ['0%', '100%', '0%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="absolute left-0 right-0 h-24 bg-gradient-to-b from-transparent via-brand-blue/[0.03] to-transparent z-20 pointer-events-none"
+              />
+
+              <div className="relative z-10 flex-1">
+                <div className="flex items-center justify-between mb-10">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-[#F1F4F9] flex items-center justify-center">
+                      <Layout className="w-6 h-6 text-brand-blue" />
+                    </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-2">{categories[activeCategory].id}</h3>
-                      <p className="text-sm text-text-secondary max-w-md">{categories[activeCategory].summary}</p>
+                      <h3 className="text-xl font-bold text-slate-900">Listing Canvas</h3>
+                      <p className="text-[10px] uppercase text-[#4A4D55] font-black tracking-widest">4821 Oakmont Dr, Charlotte</p>
                     </div>
-                    <div className="text-right">
-                      <div className="text-4xl font-bold text-brand-blue">{categories[activeCategory].score}%</div>
-                      <div className="text-[10px] font-bold text-text-muted uppercase tracking-widest mt-1">Section Score</div>
+                  </div>
+                  <div className="px-3 py-1.5 bg-brand-blue/10 text-brand-blue rounded-full text-[10px] font-bold border border-brand-blue/20">
+                    DRAFT_STAGING
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  {/* Field: Address */}
+                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'address' ? 'bg-brand-blue/5 border-brand-blue/30 ring-1 ring-brand-blue/5' : 'bg-[#FAFBFC] border-[#F0F2F5]'}`}>
+                    <label className="text-[10px] font-black text-[#4A4D55] uppercase tracking-widest mb-2 block">Public Property Source</label>
+                    <p className="text-sm font-semibold text-slate-800">4821 Oakmont Dr, Charlotte, NC 28205</p>
+                    <div className="mt-3 flex items-center gap-2">
+                      <CheckCircle2 className={`w-3.5 h-3.5 ${activeField === 'address' ? 'text-brand-blue' : 'text-slate-300'}`} />
+                      <span className="text-[9px] font-bold text-slate-400">Verified against 4 public record sources</span>
                     </div>
                   </div>
 
-                  <div className="border-t border-divider/50 pt-8">
-                    {activeCategory === 0 && (
-                      <div className="grid md:grid-cols-2 gap-x-12 gap-y-4">
-                        {categories[0].items?.map((item, idx) => (
-                          <div key={idx} className="flex items-center justify-between p-3 bg-bg-primary/30 rounded-lg border border-divider/50">
-                            <span className="text-xs text-text-secondary font-medium">{item.label}</span>
-                            <CheckCircle2 className="w-4 h-4 text-status-success" />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {activeCategory === 1 && (
-                      <div className="space-y-8">
-                        <div>
-                          <div className="flex items-center gap-2 mb-4">
-                            <AlertTriangle className="w-4 h-4 text-amber-500" />
-                            <p className="text-[10px] font-bold text-amber-500 uppercase tracking-widest">Active Alerts Required Action</p>
-                          </div>
-                          <div className="grid sm:grid-cols-2 gap-4">
-                            {categories[1].warnings?.map((warning, idx) => (
-                              <div key={idx} className="group relative p-4 bg-amber-50 border border-amber-200 rounded-xl hover:bg-amber-100/50 transition-colors">
-                                <p className="text-xs font-bold text-text-primary mb-1">{warning.label}</p>
-                                <p className="text-[10px] text-text-muted underline decoration-dotted decoration-divider cursor-help">
-                                  {warning.subtext}
-                                </p>
-                                <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-0 mb-2 bg-text-primary text-white text-[10px] py-2 px-3 rounded shadow-xl max-w-[200px] z-50 pointer-events-none leading-tight">
-                                  {warning.tooltip}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                        <div>
-                          <p className="text-[10px] font-bold text-status-success uppercase tracking-widest mb-4">Verified Compliance Checks</p>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                            {categories[1].passed?.map((item, idx) => (
-                              <div key={idx} className="flex items-center gap-2 bg-bg-primary/30 p-2 rounded-lg border border-divider/50">
-                                <CheckCircle2 className="w-3 h-3 text-status-success" />
-                                <span className="text-[10px] text-text-secondary">{item.label}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {activeCategory === 2 && (
-                      <div className="space-y-8">
-                        <div className="grid sm:grid-cols-2 gap-4">
-                          {categories[2].bullets?.map((bullet, idx) => (
-                            <div key={idx} className="flex items-center gap-3 p-4 bg-bg-primary/30 rounded-xl border border-divider/50">
-                              <div className="w-2 h-2 rounded-full bg-indigo-500 shrink-0" />
-                              <span className="text-xs text-text-secondary">{bullet}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center gap-2">
-                              <Sparkles className="w-4 h-4 text-indigo-500" />
-                              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest">Market Exposure Potential</span>
-                            </div>
-                            <span className="text-xl font-bold text-indigo-500">{categories[2].opportunityScore}%</span>
-                          </div>
-                          <div className="h-2 bg-indigo-200 rounded-full overflow-hidden">
-                            <motion.div
-                              className="h-full bg-indigo-500"
-                              initial={{ width: 0 }}
-                              animate={{ width: `${categories[2].opportunityScore}%` }}
-                              transition={{ duration: 1, ease: "easeOut" }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                  {/* Field: Remarks */}
+                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'remarks' ? 'bg-amber-50 border-amber-200 ring-1 ring-amber-100' : 'bg-[#FAFBFC] border-[#F0F2F5]'}`}>
+                    <label className="text-[10px] font-black text-[#4A4D55] uppercase tracking-widest mb-2 block">AI Compliance Check</label>
+                    <p className="text-xs text-[#4A4D55] leading-relaxed italic pr-4">
+                      "Stunning 4-bed home with <span className={completedFixes.includes(1) ? "text-emerald-600 font-bold bg-emerald-50 px-1 rounded" : "bg-amber-200 text-amber-800 px-1 rounded"}>{completedFixes.includes(1) ? "close proximity to" : "walking distance to"}</span> Freedom Park. Brand new chef's kitchen..."
+                    </p>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+                  {/* Field: HOA Disclosures */}
+                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'hoa' ? 'bg-brand-blue/5 border-brand-blue/30' : 'bg-[#FAFBFC] border-[#F0F2F5]'}`}>
+                    <label className="text-[10px] font-black text-[#4A4D55] uppercase tracking-widest mb-2 block">Ownership & Encumbrances</label>
+                    <div className="flex gap-4">
+                      <div className="flex-1 bg-white border border-[#F0F2F5] rounded-xl p-3 text-[10px] text-slate-600 font-bold shadow-sm">HOA: $450/m</div>
+                      <div className="flex-1 bg-white border border-[#F0F2F5] rounded-xl p-3 text-[10px] text-brand-blue font-bold shadow-sm">Status: Verified</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10 pt-8 border-t border-[#F0F2F5] flex items-center justify-between">
+                <div className="flex items-center gap-3 text-[#4A4D55]">
+                  <Activity className="w-4 h-4 text-brand-blue" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Confidence: {categories[activeCategory].confidence}%</span>
+                </div>
+                <div className="flex gap-3 text-[#E1E6ED]">
+                  <FileText className="w-4 h-4" />
+                  <Search className="w-4 h-4" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Fix Before Publishing Checklist */}
-        <motion.div
-          className="mt-12 bg-[#F9FBFF] p-8 rounded-[18px] border border-[#E6EAF0] shadow-[0_20px_40px_rgba(0,0,0,0.02)] relative overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-brand-blue/10 rounded-xl flex items-center justify-center">
-                <ClipboardCheck className="w-5 h-5 text-brand-blue" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">Fix Before Publishing</h3>
-                <p className="text-xs text-text-secondary">Operational improvements detected by Ria</p>
-              </div>
+        {/* Action Panel */}
+        <div className="mt-24 grid md:grid-cols-2 gap-16 items-start">
+          <div>
+            <div className="inline-block px-3 py-1 bg-amber-50 text-amber-600 rounded-lg text-[10px] font-black tracking-widest mb-4 border border-amber-100">
+              URGENT ACTIONS
             </div>
-            <div className="flex flex-col items-end">
-              <div className="flex items-center gap-4 mb-2">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">
-                  Improve to 98% by resolving {fixes.length - completedFixes.length} issues
-                </span>
-                <span className="text-xs font-bold text-brand-blue">{completedFixes.length} of {fixes.length}</span>
-              </div>
-              <div className="w-64 h-1.5 bg-divider rounded-full overflow-hidden">
+            <h3 className="text-3xl font-bold mb-8 text-slate-900 tracking-tight">Audit Checklist</h3>
+            <div className="space-y-4">
+              {fixes.map((fix) => (
                 <motion.div
-                  className="h-full bg-brand-blue"
-                  animate={{ width: `${(completedFixes.length / fixes.length) * 100}%` }}
-                  transition={{ duration: 0.4, ease: professionalEase }}
-                />
-              </div>
+                  key={fix.id}
+                  onClick={() => toggleFix(fix.id)}
+                  whileHover={{ x: 6, backgroundColor: "rgba(59, 130, 246, 0.02)" }}
+                  className={`p-5 rounded-[20px] border flex items-center gap-4 cursor-pointer transition-all duration-300 ${completedFixes.includes(fix.id)
+                    ? 'bg-emerald-50/50 border-emerald-100 opacity-60'
+                    : 'bg-white border-[#E6EAF0] shadow-sm hover:border-brand-blue/30 hover:shadow-md'
+                    }`}
+                >
+                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${completedFixes.includes(fix.id) ? 'bg-emerald-500 border-emerald-500' : 'border-[#E1E6ED]'}`}>
+                    {completedFixes.includes(fix.id) && <Check className="w-3.5 h-3.5 text-white" />}
+                  </div>
+                  <span className={`text-[13px] font-bold tracking-tight ${completedFixes.includes(fix.id) ? 'line-through text-slate-400' : 'text-slate-800'}`}>
+                    {fix.text}
+                  </span>
+                  {!completedFixes.includes(fix.id) && (
+                    <div className="ml-auto w-8 h-8 rounded-full bg-[#F1F4F9] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ArrowRight className="w-4 h-4 text-brand-blue" />
+                    </div>
+                  )}
+                </motion.div>
+              ))}
             </div>
           </div>
 
-          <div className="grid md:grid-cols-1 gap-3">
-            {["High", "Medium"].map(priority => (
-              <div key={priority} className="space-y-3">
-                <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest ml-1">{priority} Priority</p>
-                {fixes.filter(f => f.priority === priority).map((fix) => (
-                  <motion.div
-                    key={fix.id}
-                    onClick={() => toggleFix(fix.id)}
-                    className={`flex items-center gap-4 p-4 rounded-xl border transition-all cursor-pointer group relative ${completedFixes.includes(fix.id)
-                      ? "bg-white border-status-success/30 opacity-60"
-                      : `bg-white border-[#E6EAF0] hover:border-brand-blue/30 ${priority === 'High' ? 'border-l-4 border-l-amber-500' : ''}`
-                      }`}
-                  >
-                    <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-all ${completedFixes.includes(fix.id)
-                      ? "bg-status-success border-status-success text-white"
-                      : "border-divider group-hover:border-brand-blue"
-                      }`}>
-                      {completedFixes.includes(fix.id) && <CheckCircle2 className="w-4 h-4" />}
-                    </div>
-                    <span className={`text-sm font-medium transition-all ${completedFixes.includes(fix.id) ? "text-text-muted line-through" : "text-text-primary"
-                      }`}>
-                      {fix.text}
-                    </span>
-                  </motion.div>
-                ))}
+          <div className="p-10 rounded-[40px] bg-white border border-[#E1E6ED] shadow-[0_40px_100px_rgba(0,0,0,0.04)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-brand-blue/[0.02] rounded-full blur-[60px] -mr-24 -mt-24" />
+            <div className="relative z-10">
+              <div className="w-12 h-12 rounded-2xl bg-brand-blue/10 flex items-center justify-center mb-8">
+                <Zap className="w-6 h-6 text-brand-blue" />
               </div>
-            ))}
+              <p className="text-slate-800 text-lg leading-relaxed mb-8">
+                Your listing data has been verified against <span className="text-brand-blue font-black underline decoration-2 decoration-brand-blue/20 underline-offset-4">150+ regional sources</span>. Accuracy is currently at <span className="text-brand-blue font-black">94%</span>—putting this listing in the top 5% for completeness in your market.
+              </p>
+              <button className="w-full py-5 bg-brand-blue text-white rounded-2xl font-bold hover:bg-brand-blue-dark hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-xl shadow-brand-blue/20">
+                Proceed to Final Draft <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
-
-          <div className="mt-8 text-center">
-            <p className="text-[10px] text-text-muted font-bold uppercase tracking-widest">
-              Ria cross-references 200+ regional data points before preparing your MLS draft.
-            </p>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -3547,11 +3562,11 @@ const ThreePillarsSection = () => {
 
   const pillars = [
     {
-      title: "Listing Manager",
+      title: "Listing Agent",
       tagline: "LIVE",
       desc: "Ria acts as your second brain for every listing. It extracts data, audits compliance, and builds your MLS draft automatically.",
       features: [
-        "200+ MLS fields extracted from documents",
+        "150+ MLS fields extracted from documents",
         "Fair Housing & compliance AI audit",
         "Missing disclosure & addenda detection",
         "Real-time listing readiness scoring",
@@ -3575,7 +3590,7 @@ const ThreePillarsSection = () => {
       tagline: "LIVE",
       desc: "Turn raw property photos into stunning, market-ready assets. professional edits and virtual staging delivered in 24 hours.",
       features: [
-        "AI-powered virtual staging ($29/image)",
+        "AI-powered virtual staging",
         "Professional photo enhancement",
         "Day-to-dusk lighting conversion",
         "Object & clutter removal (AI-Eraser)",
@@ -3617,6 +3632,30 @@ const ThreePillarsSection = () => {
           { label: "HOA docs", status: "Not started", color: "slate" }
         ]
       }
+    },
+    {
+      title: "Listing Intelligence",
+      tagline: "LIVE",
+      desc: "Every listing gets a data-driven quality score. Ria audits 200+ data points for accuracy, compliance, and marketability before you hit publish.",
+      features: [
+        "150+ regional data point cross-reference",
+        "Fair Housing & compliance AI guardrails",
+        "Automatic tax & historical record sync",
+        "Listing readiness scoring (0-100)",
+        "Missing field & discrepancy detection"
+      ],
+      cta: "Audit your listing quality",
+      color: "amber",
+      preview: {
+        title: "Audit Score: 4821 Oakmont",
+        progress: 94,
+        items: [
+          { label: "MLS Field Accuracy", status: "98%", color: "emerald" },
+          { label: "Compliance Risk", status: "Low", color: "emerald" },
+          { label: "Marketability Score", status: "92%", color: "blue" },
+          { label: "Fair Housing", status: "Verified", color: "emerald" }
+        ]
+      }
     }
   ];
 
@@ -3634,7 +3673,7 @@ const ThreePillarsSection = () => {
             <Zap className="w-3 h-3" />
             The Ria Platform
           </motion.div>
-          <h2 className="text-4xl font-bold tracking-tight mb-4">Three pillars. One operating system.</h2>
+          <h2 className="text-4xl font-bold tracking-tight mb-4">Four pillars. One operating system.</h2>
           <p className="text-text-secondary max-w-2xl mx-auto">
             Every module is designed to work together—and eliminate the chaos of managing listings across disconnected tools.
           </p>
@@ -3652,7 +3691,9 @@ const ThreePillarsSection = () => {
                     ? "bg-teal-50 border-teal-600 text-teal-600 border-2"
                     : pillar.color === 'blue'
                       ? "bg-blue-50 border-blue-600 text-blue-600 border-2"
-                      : "bg-indigo-50 border-indigo-600 text-indigo-600 border-2"
+                      : pillar.color === 'amber'
+                        ? "bg-amber-50 border-amber-600 text-amber-600 border-2"
+                        : "bg-indigo-50 border-indigo-600 text-indigo-600 border-2"
                   : "bg-white border-divider text-slate-500 hover:border-slate-300"
                 }
               `}
@@ -3676,9 +3717,10 @@ const ThreePillarsSection = () => {
               <div className="flex flex-col justify-center">
                 <div className={`w-[70px] justify-center inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 
                   ${currentPillar.color === 'teal' ? 'bg-emerald-500/10 text-emerald-600' :
-                    currentPillar.color === 'blue' ? 'bg-blue-500/10 text-blue-600' : 'bg-indigo-500/10 text-indigo-600'}`}
+                    currentPillar.color === 'blue' ? 'bg-blue-500/10 text-blue-600' :
+                      currentPillar.color === 'amber' ? 'bg-amber-500/10 text-amber-600' : 'bg-indigo-500/10 text-indigo-600'}`}
                 >
-                  <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${currentPillar.color === 'teal' ? 'bg-emerald-500' : currentPillar.color === 'blue' ? 'bg-blue-500' : 'bg-indigo-500'}`} />
+                  <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${currentPillar.color === 'teal' ? 'bg-emerald-500' : currentPillar.color === 'blue' ? 'bg-blue-500' : currentPillar.color === 'amber' ? 'bg-amber-500' : 'bg-indigo-500'}`} />
                   {currentPillar.tagline}
                 </div>
 
@@ -3692,7 +3734,8 @@ const ThreePillarsSection = () => {
                     <div key={feature} className="flex gap-3 items-start">
                       <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5
                         ${currentPillar.color === 'teal' ? 'bg-emerald-50 text-emerald-600' :
-                          currentPillar.color === 'blue' ? 'bg-blue-50 text-blue-600' : 'bg-indigo-50 text-indigo-600'}`}
+                          currentPillar.color === 'blue' ? 'bg-blue-50 text-blue-600' :
+                            currentPillar.color === 'amber' ? 'bg-amber-50 text-amber-600' : 'bg-indigo-50 text-indigo-600'}`}
                       >
                         <Check className="w-4 h-4" />
                       </div>
@@ -3706,7 +3749,8 @@ const ThreePillarsSection = () => {
                   whileTap={{ scale: 0.98 }}
                   className={`btn-primary self-start font-bold py-4 px-8 flex items-center gap-2
                     ${currentPillar.color === 'teal' ? 'bg-teal-600 hover:bg-teal-700' :
-                      currentPillar.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-indigo-600 hover:bg-indigo-700'}`}
+                      currentPillar.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700' :
+                        currentPillar.color === 'amber' ? 'bg-amber-600 hover:bg-amber-700' : 'bg-indigo-600 hover:bg-indigo-700'}`}
                 >
                   {currentPillar.cta} <ArrowRight className="w-5 h-5" />
                 </motion.button>
@@ -3717,7 +3761,8 @@ const ThreePillarsSection = () => {
                 {/* Decorative glows */}
                 <div className={`absolute w-[120%] h-[120%] rounded-full blur-[120px] opacity-10 -z-10
                   ${currentPillar.color === 'teal' ? 'bg-emerald-500' :
-                    currentPillar.color === 'blue' ? 'bg-blue-500' : 'bg-indigo-500'}`}
+                    currentPillar.color === 'blue' ? 'bg-blue-500' :
+                      currentPillar.color === 'amber' ? 'bg-amber-500' : 'bg-indigo-500'}`}
                 />
 
                 <div className="w-full max-w-[500px] lg:max-w-none bg-white border border-slate-200/60 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col h-[400px]">
@@ -3741,14 +3786,15 @@ const ThreePillarsSection = () => {
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                           {currentPillar.preview.title}
                         </p>
-                        <h4 className="text-2xl font-bold text-slate-900">4221 Oamot Dr</h4>
+                        <h4 className="text-2xl font-bold text-slate-900">4221 Oot Dr</h4>
                       </div>
 
                       {/* Overall Progress */}
                       <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 min-w-[180px]">
                         <div className="flex justify-between items-center mb-2">
                           <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Progress</span>
-                          <span className={`text-sm font-black ${currentPillar.color === 'teal' ? 'text-emerald-600' : 'text-blue-600'}`}>
+                          <span className={`text-sm font-black ${currentPillar.color === 'teal' ? 'text-emerald-600' :
+                            currentPillar.color === 'amber' ? 'text-amber-600' : 'text-blue-600'}`}>
                             {currentPillar.preview.progress}%
                           </span>
                         </div>
@@ -3757,7 +3803,8 @@ const ThreePillarsSection = () => {
                             initial={{ width: 0 }}
                             animate={{ width: `${currentPillar.preview.progress}%` }}
                             transition={{ duration: 1, delay: 0.5 }}
-                            className={`h-full rounded-full ${currentPillar.color === 'teal' ? 'bg-gradient-to-r from-emerald-400 to-teal-500' : 'bg-gradient-to-r from-blue-400 to-indigo-500'}`}
+                            className={`h-full rounded-full ${currentPillar.color === 'teal' ? 'bg-gradient-to-r from-emerald-400 to-teal-500' :
+                              currentPillar.color === 'amber' ? 'bg-gradient-to-r from-amber-400 to-orange-500' : 'bg-gradient-to-r from-blue-400 to-indigo-500'}`}
                           />
                         </div>
                       </div>
@@ -3783,9 +3830,12 @@ const ThreePillarsSection = () => {
                     <div className="flex justify-end pt-4 border-t border-slate-100">
                       <button className={`px-5 py-2 rounded-lg text-sm font-bold shadow-sm transition-transform hover:-translate-y-0.5
                         ${currentPillar.color === 'teal' ? 'bg-emerald-600 text-white hover:bg-emerald-700' :
-                          currentPillar.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-indigo-600 text-white hover:bg-indigo-700'}`}
+                          currentPillar.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700' :
+                            currentPillar.color === 'amber' ? 'bg-amber-600 text-white hover:bg-amber-700' : 'bg-indigo-600 text-white hover:bg-indigo-700'}`}
                       >
-                        {currentPillar.color === 'teal' ? 'Upload Documents →' : currentPillar.color === 'blue' ? 'Finalize MLS Draft →' : 'Manage Media Lab →'}
+                        {currentPillar.color === 'teal' ? 'Upload Documents →' :
+                          currentPillar.color === 'blue' ? 'Finalize MLS Draft →' :
+                            currentPillar.color === 'amber' ? 'View Audit Report →' : 'Manage Media Lab →'}
                       </button>
                     </div>
                   </div>
@@ -4131,7 +4181,7 @@ export const RoadmapSection = () => {
 
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 bg-white relative overflow-hidden hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-24">
           <motion.div
