@@ -223,7 +223,7 @@ const HeroStats = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#F7F9FC] border-y border-[#E6EAF0] hidden">
+    <>
       <div className="max-w-7xl mx-auto px-6">
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {stats.map((stat, i) => (
@@ -253,7 +253,7 @@ const HeroStats = () => {
           ))}
         </StaggerContainer>
       </div>
-    </section>
+    </>
   );
 };
 
@@ -322,250 +322,7 @@ const SellerCollaborationSection = () => {
   );
 };
 
-const RiaEngine = () => {
-  const [activeStage, setActiveStage] = useState(0);
 
-  const stages = [
-    {
-      id: "Assemble",
-      icon: Upload,
-      title: "Assemble",
-      status: "Extracting structured data...",
-      benefit: "150+ Fields Structured",
-      description: "Processing tax records, deeds, and previous MLS history...",
-      fields: [
-        { label: "Bedrooms", value: "4", source: "County Tax Record" },
-        { label: "Bathrooms", value: "3.5", source: "Appraisal PDF" },
-        { label: "Square Feet", value: "2,840", source: "Floor Plan" },
-        { label: "Year Built", value: "1974", source: "Public Record" }
-      ]
-    },
-    {
-      id: "Validate",
-      icon: ShieldCheck,
-      title: "Validate",
-      status: "Auditing compliance...",
-      benefit: "Zero Errors",
-      description: "Checking fair housing, local MLS rules, and mandatory disclosures.",
-      fields: []
-    },
-    {
-      id: "Optimize",
-      icon: Sparkles,
-      title: "Optimize",
-      status: "Polishing assets...",
-      benefit: "Live Ready",
-      description: "Enhancing photos, generating remarks, and tagging media.",
-      fields: []
-    },
-    {
-      id: "Publish",
-      icon: Download,
-      title: "Publish",
-      status: "Finalizing package...",
-      benefit: "MLS Ready",
-      description: "Drafting MLS listing and preparing seller portal.",
-      fields: []
-    }
-  ];
-
-  return (
-    <section className="py-24 bg-[#F7F9FC] overflow-hidden hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-[10px] font-bold uppercase tracking-widest mb-4"
-          >
-            <Zap className="w-3 h-3" />
-            The Ria Engine
-          </motion.div>
-          <h2 className="text-4xl font-bold tracking-tight mb-4">How Ria Manages Your Listing</h2>
-          <p className="text-text-secondary max-w-2xl mx-auto">
-            A high-precision infrastructure designed to transform raw property data into market-ready assets.
-          </p>
-        </div>
-
-        <div className="max-w-4xl mx-auto mb-20 relative px-2">
-          {/* Progress Line */}
-          <div className="absolute top-6 left-16 right-16 h-0.5 pointer-events-none -mt-px -translate-y-1/2 z-10 w-[calc(100%-8rem)]">
-            <div className="absolute inset-0 bg-divider" />
-            <motion.div
-              className="absolute inset-0 bg-brand-blue origin-left"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: activeStage / (stages.length - 1) }}
-              transition={{ duration: 0.5, ease: professionalEase }}
-            />
-            <motion.div
-              className={`absolute top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-transparent via-brand-blue to-transparent w-32 blur-[2px] z-20 transition-opacity duration-300 ${activeStage === stages.length - 1 ? 'opacity-0' : 'opacity-100'}`}
-              animate={{ left: `${(activeStage / (stages.length - 1)) * 100}%` }}
-              transition={{ duration: 0.5, ease: professionalEase }}
-              style={{ x: "-50%" }}
-            />
-          </div>
-
-          <div className="relative flex justify-between items-start z-30">
-            {stages.map((stage, i) => (
-              <div key={stage.id} className="flex flex-col items-center w-32 relative">
-                <div className="h-12 w-12 relative flex items-center justify-center mb-5 z-20">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setActiveStage(i)}
-                    aria-label={`Switch to ${stage.title} stage`}
-                    className={`absolute inset-0 rounded-full flex items-center justify-center transition-all duration-300 border-2 origin-center ${activeStage === i
-                      ? "bg-brand-blue border-brand-blue text-white shadow-xl shadow-brand-blue/30 scale-125"
-                      : activeStage > i
-                        ? "bg-brand-blue/10 border-brand-blue text-brand-blue"
-                        : "bg-white border-divider text-text-muted hover:border-brand-blue/30"
-                      }`}
-                  >
-                    <stage.icon className="w-5 h-5 absolute" />
-                  </motion.button>
-                  {activeStage === i && (
-                    <motion.div
-                      layoutId="engineGlow"
-                      className="absolute inset-[-8px] rounded-full bg-brand-blue/10 -z-10"
-                    />
-                  )}
-                </div>
-                <div className="text-center w-full px-2">
-                  <p className={`text-xs font-bold transition-colors ${activeStage === i ? "text-text-primary" : "text-text-muted"}`}>
-                    {stage.title}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            className="bg-white rounded-3xl shadow-2xl shadow-black/5 border border-divider overflow-hidden min-h-[550px] flex flex-col"
-            layout
-          >
-            {/* Engine Header */}
-            <div className="px-6 py-4 border-b border-divider bg-white flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-status-error/20" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-status-warning/20" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-status-success/20" />
-                </div>
-                <div className="h-4 w-px bg-divider mx-2" />
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={activeStage}
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    className="text-[10px] font-bold text-text-muted uppercase tracking-widest"
-                  >
-                    {stages[activeStage].status}
-                  </motion.span>
-                </AnimatePresence>
-              </div>
-              <div className="flex items-center gap-3">
-                <button className="text-[10px] font-bold text-brand-blue uppercase tracking-widest hover:opacity-70 transition-opacity">Resume</button>
-                <div className="flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-status-success animate-pulse" />
-                  <span className="text-[10px] font-bold text-status-success">LIVE ENGINE</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Engine Content */}
-            <div className="flex-1 p-8 relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeStage}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.4, ease: professionalEase }}
-                  className="h-full"
-                >
-                  <div className="grid md:grid-cols-2 gap-12 items-center h-full">
-                    <div className="space-y-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-2xl font-bold">{stages[activeStage].title}</h3>
-                        <div className="text-right">
-                          <div className="text-3xl font-bold text-brand-blue">{stages[activeStage].benefit}</div>
-                          <div className="text-[8px] font-bold text-text-muted uppercase tracking-widest">Efficiency Benchmark</div>
-                        </div>
-                      </div>
-
-                      {activeStage === 0 ? (
-                        <div className="grid gap-3">
-                          {stages[0].fields.map((field, i) => (
-                            <motion.div
-                              key={field.label}
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: i * 0.1 }}
-                              className="p-4 bg-bg-primary rounded-xl border border-divider flex items-center justify-between group relative cursor-help"
-                            >
-                              <div>
-                                <p className="text-[10px] font-bold text-text-muted uppercase mb-1">{field.label}</p>
-                                <p className="text-sm font-bold">{field.value}</p>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <span className="text-[8px] font-bold text-brand-blue px-2 py-1 bg-brand-blue/5 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                                  {field.source}
-                                </span>
-                                <CircleCheck className="w-4 h-4 text-status-success" />
-                              </div>
-                            </motion.div>
-                          ))}
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
-                            className="flex items-center gap-2 text-[10px] font-bold text-status-success"
-                          >
-                            <div className="w-1.5 h-1.5 rounded-full bg-status-success" /> SOURCES VERIFIED
-                          </motion.div>
-                        </div>
-                      ) : (
-                        <div className="bg-bg-primary/50 rounded-2xl p-8 border border-divider border-dashed flex flex-col items-center justify-center text-center">
-                          {(() => {
-                            const Icon = stages[activeStage].icon;
-                            return <Icon className="w-12 h-12 text-brand-blue/20 mb-4" />;
-                          })()}
-                          <p className="text-sm text-text-secondary leading-relaxed">
-                            {stages[activeStage].description}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="bg-bg-accent rounded-2xl p-6 border border-divider h-full flex flex-col items-center justify-center text-center relative overflow-hidden">
-                      <div className="absolute inset-0 opacity-10">
-                        <div className="grid grid-cols-8 gap-1 p-2">
-                          {[...Array(64)].map((_, i) => (
-                            <div key={i} className="aspect-square bg-brand-blue rounded-sm" />
-                          ))}
-                        </div>
-                      </div>
-                      <FileText className="w-16 h-16 text-brand-blue/20 mb-4" />
-                      <p className="text-xs text-text-secondary max-w-[200px]">
-                        {stages[activeStage].description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </motion.div>
-          <div className="mt-8 flex justify-center text-center">
-            <p className="text-xs text-text-muted font-medium italic">System operating autonomously...</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const RiaStudio = () => {
   const [activeTool, setActiveTool] = useState(0);
@@ -637,7 +394,7 @@ const RiaStudio = () => {
   const currentTool = tools[activeTool];
 
   return (
-    <section className="py-24 bg-[#F7F9FC] overflow-hidden">
+    <section className="py-24 bg-[#F7F9FC] overflow-">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <FadeIn>
@@ -1212,7 +969,7 @@ export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: bool
             transition={{ delay: 0.1 }}
             className="text-4xl font-bold tracking-tight mb-4"
           >
-            How it works
+            How Ria Lists Property
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -1936,8 +1693,8 @@ const RolePreview = ({ role }: { role: string }) => {
 
 export const SocialProof = () => {
   return (
-    <section className="section-padding bg-bg-primary border-t border-divider overflow-hidden transition-colors duration-300 py-24 hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <>
+      <div className="max-w-7xl mx-auto px-6 hidden">
         <div className="text-center mb-16">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/5 border border-brand-blue/10 text-brand-blue text-[10px] font-bold uppercase tracking-widest mb-4">
@@ -2019,387 +1776,10 @@ export const SocialProof = () => {
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 
-const RoleSwitcher = () => {
-  const [activeRole, setActiveRole] = useState("Agents");
-  const roles = [
-    {
-      id: "Agents",
-      icon: Users,
-      heading: "Go from signed listing agreement to live MLS in an afternoon",
-      desc: "Ria handles the assembly, compliance checks, and remarks — you handle the relationship.",
-      keyMetric: "80% faster time-to-market vs. manual listing prep",
-      features: [
-        "Auto-populate 200+ MLS fields from documents",
-        "AI-written public remarks optimized for your market",
-        "Real-time compliance validation",
-        "One-click MLS export"
-      ],
-      preview: (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between p-4 bg-bg-secondary rounded-xl border border-divider shadow-sm">
-            <div>
-              <div className="font-bold text-text-primary">123 Ok Street</div>
-              <div className="text-xs text-text-secondary">Draft ready for review</div>
-            </div>
-            <div className="px-3 py-0.5 bg-status-success/10 text-status-success rounded-full text-[10px] font-bold">
-              96% Ready
-            </div>
-          </div>
-          <div className="p-6 bg-brand-blue/5 border border-brand-blue/10 rounded-xl">
-            <div className="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-2">Time saved on this listing</div>
-            <div className="text-4xl font-black text-brand-blue">3.2 hours</div>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: "Coordinators",
-      icon: ClipboardCheck,
-      heading: "Manage 3x the listings, zero the errors.",
-      desc: "Scale your operations without adding headcount by automating the mundane documentation tasks.",
-      keyMetric: "40+ active listings managed per coordinator",
-      features: [
-        "Automated document collection tracking",
-        "Cross-team collaboration portal",
-        "Bulk compliance auditing",
-        "Task prioritization dashboard"
-      ],
-      preview: (
-        <div className="space-y-3">
-          {[1, 2, 3].map(i => (
-            <div key={i} className="flex items-center gap-3 p-3 bg-bg-secondary rounded-lg border border-divider">
-              <div className="w-2 h-2 rounded-full bg-brand-blue" />
-              <div className="flex-1 h-2 bg-divider rounded" />
-              <div className="w-8 h-4 bg-brand-blue/10 rounded" />
-            </div>
-          ))}
-          <div className="mt-4 p-4 bg-brand-blue/5 rounded-xl border border-brand-blue/10 flex items-center justify-between">
-            <span className="text-xs font-bold text-text-primary">Throughput Increase</span>
-            <span className="text-xl font-bold text-brand-blue">+300%</span>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: "Brokerages",
-      icon: Building2,
-      heading: "Brand-consistent listings across every office.",
-      desc: "Maintain peak quality standards and brand identity across thousands of agents effortlessly.",
-      keyMetric: "100% brand compliance on every public draft",
-      features: [
-        "Global listing style guides",
-        "Broker-level visibility & reporting",
-        "Automated brand voice enforcement",
-        "Recruitment & retention advantage"
-      ],
-      preview: (
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3">
-            {[1, 2, 3, 4].map(i => (
-              <div key={i} className="aspect-square bg-bg-secondary rounded-lg border border-divider p-2 flex flex-col justify-end">
-                <div className="h-1 w-full bg-divider rounded mb-1" />
-                <div className="h-1 w-2/3 bg-divider rounded" />
-              </div>
-            ))}
-          </div>
-          <div className="p-3 bg-status-success/5 rounded-lg border border-status-success/10 flex items-center gap-3">
-            <ShieldCheck className="w-4 h-4 text-status-success" />
-            <span className="text-[10px] font-bold text-status-success uppercase">Quality Score: 100/100</span>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: "Compliance",
-      icon: ShieldCheck,
-      heading: "Catch problems before they become lawsuits.",
-      desc: "Ria acts as a 24/7 audit layer, ensuring every field and remark meets state and local regulations.",
-      keyMetric: "200+ automated compliance rules checked instantly",
-      features: [
-        "Fair Housing act violation detection",
-        "Mandatory disclosure verification",
-        "Local regulation enforcement",
-        "Audit-ready trail for every listing"
-      ],
-      preview: (
-        <div className="space-y-3">
-          <div className="p-4 bg-status-error/5 border border-status-error/10 rounded-xl">
-            <div className="flex items-center gap-2 mb-2">
-              <AlertCircle className="w-4 h-4 text-status-error" />
-              <span className="text-[10px] font-bold text-status-error uppercase">Flagged: Fair Housing</span>
-            </div>
-            <div className="h-2 w-full bg-divider rounded mb-1" />
-            <div className="h-2 w-2/3 bg-divider rounded" />
-          </div>
-          <div className="p-4 bg-status-success/5 border border-status-success/10 rounded-xl">
-            <div className="flex items-center gap-2 mb-2">
-              <CheckCircle2 className="w-4 h-4 text-status-success" />
-              <span className="text-[10px] font-bold text-status-success uppercase">Fixed: Mandatory Field</span>
-            </div>
-            <div className="h-2 w-full bg-divider rounded mb-1" />
-            <div className="h-2 w-1/3 bg-divider rounded" />
-          </div>
-        </div>
-      )
-    }
-  ];
-
-  return (
-    <section className="section-padding bg-bg-primary transition-colors duration-300 overflow-hidden py-24 hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight mb-4">Designed for</h2>
-          <p className="text-text-secondary max-w-2xl mx-auto">Ria becomes what you need, scaling with your organization from solo agent to national brokerage.</p>
-        </div>
-
-        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-16">
-          {roles.map((role) => (
-            <button
-              key={role.id}
-              onClick={() => setActiveRole(role.id)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all border ${activeRole === role.id
-                ? "bg-brand-blue text-white border-brand-blue shadow-lg shadow-brand-blue/20"
-                : "bg-bg-secondary text-text-muted border-divider hover:border-brand-blue/30"
-                }`}
-            >
-              <role.icon className="w-4 h-4" />
-              {role.id}
-            </button>
-          ))}
-        </div>
-
-        <AnimatePresence mode="wait">
-          {roles.map((role) => role.id === activeRole && (
-            <motion.div
-              key={role.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-              className="grid lg:grid-cols-2 gap-12 items-center"
-            >
-              <div className="order-2 lg:order-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/5 text-brand-blue rounded-full text-xs font-bold uppercase tracking-wider mb-6">
-                  <role.icon className="w-4 h-4" />
-                  {role.id}
-                </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-text-primary mb-6 leading-tight">
-                  {role.heading}
-                </h3>
-                <p className="text-lg text-text-secondary mb-8 leading-relaxed">
-                  {role.desc}
-                </p>
-
-                <div className="p-6 bg-brand-blue/5 rounded-2xl border border-divider mb-8 group overflow-hidden relative">
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
-                    <Sparkles className="w-12 h-12 text-brand-blue" />
-                  </div>
-                  <div className="text-xs font-bold text-text-muted uppercase tracking-widest mb-2">Key Metric</div>
-                  <div className="text-2xl font-black text-brand-blue">
-                    {role.keyMetric}
-                  </div>
-                </div>
-
-                <ul className="space-y-4">
-                  {role.features.map((feature, i) => (
-                    <motion.li
-                      key={i}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.2 + i * 0.1 }}
-                      className="flex items-start gap-4"
-                    >
-                      <div className="w-6 h-6 rounded-full bg-brand-blue text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg shadow-brand-blue/20">
-                        <Check className="w-3.5 h-3.5" strokeWidth={3} />
-                      </div>
-                      <span className="text-text-primary font-medium">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="order-1 lg:order-2 relative">
-                <div className="absolute -inset-4 bg-brand-blue/5 rounded-[40px] blur-2xl opacity-50"></div>
-                <div className="relative bg-bg-secondary rounded-3xl p-8 border border-divider shadow-2xl shadow-brand-blue/5 min-h-[400px] flex flex-col justify-center transition-colors">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    {role.preview}
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
-    </section>
-  );
-};
-
-export const JourneyTimeline = () => {
-  const [activeStage, setActiveStage] = useState(0);
-
-  const stages = [
-    {
-      id: "Pre-Listing",
-      desc: "Assemble property data and documents.",
-      preview: (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between p-3 bg-bg-primary rounded-lg border border-divider shadow-sm gap-2">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-brand-blue/10 rounded flex items-center justify-center">
-                <Upload className="w-4 h-4 text-brand-blue" />
-              </div>
-              <span className="text-xs font-bold text-text-primary">Tax Record Ingested</span>
-            </div>
-            <CircleCheck className="w-4 h-4 text-status-success" />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="h-12 bg-bg-accent rounded-lg animate-pulse" />
-            <div className="h-12 bg-bg-accent rounded-lg animate-pulse" />
-          </div>
-          <div className="p-3 border border-divider rounded-lg bg-bg-primary">
-            <div className="flex justify-between text-[10px] mb-2">
-              <span className="text-text-muted uppercase font-bold">Checklist</span>
-              <span className="text-brand-blue font-bold">80%</span>
-            </div>
-            <div className="h-1 bg-divider rounded-full overflow-hidden">
-              <div className="h-full bg-brand-blue" style={{ width: '80%' }} />
-            </div>
-          </div>
-        </div>
-      ),
-      icon: FileText,
-      status: "active",
-      list: ["Document scanning", "Data extraction", "Checklist automation"]
-    },
-    {
-      id: "MLS Draft",
-      desc: "Review remarks, media, and fields.",
-      preview: <div className="w-full h-40 bg-bg-primary rounded-xl border border-dashed border-divider flex items-center justify-center text-text-muted text-xs">Draft Preview</div>,
-      icon: PanelsTopLeft,
-      status: "active",
-      list: ["Remark generation", "Media ordering", "Field mapping"]
-    },
-    {
-      id: "Marketing",
-      desc: "Publish property websites and social posts.",
-      preview: <div className="h-40 bg-bg-primary rounded-xl border border-divider flex items-center justify-center text-text-muted text-xs flex-col gap-2"><Megaphone className="w-6 h-6 opacity-50" /><span>Coming Soon</span></div>,
-      icon: Megaphone,
-      status: "soon",
-      list: []
-    },
-    {
-      id: "Closing",
-      desc: "Manage offers, documents, and coordinates.",
-      preview: <div className="h-40 p-4 bg-bg-secondary rounded-xl border border-divider flex items-center justify-center text-text-muted text-xs flex-col gap-2"><Handshake className="w-6 h-6 opacity-50" /><span>Coming Soon</span></div>,
-      icon: Handshake,
-      status: "soon",
-      list: []
-    }
-  ];
-
-  return (
-    <section className="section-padding bg-bg-secondary transition-colors duration-300 overflow-hidden border-t border-divider py-24 hidden ">
-      <div className="max-w-7xl container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight text-text-primary mb-4">From prep to closing — Ria stays with the listing.</h2>
-          <p className="text-text-secondary">Built to manage every stage of the listing lifecycle.</p>
-        </div>
-
-        <div className="relative mb-20 max-w-4xl mx-auto">
-          {/* Progress Line */}
-          <div className="absolute top-6 left-8 right-8 h-0.5 bg-divider -translate-y-1/2" />
-          <motion.div
-            className="absolute top-6 left-8 h-0.5 bg-brand-blue -translate-y-1/2 origin-left z-0"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: activeStage / 1 }} // Only 2 active steps (0 and 1)
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            style={{ width: 'calc(33.33% - 2rem)' }} // Approx space between step 1 and 2
-          />
-
-          <div className="relative flex justify-between px-4">
-            {stages.map((stage, i) => {
-              const isActive = activeStage === i;
-              const isPast = i <= activeStage;
-              const isSoon = stage.status === "soon";
-
-              return (
-                <div key={stage.id} className="flex flex-col items-center relative z-10 w-24">
-                  <button
-                    onClick={() => !isSoon && setActiveStage(i)}
-                    disabled={isSoon}
-                    className={`group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${isActive ? 'bg-brand-blue border-brand-blue text-white shadow-xl shadow-brand-blue/30 scale-110' : isPast ? 'bg-bg-primary border-2 border-brand-blue text-brand-blue' : 'bg-bg-primary border-2 border-divider text-text-muted'} ${!isSoon ? 'cursor-pointer hover:border-brand-blue/50' : 'cursor-not-allowed opacity-50'}`}
-                  >
-                    <stage.icon className="w-5 h-5" />
-                    {isSoon && (
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-bg-accent text-text-muted text-[8px] font-bold rounded-full border border-divider whitespace-nowrap">SOON</span>
-                    )}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeTimelineGlow"
-                        className="absolute inset-0 rounded-full bg-brand-blue/20 blur-lg -z-10"
-                      />
-                    )}
-                  </button>
-                  <div className="mt-4 text-center">
-                    <p className={`text-xs font-bold transition-colors ${isActive ? "text-text-primary" : "text-text-muted"}`}>
-                      {stage.id}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Preview Panel */}
-        <div className="max-w-3xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeStage}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="glass-card p-8 bg-bg-primary/50 border border-divider shadow-sm"
-            >
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                  <div className="inline-flex items-center gap-2 px-2 py-1 bg-brand-blue/5 text-brand-blue text-[10px] font-bold rounded mb-4 uppercase tracking-wider">
-                    PHASE 0{activeStage + 1}
-                  </div>
-                  <h3 className="text-2xl font-bold text-text-primary mb-3">{stages[activeStage].id}</h3>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-6">
-                    {stages[activeStage].desc}
-                  </p>
-                  {stages[activeStage].list.length > 0 && (
-                    <ul className="space-y-3">
-                      {stages[activeStage].list.map((item, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-xs font-medium text-text-secondary">
-                          <CircleCheck className="w-3.5 h-3.5 text-status-success" /> {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                <div className="bg-bg-secondary p-6 rounded-2xl border border-divider shadow-inner min-h-[220px] flex items-center justify-center">
-                  {stages[activeStage].preview}
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 function LandingPage() {
   const [showBanner, setShowBanner] = useState(true);
@@ -2545,85 +1925,51 @@ function LandingPage() {
                           <svg class="size-5 text-green-700" fill="currentColor" viewBox="0 0 20 20" data-fg-eh6d50="1.16:1.6728:/src/app/components/Hero.tsx:86:19:3978:380:e:svg:e"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" data-fg-eh6d51="1.16:1.6728:/src/app/components/Hero.tsx:87:21:4063:270:e:path"></path></svg>
                         </p>
                       </div> */}
-                      <div data-fg-eh6d61="1.16:1.6728:/src/app/components/Hero.tsx:109:15:5187:1277:e:div:ete">
-
-                        <div
-                          class="text-sm text-gray-500 mb-2"
-                          data-fg-eh6d62="1.16:1.6728:/src/app/components/Hero.tsx:110:17:5209:70:e:div:t"
-                        >
+                      <div className="col-span-2">
+                        <div className="text-[10px] font-bold text-text-muted uppercase tracking-widest mb-2">
                           Photos (12 uploaded)
                         </div>
 
-                        <div
-                          class="grid grid-cols-3 gap-2"
-                          data-fg-eh6d64="1.16:1.6728:/src/app/components/Hero.tsx:111:17:5296:1147:e:div:x"
-                        >
+                        <div className="grid grid-cols-3 gap-3 w-full">
 
+                          <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-sm">
+                            <img src="https://picsum.photos/seed/staged-room-modern/400/300" alt="Virtually Staged" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
 
-                          <div
-                            class="relative aspect-video bg-gray-200 rounded-lg overflow-hidden"
-                            data-fg-eh6d66="1.16:1.6728:/src/app/components/Hero.tsx:113:21:5399:999:e:div:etete"
-                          >
-                            <div
-                              class="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100"
-                              data-fg-eh6d67="1.16:1.6728:/src/app/components/Hero.tsx:114:23:5508:82:e:div"
-                            ></div>
-
-                            <div
-                              class="absolute top-2 right-2 bg-green-500 text-white p-1 rounded-full"
-                              data-fg-eh6d68="1.16:1.6728:/src/app/components/Hero.tsx:115:23:5613:532:e:div:e"
-                            >
-                              <svg
-                                class="size-3"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <path
-                                  fill-rule="evenodd"
-                                  clip-rule="evenodd"
-                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                ></path>
+                            <div className="absolute top-2 right-2 bg-status-success text-white p-1 rounded-full shadow-sm flex items-center justify-center">
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
                               </svg>
                             </div>
 
-                            <div class="absolute bottom-2 left-2 text-xs text-gray-700 bg-white/90 px-2 py-1 rounded">
-                              Vistually staged
+                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-white/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
+                              Virtually Staged
                             </div>
                           </div>
 
+                          <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-sm">
+                            <img src="https://picsum.photos/seed/dusk-house/400/300" alt="Day to Dusk" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
 
-                          <div class="relative aspect-video bg-gray-200 rounded-lg overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100"></div>
-
-                            <div class="absolute top-2 right-2 bg-green-500 text-white p-1 rounded-full">
-                              <svg class="size-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                  fill-rule="evenodd"
-                                  clip-rule="evenodd"
-                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                ></path>
+                            <div className="absolute top-2 right-2 bg-status-success text-white p-1 rounded-full shadow-sm flex items-center justify-center">
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
                               </svg>
                             </div>
 
-                            <div class="absolute bottom-2 left-2 text-xs text-gray-700 bg-white/90 px-2 py-1 rounded">
+                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-white/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
                               Day to Dusk
                             </div>
                           </div>
 
-                          <div class="relative aspect-video bg-gray-200 rounded-lg overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100"></div>
+                          <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-sm">
+                            <img src="https://picsum.photos/seed/enhanced-room/400/300" alt="AI Enhanced" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
 
-                            <div class="absolute top-2 right-2 bg-green-500 text-white p-1 rounded-full">
-                              <svg class="size-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                  fill-rule="evenodd"
-                                  clip-rule="evenodd"
-                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                ></path>
+                            <div className="absolute top-2 right-2 bg-status-success text-white p-1 rounded-full shadow-sm flex items-center justify-center">
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
                               </svg>
                             </div>
 
-                            <div class="absolute bottom-2 left-2 text-xs text-gray-700 bg-white/90 px-2 py-1 rounded">
+                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-white/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
                               AI Enhanced
                             </div>
                           </div>
@@ -2643,11 +1989,10 @@ function LandingPage() {
         </div>
       </RevealSection>
 
-      <HeroStats />
 
       {/* Problem Reframe */}
-      <RevealSection className="py-24 bg-white border-y border-divider hidden">
-        <div className="max-w-7xl mx-auto px-6">
+      <>
+        <div className="max-w-7xl mx-auto px-6 hidden">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <FadeIn>
               <h2 className="text-4xl font-bold tracking-tight mb-4">Listings aren’t data entry. They’re revenue.</h2>
@@ -2674,16 +2019,13 @@ function LandingPage() {
             ))}
           </StaggerContainer>
         </div>
-      </RevealSection>
+      </>
 
       <ThreePillarsSection />
 
-      <RiaEngine />
+      <WatchRiaThinkSection isDemoPage={false} />
 
       <RiaStudio />
-
-      {/* How it Works - Replaced with Watch Ria Think section */}
-      <WatchRiaThinkSection isDemoPage={false} />
 
       <IntelligenceLayersSection />
 
@@ -2691,13 +2033,6 @@ function LandingPage() {
 
       <SellerCollaborationSection />
 
-      <RoleSwitcher />
-
-      <JourneyTimeline />
-
-      <RoadmapSection />
-
-      <SocialProof />
 
       {/* Final CTA */}
       <RevealSection className="py-32 bg-white border-t border-divider">
@@ -2798,14 +2133,14 @@ const IntelligenceLayersSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#F7F9FC] overflow-hidden relative hidden" ref={ref}>
+    <>
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 relative z-10 hidden">
         <div className="text-center mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -2912,7 +2247,7 @@ const IntelligenceLayersSection = () => {
           ))}
         </motion.div>
       </div>
-    </section>
+    </>
   );
 };
 
@@ -3306,7 +2641,7 @@ const LiveListingAuditSection = () => {
   ];
 
   return (
-    <section className="py-32 bg-[#F8FAFD] text-[#1A1D21] overflow-hidden relative">
+    <section className="py-32 bg-[#F8FAFD] text-[#1A1D21] overflow- relative">
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-[140px] -z-10" />
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[140px] -z-10" />
@@ -3662,7 +2997,7 @@ const ThreePillarsSection = () => {
   const currentPillar = pillars[activePillar];
 
   return (
-    <section className="py-24 bg-[#F7F9FC] overflow-hidden">
+    <section className="py-24 bg-[#F7F9FC] overflow-">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <motion.div
@@ -3765,7 +3100,7 @@ const ThreePillarsSection = () => {
                       currentPillar.color === 'amber' ? 'bg-amber-500' : 'bg-indigo-500'}`}
                 />
 
-                <div className="w-full max-w-[500px] lg:max-w-none bg-white border border-slate-200/60 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col h-[400px]">
+                <div className="w-full max-w-[500px] h-[500px] lg:max-w-none bg-white border border-slate-200/60 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col">
                   {/* Browser/Desktop Top Bar */}
                   <div className="bg-slate-50 border-b border-slate-200/60 px-4 py-3 flex items-center gap-4">
                     <div className="flex gap-1.5 opacity-80">
@@ -3779,9 +3114,9 @@ const ThreePillarsSection = () => {
                   </div>
 
                   {/* Desktop Content Area */}
-                  <div className="bg-white p-6 md:p-8 flex-1 flex flex-col text-slate-800 overflow-y-auto custom-scrollbar">
+                  <div className="bg-white p-6 md:p-8 flex-1 flex flex-col text-slate-800 overflow-hidden">
                     {/* Header */}
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-slate-100 pb-6">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b border-slate-100 pb-6 shrink-0">
                       <div>
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                           {currentPillar.preview.title}
@@ -3811,7 +3146,7 @@ const ThreePillarsSection = () => {
                     </div>
 
                     {/* Preview Items - List Layout */}
-                    <div className="space-y-3 flex-1 mb-6">
+                    <div className="space-y-3 flex-1 overflow-y-auto custom-scrollbar pr-2 pb-4">
                       {currentPillar.preview.items.map((item, idx) => (
                         <div key={idx} className="flex justify-between items-center p-3 sm:px-4 sm:py-3 border border-slate-100 rounded-lg hover:border-slate-200 transition-colors bg-white hover:bg-slate-50">
                           <span className="text-sm font-medium text-slate-700">{item.label}</span>
@@ -3827,7 +3162,7 @@ const ThreePillarsSection = () => {
                     </div>
 
                     {/* Desktop CTA */}
-                    <div className="flex justify-end pt-4 border-t border-slate-100">
+                    <div className="flex justify-end pt-4 mt-auto border-t border-slate-100 bg-white z-10 shrink-0">
                       <button className={`px-5 py-2 rounded-lg text-sm font-bold shadow-sm transition-transform hover:-translate-y-0.5
                         ${currentPillar.color === 'teal' ? 'bg-emerald-600 text-white hover:bg-emerald-700' :
                           currentPillar.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700' :
@@ -4102,7 +3437,8 @@ export const VisualIntelligenceStudio = () => {
         <div className="mt-20 text-center">
           <h3 className="text-2xl font-bold mb-4">Upgrade your listing presentation in minutes.</h3>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="px-8 py-4 bg-brand-blue text-white rounded-full font-bold shadow-xl shadow-brand-blue/20 hover:scale-105 transition-transform">
+            <button className="btn-primary self-start font-bold py-4 px-8 flex items-center gap-2
+                    bg-blue-600 hover:bg-blue-700">
               Optimize Your First Listing
             </button>
           </div>
@@ -4181,8 +3517,8 @@ export const RoadmapSection = () => {
 
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden hidden">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <>
+      <div className="max-w-7xl mx-auto px-6 relative z-10 hidden">
         <div className="text-center mb-24">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -4343,7 +3679,7 @@ export const RoadmapSection = () => {
           })}
         </div>
       </div>
-    </section>
+    </>
   );
 };
 
@@ -4408,7 +3744,7 @@ export const DemoPage = () => {
       </footer>
     </div>
   );
-}
+};
 
 export default function App() {
   return (
