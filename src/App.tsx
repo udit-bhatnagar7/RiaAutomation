@@ -704,7 +704,7 @@ const RiaStudio = () => {
           <FadeIn>
             <h3 className="text-2xl font-bold mb-4">Upgrade your listing presentation in minutes.</h3>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button className="px-8 py-4 bg-brand-blue text-white rounded-full font-bold shadow-xl shadow-brand-blue/20 hover:scale-105 transition-transform">
+              <button className="py-5 px-10 bg-brand-blue text-white rounded-2xl font-bold hover:bg-brand-blue-dark hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-xl shadow-brand-blue/20">
                 Optimize Your First Listing
               </button>
             </div>
@@ -807,15 +807,15 @@ const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; 
   return (
     <header className="fixed top-0 w-full z-50">
       {showBanner && <AnnouncementBanner onDismiss={onDismissBanner} />}
-      <nav className="w-full bg-white/95 backdrop-blur-md border-b border-gray-200">
+      <nav className="w-full bg-white/95 backdrop-blur-md border-b border-gray-200 relative">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center">
               <svg width="80" height="32" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="RIA Logo">
                 <defs>
                   <linearGradient id="logoGradientHorizontal" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#2563eb" />
-                    <stop offset="100%" stop-color="#7c3aed" />
+                    <stop offset="0%" stopColor="#2563eb" />
+                    <stop offset="100%" stopColor="#7c3aed" />
                   </linearGradient>
                 </defs>
                 <g transform="translate(2, 2)">
@@ -825,22 +825,19 @@ const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; 
                   <circle cx="28" cy="12" r="1.5" fill="#2563eb" opacity="0.8" />
                   <circle cx="31" cy="15" r="1" fill="#7c3aed" opacity="0.6" />
                 </g>
-                <text x="42" y="27" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#030213" letter-spacing="-0.5">RIA</text>
+                <text x="42" y="27" fontFamily="system-ui, -apple-system, sans-serif" fontSize="20" fontWeight="700" fill="#030213" letterSpacing="-0.5">RIA</text>
               </svg>
             </Link>
             <div className="hidden md:flex items-center gap-6">
               <ProductDropdown />
-              {/* <Link to="#pricing" className="text-gray-700 hover:text-gray-900 font-medium text-sm">Pricing</Link>
-              <Link to="#resources" className="text-gray-700 hover:text-gray-900 font-medium text-sm">Resources</Link>
-              <Link to="#blog" className="text-gray-700 hover:text-gray-900 font-medium text-sm">Blog</Link> */}
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link to="/login" className="text-gray-700 hover:text-gray-900 font-medium text-sm hidden md:block">Login</Link>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-bold"
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-bold hidden sm:block"
             >
               Start Free
             </motion.button>
@@ -848,7 +845,7 @@ const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; 
               Book Demo
             </Link>
             <button
-              className="md:hidden text-gray-700 p-2"
+              className="md:hidden text-gray-700 p-2 ml-1"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -864,14 +861,33 @@ const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; 
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden border-t border-gray-100 bg-white"
+              className="md:hidden overflow-hidden absolute top-16 left-0 w-full bg-white border-b border-gray-200 shadow-2xl"
             >
-              <div className="p-4 space-y-4">
-                <Link to="#pricing" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Pricing</Link>
-                <Link to="#resources" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Resources</Link>
-                <Link to="#blog" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Blog</Link>
-                <Link to="/login" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Login</Link>
-                <Link to="/demo" className="block text-gray-700 hover:text-gray-900 font-medium py-2">Book Demo</Link>
+              <div className="p-6 space-y-6">
+                <div>
+                  <div className="font-bold text-[10px] text-text-muted uppercase tracking-widest mb-4">Products</div>
+                  <div className="flex flex-col gap-4 pl-2">
+                    <Link to="#" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">Listing Intelligence</Link>
+                    <Link to="#" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">MLS Automation</Link>
+                    <Link to="#" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">Compliance & QA</Link>
+                    <Link to="/demo" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">Virtual Staging</Link>
+                  </div>
+                </div>
+
+                <div className="h-px bg-gray-100 w-full" />
+
+                <div className="flex flex-col gap-4">
+                  <Link to="/login" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">Login</Link>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 pt-2 pb-4">
+                  <Link to="/demo" className="px-4 py-3 border border-gray-200 text-center rounded-lg hover:bg-gray-50 transition-colors text-sm font-bold">
+                    Demo
+                  </Link>
+                  <button className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-bold">
+                    Start Free
+                  </button>
+                </div>
               </div>
             </motion.div>
           )}
@@ -1809,7 +1825,7 @@ function LandingPage() {
   }, [isInView]);
 
   return (
-    <div className="min-h-screen selection:bg-brand-blue/10 selection:text-brand-blue bg-white">
+    <div className="min-h-screen selection:bg-brand-blue/10 selection:text-brand-blue bg-white overflow-x-hidden w-full max-w-[100vw]">
       {/* Navigation */}
       <MainNavigation showBanner={showBanner} onDismissBanner={() => setShowBanner(false)} />
 
