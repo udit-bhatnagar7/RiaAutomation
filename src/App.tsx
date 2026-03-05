@@ -340,11 +340,11 @@ const RiaStudio = () => {
       desc: "Transform empty spaces into inviting homes.",
       features: ["AI-powered furniture placement", "Style-matched decor", "Realistic lighting & shadows"],
       price: "$29",
-      before: "https://picsum.photos/seed/studio-empty/1200/800",
+      before: "/images/staging-after.jpg",
       after: {
-        "Modern Neutral": "https://picsum.photos/seed/studio-staged-modern/1200/800",
-        "Luxury Contemporary": "https://picsum.photos/seed/studio-staged-luxury/1200/800",
-        "Scandinavian Bright": "https://picsum.photos/seed/studio-staged-scandi/1200/800"
+        "Modern Neutral": "/images/staging-before.jpg",
+        "Luxury Contemporary": "/images/staging-before.jpg",
+        "Scandinavian Bright": "/images/staging-before.jpg"
       }
     },
     {
@@ -453,9 +453,9 @@ const RiaStudio = () => {
                   className="grid md:grid-cols-3 gap-4"
                 >
                   {[
-                    { label: "ORIGINAL", img: tools[1].before },
-                    { label: "ENHANCED", img: tools[1].after as string },
-                    { label: "STAGED", img: (tools[0].after as any)["Modern Neutral"] }
+                    { label: "ORIGINAL", img: (tools[0].after as any)["Modern Neutral"] },
+                    { label: "STAGED", img: tools[0].before as string }
+                    { label: "ENHANCED", img: (tools[0].after as any)["Modern Neutral"] },
                   ].map((item, i) => (
                     <div key={i} className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-divider shadow-lg bg-white group">
                       <img src={item.img} alt={item.label} loading="lazy" width="400" height="300" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
@@ -569,15 +569,15 @@ const RiaStudio = () => {
                     className="absolute top-0 bottom-0 w-1 bg-white shadow-xl z-30 flex items-center justify-center cursor-ew-resize group/handle"
                     style={{ left: `${revealPosition}%` }}
                   >
-                    <div className="w-8 h-8 bg-white rounded-full shadow-2xl border border-divider flex items-center justify-center group-hover/handle:scale-110 transition-transform">
-                      <div className="flex gap-0.5">
-                        <div className="w-0.5 h-3 bg-divider rounded-full" />
-                        <div className="w-0.5 h-3 bg-divider rounded-full" />
+                    <div className="w-12 h-12 bg-white rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.25)] border-2 border-divider flex items-center justify-center group-hover/handle:scale-110 transition-transform">
+                      <div className="flex gap-1">
+                        <div className="w-1 h-5 bg-divider rounded-full" />
+                        <div className="w-1 h-5 bg-divider rounded-full" />
                       </div>
                     </div>
                     {/* Visual hint for dragging */}
-                    <div className="absolute top-1/2 -translate-y-1/2 -left-8 right-0 pointer-events-none opacity-0 group-hover/handle:opacity-100 transition-opacity">
-                      <div className="flex items-center gap-12 text-white/50">
+                    <div className="absolute top-1/2 -translate-y-1/2 -left-10 right-0 pointer-events-none opacity-0 group-hover/handle:opacity-100 transition-opacity">
+                      <div className="flex items-center gap-[60px] text-white/50">
                         <ChevronRight className="w-4 h-4 rotate-180" />
                         <ChevronRight className="w-4 h-4" />
                       </div>
@@ -1933,7 +1933,7 @@ function LandingPage() {
                         <div className="grid grid-cols-3 gap-3 w-full">
 
                           <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-sm">
-                            <img src="https://picsum.photos/seed/staged-room-modern/400/300" alt="Virtually Staged" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
+                            <img src="/images/os-staged.jpg" alt="Virtually Staged" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
 
                             <div className="absolute top-2 right-2 bg-status-success text-white p-1 rounded-full shadow-sm flex items-center justify-center">
                               <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -1947,21 +1947,7 @@ function LandingPage() {
                           </div>
 
                           <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-sm">
-                            <img src="https://picsum.photos/seed/dusk-house/400/300" alt="Day to Dusk" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
-
-                            <div className="absolute top-2 right-2 bg-status-success text-white p-1 rounded-full shadow-sm flex items-center justify-center">
-                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" clipRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
-                              </svg>
-                            </div>
-
-                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-white/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
-                              Day to Dusk
-                            </div>
-                          </div>
-
-                          <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-sm">
-                            <img src="https://picsum.photos/seed/enhanced-room/400/300" alt="AI Enhanced" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
+                            <img src="/images/os-enhanced-new.jpg" alt="AI Enhanced" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
 
                             <div className="absolute top-2 right-2 bg-status-success text-white p-1 rounded-full shadow-sm flex items-center justify-center">
                               <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -1971,6 +1957,20 @@ function LandingPage() {
 
                             <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-white/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
                               AI Enhanced
+                            </div>
+                          </div>
+
+                          <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-sm">
+                            <img src="/images/os-dusk-new.jpg" alt="Day to Dusk" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
+
+                            <div className="absolute top-2 right-2 bg-status-success text-white p-1 rounded-full shadow-sm flex items-center justify-center">
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                              </svg>
+                            </div>
+
+                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-white/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
+                              Day to Dusk
                             </div>
                           </div>
 
@@ -2798,7 +2798,7 @@ const LiveListingAuditSection = () => {
                   {/* Field: Address */}
                   <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'address' ? 'bg-brand-blue/5 border-brand-blue/30 ring-1 ring-brand-blue/5' : 'bg-[#FAFBFC] border-[#F0F2F5]'}`}>
                     <label className="text-[10px] font-black text-[#4A4D55] uppercase tracking-widest mb-2 block">Public Property Source</label>
-                    <p className="text-sm font-semibold text-slate-800">4821 Oakmont Dr, Charlotte, NC 28205</p>
+                    <p className="text-sm font-semibold text-slate-800">1234 Ont, Chtte, NC 2345</p>
                     <div className="mt-3 flex items-center gap-2">
                       <CheckCircle2 className={`w-3.5 h-3.5 ${activeField === 'address' ? 'text-brand-blue' : 'text-slate-300'}`} />
                       <span className="text-[9px] font-bold text-slate-400">Verified against 4 public record sources</span>
