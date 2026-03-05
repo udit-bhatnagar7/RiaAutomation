@@ -454,8 +454,8 @@ const RiaStudio = () => {
                 >
                   {[
                     { label: "ORIGINAL", img: (tools[0].after as any)["Modern Neutral"] },
-                    { label: "STAGED", img: tools[0].before as string }
-                    { label: "ENHANCED", img: (tools[0].after as any)["Modern Neutral"] },
+                    { label: "STAGED", img: tools[0].before as string },
+                    { label: "ENHANCED", img: "/images/os-enhanced-new.jpg" }
                   ].map((item, i) => (
                     <div key={i} className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-divider shadow-lg bg-white group">
                       <img src={item.img} alt={item.label} loading="lazy" width="400" height="300" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
