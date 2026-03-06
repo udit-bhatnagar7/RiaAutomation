@@ -286,7 +286,7 @@ const SellerCollaborationSection = () => {
   ];
 
   return (
-    <RevealSection className="py-24 bg-white">
+    <RevealSection className="py-24 bg-bg-secondary">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <FadeIn>
@@ -394,7 +394,7 @@ const RiaStudio = () => {
   const currentTool = tools[activeTool];
 
   return (
-    <section className="py-24 bg-[#F7F9FC] overflow-">
+    <section className="py-24 bg-bg-primary overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <FadeIn>
@@ -407,7 +407,7 @@ const RiaStudio = () => {
 
         {/* Compare Mode Toggle */}
         <div className="flex justify-center mb-12">
-          <div className="bg-white p-1 rounded-full border border-divider shadow-sm flex items-center">
+          <div className="bg-bg-secondary p-1 rounded-full border border-divider shadow-sm flex items-center">
             <button
               onClick={() => setCompareMode(false)}
               className={`px-6 py-2 rounded-full text-xs font-bold transition-all ${!compareMode ? "bg-brand-blue text-white shadow-lg" : "text-text-muted hover:text-text-primary"}`}
@@ -431,8 +431,8 @@ const RiaStudio = () => {
                 key={tool.id}
                 onClick={() => handleToolChange(i)}
                 className={`w-full flex flex-col items-center gap-2 p-4 rounded-2xl transition-all duration-300 border ${activeTool === i
-                  ? "bg-white border-brand-blue shadow-xl shadow-brand-blue/5 text-brand-blue"
-                  : "bg-transparent border-transparent text-text-muted hover:bg-white/50 hover:border-divider"
+                  ? "bg-bg-secondary border-brand-blue shadow-xl shadow-brand-blue/5 text-brand-blue"
+                  : "bg-transparent border-transparent text-text-muted hover:bg-bg-secondary/50 hover:border-divider"
                   }`}
               >
                 <tool.icon className="w-6 h-6" />
@@ -457,7 +457,7 @@ const RiaStudio = () => {
                     { label: "STAGED", img: tools[0].before as string },
                     { label: "ENHANCED", img: "/images/os-enhanced-new.jpg" }
                   ].map((item, i) => (
-                    <div key={i} className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-divider shadow-lg bg-white group">
+                    <div key={i} className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-divider shadow-lg bg-bg-secondary group">
                       <img src={item.img} alt={item.label} loading="lazy" width="400" height="300" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                       <div className="absolute top-4 left-4 px-3 py-1 bg-black/50 backdrop-blur text-white text-[10px] font-bold rounded-full">
                         {item.label}
@@ -474,7 +474,7 @@ const RiaStudio = () => {
                   exit={{ opacity: 0, scale: 0.98 }}
                   ref={canvasRef}
                   onMouseMove={handleMouseMove}
-                  className="relative aspect-[4/3] bg-white rounded-3xl shadow-2xl shadow-black/5 border border-divider overflow-hidden cursor-ew-resize group"
+                  className="relative aspect-[4/3] bg-bg-secondary rounded-3xl shadow-2xl shadow-black/5 border border-divider overflow-hidden cursor-ew-resize group"
                 >
                   {/* ... existing canvas content ... */}
                   <AnimatePresence mode="wait">
@@ -483,7 +483,7 @@ const RiaStudio = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="absolute inset-0 z-40 bg-white/40 backdrop-blur-sm flex items-center justify-center"
+                        className="absolute inset-0 z-40 bg-bg-secondary/40 backdrop-blur-sm flex items-center justify-center"
                       >
                         <div className="relative flex flex-col items-center">
                           <div className="w-16 h-16 border-4 border-brand-blue/20 border-t-brand-blue rounded-full animate-spin mb-4" />
@@ -566,10 +566,10 @@ const RiaStudio = () => {
                       const x = ((info.point.x - rect.left) / rect.width) * 100;
                       setRevealPosition(Math.max(0, Math.min(100, x)));
                     }}
-                    className="absolute top-0 bottom-0 w-1 bg-white shadow-xl z-30 flex items-center justify-center cursor-ew-resize group/handle"
+                    className="absolute top-0 bottom-0 w-1 bg-bg-secondary shadow-xl z-30 flex items-center justify-center cursor-ew-resize group/handle"
                     style={{ left: `${revealPosition}%` }}
                   >
-                    <div className="w-12 h-12 bg-white rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.25)] border-2 border-divider flex items-center justify-center group-hover/handle:scale-110 transition-transform">
+                    <div className="w-12 h-12 bg-bg-secondary rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.25)] border-2 border-divider flex items-center justify-center group-hover/handle:scale-110 transition-transform">
                       <div className="flex gap-1">
                         <div className="w-1 h-5 bg-divider rounded-full" />
                         <div className="w-1 h-5 bg-divider rounded-full" />
@@ -595,7 +595,7 @@ const RiaStudio = () => {
                     <motion.div
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className="bg-white/90 backdrop-blur p-3 rounded-xl shadow-xl border border-brand-blue/20 text-right"
+                      className="bg-bg-secondary/90 backdrop-blur p-3 rounded-xl shadow-xl border border-brand-blue/20 text-right"
                     >
                       <p className="text-[8px] font-bold text-brand-blue uppercase tracking-widest mb-0.5">Starting at</p>
                       <div className="flex items-end justify-end gap-1">
@@ -690,7 +690,7 @@ const RiaStudio = () => {
                   )}
                 </div>
 
-                <div className="mt-8 p-6 border-t border-divider sticky bottom-0 bg-white">
+                <div className="mt-8 p-6 border-t border-divider sticky bottom-0 bg-bg-secondary">
                   <button className="w-full py-3 bg-brand-blue text-white rounded-xl text-xs font-bold hover:bg-brand-blue-dark transition-colors shadow-lg shadow-brand-blue/20">
                     Apply to Listing
                   </button>
@@ -747,7 +747,7 @@ const ProductDropdown = () => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <button aria-expanded={isOpen} className="flex items-center gap-1 hover:text-brand-blue transition-colors py-4 text-sm font-medium text-gray-700">
+      <button aria-expanded={isOpen} className="flex items-center gap-1 hover:text-brand-blue transition-colors py-4 text-sm font-medium text-text-secondary">
         Product
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
@@ -767,7 +767,7 @@ const ProductDropdown = () => {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="absolute top-full left-0 pt-2 hidden md:block"
           >
-            <div className="w-[640px] bg-white border border-[#E6EAF0] rounded-2xl p-6 shadow-xl">
+            <div className="w-[640px] bg-bg-secondary border border-[#E6EAF0] rounded-2xl p-6 shadow-xl">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest mb-6 block">
                 CORE PRODUCTS
               </span>
@@ -801,39 +801,30 @@ const ProductDropdown = () => {
   );
 };
 
-const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; onDismissBanner: () => void }) => {
+const MainNavigation = ({ showBanner, onDismissBanner, isDark, toggleTheme }: { showBanner: boolean; onDismissBanner: () => void; isDark: boolean; toggleTheme: () => void }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <header className="fixed top-0 w-full z-50">
       {showBanner && <AnnouncementBanner onDismiss={onDismissBanner} />}
-      <nav className="w-full bg-white/95 backdrop-blur-md border-b border-gray-200 relative">
+      <nav className="w-full bg-bg-secondary/95 backdrop-blur-md border-b border-divider relative">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <Link to="/" className="flex items-center">
-              <svg width="80" height="32" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="RIA Logo">
-                <defs>
-                  <linearGradient id="logoGradientHorizontal" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#2563eb" />
-                    <stop offset="100%" stopColor="#7c3aed" />
-                  </linearGradient>
-                </defs>
-                <g transform="translate(2, 2)">
-                  <circle cx="18" cy="18" r="16" fill="url(#logoGradientHorizontal)" opacity="0.1" />
-                  <path d="M11 10h7.5c2.5 0 4.5 2 4.5 4.5 0 1.8-1 3.3-2.5 4L23 24h-3.5l-2.5-5.5h-2V24h-4V10z" fill="url(#logoGradientHorizontal)" />
-                  <rect x="15" y="14" width="3.5" height="2" fill="white" rx="0.7" />
-                  <circle cx="28" cy="12" r="1.5" fill="#2563eb" opacity="0.8" />
-                  <circle cx="31" cy="15" r="1" fill="#7c3aed" opacity="0.6" />
-                </g>
-                <text x="42" y="27" fontFamily="system-ui, -apple-system, sans-serif" fontSize="20" fontWeight="700" fill="#030213" letterSpacing="-0.5">RIA</text>
-              </svg>
+            <Link to="/" className="flex items-center gap-3">
+              <div className="w-[53px] h-10 md:w-11 md:h-11 overflow-hidden shrink-0">
+                <img src="/images/logo.jpg" alt="RIA Logo" className="w-full h-full object-cover mix-blend-darken" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-lg leading-none tracking-tight text-text-primary">RIA</span>
+                <span className="text-[9px] font-bold text-brand-blue uppercase tracking-widest mt-0.5">Agentic AI OS</span>
+              </div>
             </Link>
             <div className="hidden md:flex items-center gap-6">
               <ProductDropdown />
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
-            <Link to="/login" className="text-gray-700 hover:text-gray-900 font-medium text-sm hidden md:block">Login</Link>
+            <Link to="/login" className="text-text-secondary hover:text-gray-900 font-medium text-sm hidden md:block">Login</Link>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -841,11 +832,18 @@ const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; 
             >
               Start Free
             </motion.button>
-            <Link to="/demo" className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors hidden lg:block text-sm font-bold">
+            <Link to="/demo" className="px-4 py-2 border border-divider text-text-secondary rounded-lg hover:bg-gray-50 transition-colors hidden lg:block text-sm font-bold">
               Book Demo
             </Link>
             <button
-              className="md:hidden text-gray-700 p-2 ml-1"
+              onClick={toggleTheme}
+              className="text-text-secondary hover:text-brand-blue p-2 ml-1 rounded-full transition-colors hidden sm:block"
+              aria-label="Toggle dark mode"
+            >
+              {isDark ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button
+              className="md:hidden text-text-secondary p-2 ml-1"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -861,27 +859,27 @@ const MainNavigation = ({ showBanner, onDismissBanner }: { showBanner: boolean; 
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden overflow-hidden absolute top-16 left-0 w-full bg-white border-b border-gray-200 shadow-2xl"
+              className="md:hidden overflow-hidden absolute top-16 left-0 w-full bg-bg-secondary border-b border-divider shadow-2xl"
             >
               <div className="p-6 space-y-6">
                 <div>
                   <div className="font-bold text-[10px] text-text-muted uppercase tracking-widest mb-4">Products</div>
                   <div className="flex flex-col gap-4 pl-2">
-                    <Link to="#" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">Listing Intelligence</Link>
-                    <Link to="#" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">MLS Automation</Link>
-                    <Link to="#" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">Compliance & QA</Link>
-                    <Link to="/demo" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">Virtual Staging</Link>
+                    <Link to="#" className="block text-text-primary hover:text-brand-blue font-semibold text-sm">Listing Intelligence</Link>
+                    <Link to="#" className="block text-text-primary hover:text-brand-blue font-semibold text-sm">MLS Automation</Link>
+                    <Link to="#" className="block text-text-primary hover:text-brand-blue font-semibold text-sm">Compliance & QA</Link>
+                    <Link to="/demo" className="block text-text-primary hover:text-brand-blue font-semibold text-sm">Virtual Staging</Link>
                   </div>
                 </div>
 
-                <div className="h-px bg-gray-100 w-full" />
+                <div className="h-px bg-bg-accent w-full" />
 
                 <div className="flex flex-col gap-4">
-                  <Link to="/login" className="block text-gray-800 hover:text-brand-blue font-semibold text-sm">Login</Link>
+                  <Link to="/login" className="block text-text-primary hover:text-brand-blue font-semibold text-sm">Login</Link>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 pt-2 pb-4">
-                  <Link to="/demo" className="px-4 py-3 border border-gray-200 text-center rounded-lg hover:bg-gray-50 transition-colors text-sm font-bold">
+                  <Link to="/demo" className="px-4 py-3 border border-divider text-center rounded-lg hover:bg-gray-50 transition-colors text-sm font-bold">
                     Demo
                   </Link>
                   <button className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-bold">
@@ -935,7 +933,7 @@ const StepTimeline = ({ activeStep }: { activeStep: number }) => {
             className="flex gap-6 items-start"
           >
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 z-10 ${isActive ? "bg-brand-blue text-white scale-110 shadow-lg shadow-brand-blue/20" :
-              isPast ? "bg-status-success text-white" : "bg-white border border-border-subtle text-text-muted"
+              isPast ? "bg-status-success text-white" : "bg-bg-secondary border border-border-subtle text-text-muted"
               }`}>
               {isPast ? <CheckCircle2 className="w-4 h-4" /> : `0${step.id}`}
             </div>
@@ -1005,7 +1003,7 @@ export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: bool
         <div className="py-12">
           <StepTimeline activeStep={activeStep} />
 
-          <div className="mt-16 p-6 bg-white rounded-2xl border border-border-subtle shadow-sm">
+          <div className="mt-16 p-6 bg-bg-secondary rounded-2xl border border-border-subtle shadow-sm">
             <h4 className="font-bold text-sm mb-4 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-brand-blue" />
               Operational Intelligence
@@ -1074,7 +1072,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
   }, [step]);
 
   return (
-    <div className="glass-card w-full h-[500px] overflow-hidden flex flex-col relative bg-white">
+    <div className="glass-card w-full h-[500px] overflow-hidden flex flex-col relative bg-bg-secondary">
       {/* Header */}
       <div className="p-4 border-b border-divider flex items-center justify-between bg-bg-primary/50">
         <div className="flex items-center gap-2">
@@ -1120,7 +1118,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.2 }}
-                    className="w-12 h-16 bg-white border border-border-subtle rounded shadow-sm flex items-center justify-center"
+                    className="w-12 h-16 bg-bg-secondary border border-border-subtle rounded shadow-sm flex items-center justify-center"
                   >
                     <FileText className="w-6 h-6 text-text-muted" />
                   </motion.div>
@@ -1242,7 +1240,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                           referrerPolicy="no-referrer"
                         />
                         <div className="absolute top-1 right-1">
-                          <CheckCircle2 className="w-4 h-4 text-status-success bg-white rounded-full" />
+                          <CheckCircle2 className="w-4 h-4 text-status-success bg-bg-secondary rounded-full" />
                         </div>
                       </div>
                       <div className="text-[8px] font-bold text-text-muted uppercase text-center">
@@ -1279,7 +1277,7 @@ const LiveUIDemo = ({ step }: { step: number }) => {
                   <Download className="w-5 h-5" />
                   Export to MLS Draft
                   <motion.div
-                    className="absolute inset-0 bg-white/20"
+                    className="absolute inset-0 bg-bg-secondary/20"
                     initial={{ x: "-100%" }}
                     whileHover={{ x: "100%" }}
                     transition={{ duration: 0.5 }}
@@ -1372,7 +1370,7 @@ const RolePreview = ({ role }: { role: string }) => {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-2xl shadow-black/5 border border-divider p-8 min-h-[500px] overflow-hidden relative">
+      <div className="bg-bg-secondary rounded-2xl shadow-2xl shadow-black/5 border border-divider p-8 min-h-[500px] overflow-hidden relative">
         <AnimatePresence mode="wait">
           {role === "Agents" && (
             <motion.div key="agents" {...variants} transition={transition} className="space-y-8">
@@ -1441,7 +1439,7 @@ const RolePreview = ({ role }: { role: string }) => {
                           initial={{ y: 20, opacity: 0 }}
                           animate={{ y: 0, opacity: 1 }}
                           transition={{ delay: 0.5 + i * 0.1 }}
-                          className="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur py-1 px-2 rounded text-[8px] font-bold text-brand-blue text-center border border-brand-blue/20"
+                          className="absolute bottom-2 left-2 right-2 bg-bg-secondary/90 backdrop-blur py-1 px-2 rounded text-[8px] font-bold text-brand-blue text-center border border-brand-blue/20"
                         >
                           {i === 1 ? "AUTO-TAGGED: KITCHEN" : "AUTO-TAGGED: EXTERIOR"}
                         </motion.div>
@@ -1525,7 +1523,7 @@ const RolePreview = ({ role }: { role: string }) => {
                   <BarChart3 className="w-5 h-5 text-brand-blue" />
                   <span className="text-xs font-bold text-brand-blue">Operational Throughput: +150%</span>
                 </div>
-                <span className="text-[10px] text-brand-blue font-medium px-2 py-1 bg-white/50 rounded">System Optimized</span>
+                <span className="text-[10px] text-brand-blue font-medium px-2 py-1 bg-bg-secondary/50 rounded">System Optimized</span>
               </div>
             </motion.div>
           )}
@@ -1566,7 +1564,7 @@ const RolePreview = ({ role }: { role: string }) => {
                     <p className="text-xs text-text-secondary leading-relaxed">
                       Automatically enforcing logos, colors, and typography across 100% of your organization's output.
                     </p>
-                    <div className="flex items-center gap-3 p-3 bg-white/50 rounded-xl border border-brand-blue/10">
+                    <div className="flex items-center gap-3 p-3 bg-bg-secondary/50 rounded-xl border border-brand-blue/10">
                       <div className="w-8 h-8 rounded-lg bg-brand-blue/10 flex items-center justify-center">
                         <Users className="w-4 h-4 text-brand-blue" />
                       </div>
@@ -1587,7 +1585,7 @@ const RolePreview = ({ role }: { role: string }) => {
                       <div key={i} className={`aspect-[3/4] rounded-xl border-2 transition-all cursor-pointer ${i === 1 ? "border-brand-blue bg-brand-blue/5" : "border-divider bg-bg-accent hover:border-brand-blue/30"}`}>
                         <div className="h-full flex flex-col p-2">
                           <div className={`h-1 w-full rounded-full mb-2 ${i === 1 ? "bg-brand-blue" : "bg-divider"}`} />
-                          <div className="flex-1 bg-white/50 rounded" />
+                          <div className="flex-1 bg-bg-secondary/50 rounded" />
                           {i === 1 && <div className="mt-2 text-[6px] font-bold text-brand-blue text-center uppercase">ACTIVE</div>}
                         </div>
                       </div>
@@ -1805,6 +1803,24 @@ function LandingPage() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
+
   useEffect(() => {
     if (!isInView) return;
     const timer = setTimeout(() => {
@@ -1825,9 +1841,9 @@ function LandingPage() {
   }, [isInView]);
 
   return (
-    <div className="min-h-screen selection:bg-brand-blue/10 selection:text-brand-blue bg-white overflow-x-hidden w-full max-w-[100vw]">
+    <div className="min-h-screen selection:bg-brand-blue/10 selection:text-brand-blue bg-bg-primary overflow-x-hidden w-full max-w-[100vw]">
       {/* Navigation */}
-      <MainNavigation showBanner={showBanner} onDismissBanner={() => setShowBanner(false)} />
+      <MainNavigation showBanner={showBanner} onDismissBanner={() => setShowBanner(false)} isDark={isDark} toggleTheme={() => setIsDark(!isDark)} />
 
       {/* Hero Section */}
       <RevealSection className="pt-38 pb-30 px-6 overflow-hidden">
@@ -1861,7 +1877,7 @@ function LandingPage() {
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <button className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center text-lg">
+                <button className="px-6 py-3 border-2 border-divider text-text-secondary rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center text-lg">
                   Book Demo
                 </button>
               </div>
@@ -1874,10 +1890,10 @@ function LandingPage() {
 
           <div className="relative">
             <FadeIn direction="left" delay={0.3}>
-              <div className="relative z-10 glass-card p-1 bg-white/50 backdrop-blur-xl border-white/20 shadow-2xl">
+              <div className="relative z-10 glass-card p-1 bg-bg-secondary/50 backdrop-blur-xl border-white/20 shadow-2xl">
                 <div className="bg-bg-primary rounded-2xl overflow-hidden border border-divider">
                   {/* Status Bar */}
-                  <div className="px-6 py-4 border-b border-divider flex items-center justify-between bg-white/50">
+                  <div className="px-6 py-4 border-b border-divider flex items-center justify-between bg-bg-secondary/50">
                     <div className="flex items-center gap-3">
                       <div className="flex gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-status-error/20" />
@@ -1912,7 +1928,7 @@ function LandingPage() {
                     </div>
 
                     <div className="space-y-4 mb-8">
-                      <div className="p-4 bg-white rounded-xl border border-divider">
+                      <div className="p-4 bg-bg-secondary rounded-xl border border-divider">
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Public Remarks</span>
                           <span className="text-[10px] font-bold text-brand-blue px-2 py-0.5 bg-brand-blue/5 rounded">AI Optimized</span>
@@ -1957,7 +1973,7 @@ function LandingPage() {
                               </svg>
                             </div>
 
-                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-white/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
+                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-bg-secondary/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
                               Virtually Staged
                             </div>
                           </div>
@@ -1971,7 +1987,7 @@ function LandingPage() {
                               </svg>
                             </div>
 
-                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-white/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
+                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-bg-secondary/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
                               AI Enhanced
                             </div>
                           </div>
@@ -1985,7 +2001,7 @@ function LandingPage() {
                               </svg>
                             </div>
 
-                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-white/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
+                            <div className="absolute bottom-2 left-2 text-[8px] font-bold uppercase tracking-widest text-brand-blue bg-bg-secondary/95 backdrop-blur-sm px-2 py-1 rounded shadow-sm border border-brand-blue/10">
                               Day to Dusk
                             </div>
                           </div>
@@ -2051,7 +2067,7 @@ function LandingPage() {
 
 
       {/* Final CTA */}
-      <RevealSection className="py-32 bg-white border-t border-divider">
+      <RevealSection className="py-32 bg-bg-secondary border-t border-divider">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <FadeIn>
             <h2 className="text-4xl font-bold tracking-tight mb-6">Launch a winning listing in minutes.</h2>
@@ -2186,7 +2202,7 @@ const IntelligenceLayersSection = () => {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", damping: 12, stiffness: 100 }}
-            className="relative z-20 w-32 h-32 bg-white rounded-full shadow-2xl border border-divider flex items-center justify-center"
+            className="relative z-20 w-32 h-32 bg-bg-secondary rounded-full shadow-2xl border border-divider flex items-center justify-center"
             animate={{
               boxShadow: hoveredModule !== null || activeIndex !== null ? "0 0 40px rgba(59,91,255,0.2)" : "0 0 20px rgba(0,0,0,0.05)",
               scale: hoveredModule !== null ? 1.05 : 1
@@ -2195,7 +2211,7 @@ const IntelligenceLayersSection = () => {
             <div className="w-24 h-24 bg-brand-blue rounded-full flex items-center justify-center relative overflow-hidden">
               <Sparkles className="text-white w-10 h-10 relative z-10" />
               <motion.div
-                className="absolute inset-0 bg-white/20"
+                className="absolute inset-0 bg-bg-secondary/20"
                 animate={{
                   rotate: 360,
                   scale: [1, 1.2, 1]
@@ -2304,7 +2320,7 @@ const ModuleCard = ({ module, index, isActive, isHovered, onHover, onLeave, mobi
   if (mobile) {
     return (
       <div
-        className="bg-white rounded-[18px] border border-divider shadow-sm p-6"
+        className="bg-bg-secondary rounded-[18px] border border-divider shadow-sm p-6"
         onMouseEnter={onHover}
         onMouseLeave={onLeave}
       >
@@ -2415,7 +2431,7 @@ const ListingIntelligencePreview = ({ active }: { active: boolean }) => {
         <motion.div className="h-full bg-brand-blue" style={{ width: `${progress}%` }} />
       </div>
       <div className="flex gap-2">
-        <div className="flex-1 h-12 bg-white rounded border border-divider p-2">
+        <div className="flex-1 h-12 bg-bg-secondary rounded border border-divider p-2">
           <div className="w-full h-full relative overflow-hidden">
             <motion.div
               className="absolute bottom-0 left-0 right-0 bg-brand-blue/10"
@@ -2435,7 +2451,7 @@ const ListingIntelligencePreview = ({ active }: { active: boolean }) => {
             </svg>
           </div>
         </div>
-        <div className="w-16 h-12 bg-white rounded border border-divider flex flex-col items-center justify-center">
+        <div className="w-16 h-12 bg-bg-secondary rounded border border-divider flex flex-col items-center justify-center">
           <MapPin className="w-3 h-3 text-brand-blue mb-1" />
           <span className="text-[8px] font-bold">94/100</span>
         </div>
@@ -2471,7 +2487,7 @@ const RemarkOptimizerPreview = ({ active }: { active: boolean }) => {
         </div>
         <span className="text-[8px] font-bold text-indigo-500">OPTIMIZING...</span>
       </div>
-      <div className="p-2 bg-white rounded border border-divider min-h-[60px]">
+      <div className="p-2 bg-bg-secondary rounded border border-divider min-h-[60px]">
         <p className="text-[10px] text-text-secondary leading-tight">
           {text}
           <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} className="inline-block w-0.5 h-3 bg-indigo-500 ml-0.5" />
@@ -2491,7 +2507,7 @@ const RemarkOptimizerPreview = ({ active }: { active: boolean }) => {
 const MediaIntelligencePreview = ({ active }: { active: boolean }) => {
   return (
     <div className="space-y-3 bg-bg-primary/50 p-3 rounded-xl">
-      <div className="relative aspect-video bg-white rounded border border-divider overflow-hidden">
+      <div className="relative aspect-video bg-bg-secondary rounded border border-divider overflow-hidden">
         <img src="https://picsum.photos/seed/media-intel/300/200" alt="Media Intelligence Analysis" loading="lazy" width="300" height="200" className="w-full h-full object-cover opacity-50" referrerPolicy="no-referrer" />
         <AnimatePresence>
           {active && (
@@ -2507,7 +2523,7 @@ const MediaIntelligencePreview = ({ active }: { active: boolean }) => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className="absolute bottom-2 right-2 px-2 py-1 bg-white/90 text-emerald-500 text-[8px] font-bold rounded border border-emerald-500/20 shadow-lg"
+                className="absolute bottom-2 right-2 px-2 py-1 bg-bg-secondary/90 text-emerald-500 text-[8px] font-bold rounded border border-emerald-500/20 shadow-lg"
               >
                 STAGING SUGGESTED
               </motion.div>
@@ -2657,7 +2673,7 @@ const LiveListingAuditSection = () => {
   ];
 
   return (
-    <section className="py-32 bg-[#F8FAFD] text-[#1A1D21] overflow- relative">
+    <section className="py-32 bg-bg-primary text-text-primary overflow-hidden relative">
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-[140px] -z-10" />
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[140px] -z-10" />
@@ -2669,8 +2685,8 @@ const LiveListingAuditSection = () => {
               <ShieldCheck className="w-3.5 h-3.5" />
               Machine Intelligence Audit
             </div>
-            <h2 className="text-5xl font-bold tracking-tight mb-6 text-slate-900">Every Listing Gets a Quality Score</h2>
-            <p className="text-[#4A4D55] max-w-2xl mx-auto text-lg leading-relaxed">
+            <h2 className="text-5xl font-bold tracking-tight mb-6 text-text-primary">Every Listing Gets a Quality Score</h2>
+            <p className="text-text-secondary max-w-2xl mx-auto text-lg leading-relaxed">
               Ria audits 200+ regional data points to ensure your listing is accurate, compliant, and optimized for peak market exposure.
             </p>
           </FadeIn>
@@ -2679,7 +2695,7 @@ const LiveListingAuditSection = () => {
         <div className="grid lg:grid-cols-12 gap-10 items-stretch">
           {/* Left: Ria's Live Console */}
           <div className="lg:col-span-3 flex flex-col">
-            <div className="flex-1 bg-white border border-[#E1E6ED] rounded-[32px] p-6 relative overflow-hidden flex flex-col min-h-[440px] shadow-[0_20px_40px_rgba(0,0,0,0.02)]">
+            <div className="flex-1 bg-bg-secondary border border-[#E1E6ED] rounded-[32px] p-6 relative overflow-hidden flex flex-col min-h-[440px] shadow-[0_20px_40px_rgba(0,0,0,0.02)]">
               <div className="flex items-center gap-2 mb-6 border-b border-[#F0F2F5] pb-4">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-[#E0443E]" />
@@ -2772,8 +2788,8 @@ const LiveListingAuditSection = () => {
                   <div
                     key={cat.id}
                     className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 ${activeCategory === i
-                      ? 'bg-white border-brand-blue/30 text-brand-blue shadow-[0_10px_30px_rgba(0,0,0,0.04)] ring-1 ring-brand-blue/5'
-                      : 'bg-white/50 border-[#E1E6ED] text-[#4A4D55]'
+                      ? 'bg-bg-secondary border-brand-blue/30 text-brand-blue shadow-[0_10px_30px_rgba(0,0,0,0.04)] ring-1 ring-brand-blue/5'
+                      : 'bg-bg-secondary/50 border-[#E1E6ED] text-[#4A4D55]'
                       }`}
                   >
                     <span className="text-[11px] font-bold uppercase tracking-wider">{cat.id}</span>
@@ -2786,7 +2802,7 @@ const LiveListingAuditSection = () => {
 
           {/* Right: AI Vision Preview */}
           <div className="lg:col-span-5 flex flex-col">
-            <div className="flex-1 bg-white border border-[#E1E6ED] rounded-[40px] p-8 relative overflow-hidden flex flex-col shadow-[0_20px_80px_rgba(0,0,0,0.03)]">
+            <div className="flex-1 bg-bg-secondary border border-[#E1E6ED] rounded-[40px] p-8 relative overflow-hidden flex flex-col shadow-[0_20px_80px_rgba(0,0,0,0.03)]">
               {/* Scanner Line Overlay */}
               <motion.div
                 animate={{ top: ['0%', '100%', '0%'] }}
@@ -2833,8 +2849,8 @@ const LiveListingAuditSection = () => {
                   <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'hoa' ? 'bg-brand-blue/5 border-brand-blue/30' : 'bg-[#FAFBFC] border-[#F0F2F5]'}`}>
                     <label className="text-[10px] font-black text-[#4A4D55] uppercase tracking-widest mb-2 block">Ownership & Encumbrances</label>
                     <div className="flex gap-4">
-                      <div className="flex-1 bg-white border border-[#F0F2F5] rounded-xl p-3 text-[10px] text-slate-600 font-bold shadow-sm">HOA: $450/m</div>
-                      <div className="flex-1 bg-white border border-[#F0F2F5] rounded-xl p-3 text-[10px] text-brand-blue font-bold shadow-sm">Status: Verified</div>
+                      <div className="flex-1 bg-bg-secondary border border-[#F0F2F5] rounded-xl p-3 text-[10px] text-slate-600 font-bold shadow-sm">HOA: $450/m</div>
+                      <div className="flex-1 bg-bg-secondary border border-[#F0F2F5] rounded-xl p-3 text-[10px] text-brand-blue font-bold shadow-sm">Status: Verified</div>
                     </div>
                   </div>
                 </div>
@@ -2869,7 +2885,7 @@ const LiveListingAuditSection = () => {
                   whileHover={{ x: 6, backgroundColor: "rgba(59, 130, 246, 0.02)" }}
                   className={`p-5 rounded-[20px] border flex items-center gap-4 cursor-pointer transition-all duration-300 ${completedFixes.includes(fix.id)
                     ? 'bg-emerald-50/50 border-emerald-100 opacity-60'
-                    : 'bg-white border-[#E6EAF0] shadow-sm hover:border-brand-blue/30 hover:shadow-md'
+                    : 'bg-bg-secondary border-[#E6EAF0] shadow-sm hover:border-brand-blue/30 hover:shadow-md'
                     }`}
                 >
                   <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${completedFixes.includes(fix.id) ? 'bg-emerald-500 border-emerald-500' : 'border-[#E1E6ED]'}`}>
@@ -2888,7 +2904,7 @@ const LiveListingAuditSection = () => {
             </div>
           </div>
 
-          <div className="p-10 rounded-[40px] bg-white border border-[#E1E6ED] shadow-[0_40px_100px_rgba(0,0,0,0.04)] relative overflow-hidden">
+          <div className="p-10 rounded-[40px] bg-bg-secondary border border-[#E1E6ED] shadow-[0_40px_100px_rgba(0,0,0,0.04)] relative overflow-hidden">
             <div className="absolute top-0 right-0 w-48 h-48 bg-brand-blue/[0.02] rounded-full blur-[60px] -mr-24 -mt-24" />
             <div className="relative z-10">
               <div className="w-12 h-12 rounded-2xl bg-brand-blue/10 flex items-center justify-center mb-8">
@@ -3013,7 +3029,7 @@ const ThreePillarsSection = () => {
   const currentPillar = pillars[activePillar];
 
   return (
-    <section className="py-24 bg-[#F7F9FC] overflow-">
+    <section className="py-24 bg-bg-primary overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <motion.div
@@ -3045,7 +3061,7 @@ const ThreePillarsSection = () => {
                       : pillar.color === 'amber'
                         ? "bg-amber-50 border-amber-600 text-amber-600 border-2"
                         : "bg-indigo-50 border-indigo-600 text-indigo-600 border-2"
-                  : "bg-white border-divider text-slate-500 hover:border-slate-300"
+                  : "bg-bg-secondary border-divider text-slate-500 hover:border-slate-300"
                 }
               `}
             >
@@ -3062,7 +3078,7 @@ const ThreePillarsSection = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            className="bg-white rounded-[48px] border border-divider shadow-xl shadow-black/[0.02] overflow-hidden"
+            className="bg-bg-secondary rounded-[48px] border border-divider shadow-xl shadow-black/[0.02] overflow-hidden"
           >
             <div className="grid lg:grid-cols-2 gap-12 p-8 md:p-16">
               <div className="flex flex-col justify-center">
@@ -3116,7 +3132,7 @@ const ThreePillarsSection = () => {
                       currentPillar.color === 'amber' ? 'bg-amber-500' : 'bg-indigo-500'}`}
                 />
 
-                <div className="w-full max-w-[500px] h-[500px] lg:max-w-none bg-white border border-slate-200/60 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col">
+                <div className="w-full max-w-[500px] h-[500px] lg:max-w-none bg-bg-secondary border border-slate-200/60 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col">
                   {/* Browser/Desktop Top Bar */}
                   <div className="bg-slate-50 border-b border-slate-200/60 px-4 py-3 flex items-center gap-4">
                     <div className="flex gap-1.5 opacity-80">
@@ -3124,13 +3140,13 @@ const ThreePillarsSection = () => {
                       <div className="w-3 h-3 rounded-full bg-slate-300" />
                       <div className="w-3 h-3 rounded-full bg-slate-300" />
                     </div>
-                    <div className="flex-1 bg-white rounded-md border border-slate-200/60 text-[10px] text-slate-400 font-mono px-3 py-1.5 flex items-center justify-center shadow-sm">
+                    <div className="flex-1 bg-bg-secondary rounded-md border border-slate-200/60 text-[10px] text-slate-400 font-mono px-3 py-1.5 flex items-center justify-center shadow-sm">
                       ria.app/{currentPillar.title.toLowerCase().replace(/ /g, '-')}
                     </div>
                   </div>
 
                   {/* Desktop Content Area */}
-                  <div className="bg-white p-6 md:p-8 flex-1 flex flex-col text-slate-800 overflow-hidden">
+                  <div className="bg-bg-secondary p-6 md:p-8 flex-1 flex flex-col text-slate-800 overflow-hidden">
                     {/* Header */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b border-slate-100 pb-6 shrink-0">
                       <div>
@@ -3164,7 +3180,7 @@ const ThreePillarsSection = () => {
                     {/* Preview Items - List Layout */}
                     <div className="space-y-3 flex-1 overflow-y-auto custom-scrollbar pr-2 pb-4">
                       {currentPillar.preview.items.map((item, idx) => (
-                        <div key={idx} className="flex justify-between items-center p-3 sm:px-4 sm:py-3 border border-slate-100 rounded-lg hover:border-slate-200 transition-colors bg-white hover:bg-slate-50">
+                        <div key={idx} className="flex justify-between items-center p-3 sm:px-4 sm:py-3 border border-slate-100 rounded-lg hover:border-slate-200 transition-colors bg-bg-secondary hover:bg-slate-50">
                           <span className="text-sm font-medium text-slate-700">{item.label}</span>
                           <span className={`text-[10px] font-bold uppercase py-1 px-2.5 rounded-md
                             ${item.color === 'emerald' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' :
@@ -3178,7 +3194,7 @@ const ThreePillarsSection = () => {
                     </div>
 
                     {/* Desktop CTA */}
-                    <div className="flex justify-end pt-4 mt-auto border-t border-slate-100 bg-white z-10 shrink-0">
+                    <div className="flex justify-end pt-4 mt-auto border-t border-slate-100 bg-bg-secondary z-10 shrink-0">
                       <button className={`px-5 py-2 rounded-lg text-sm font-bold shadow-sm transition-transform hover:-translate-y-0.5
                         ${currentPillar.color === 'teal' ? 'bg-emerald-600 text-white hover:bg-emerald-700' :
                           currentPillar.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700' :
@@ -3297,11 +3313,11 @@ export const VisualIntelligenceStudio = () => {
                   setShowAfter(true);
                 }}
                 className={`w-full text-left p-5 rounded-xl transition-all duration-300 border flex items-center gap-4 ${activeTool === i
-                  ? "bg-white border-brand-blue shadow-lg shadow-brand-blue/5 z-10"
-                  : "bg-transparent border-transparent hover:bg-white/50 hover:border-divider"
+                  ? "bg-bg-secondary border-brand-blue shadow-lg shadow-brand-blue/5 z-10"
+                  : "bg-transparent border-transparent hover:bg-bg-secondary/50 hover:border-divider"
                   }`}
               >
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${activeTool === i ? "bg-brand-blue text-white" : "bg-white text-brand-blue border border-divider"
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${activeTool === i ? "bg-brand-blue text-white" : "bg-bg-secondary text-brand-blue border border-divider"
                   }`}>
                   <tool.icon className="w-5 h-5" />
                 </div>
@@ -3339,7 +3355,7 @@ export const VisualIntelligenceStudio = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="bg-white rounded-2xl border border-divider shadow-xl shadow-black/5 overflow-hidden"
+                className="bg-bg-secondary rounded-2xl border border-divider shadow-xl shadow-black/5 overflow-hidden"
               >
                 <div className="p-8">
                   <div className="flex flex-col md:flex-row gap-8">
@@ -3378,7 +3394,7 @@ export const VisualIntelligenceStudio = () => {
                           />
                         )}
 
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex bg-white/90 backdrop-blur p-1 rounded-full shadow-lg border border-divider z-20">
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex bg-bg-secondary/90 backdrop-blur p-1 rounded-full shadow-lg border border-divider z-20">
                           <button
                             onClick={() => setShowAfter(false)}
                             className={`px-4 py-1.5 rounded-full text-[10px] font-bold transition-all ${!showAfter ? "bg-brand-blue text-white" : "text-text-muted hover:text-text-primary"}`}
@@ -3568,7 +3584,7 @@ export const RoadmapSection = () => {
                 transition={{ delay: i * 0.1 + 0.5 }}
                 className="relative z-10 flex flex-col items-center"
               >
-                <div className={`w-3 h-3 rounded-full border-2 relative ${phase.status === 'Live' ? 'bg-brand-blue border-brand-blue' : 'bg-white border-divider'}`}>
+                <div className={`w-3 h-3 rounded-full border-2 relative ${phase.status === 'Live' ? 'bg-brand-blue border-brand-blue' : 'bg-bg-secondary border-divider'}`}>
                   {phase.status === 'Live' && (
                     <motion.div
                       animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
@@ -3601,7 +3617,7 @@ export const RoadmapSection = () => {
                 // No click handler needed as all cards are expanded
                 className={`overflow-hidden relative p-4 rounded-2xl border transition-all cursor-pointer group
                   ${isLive
-                    ? "bg-white border-brand-blue/20 shadow-sm"
+                    ? "bg-bg-secondary border-brand-blue/20 shadow-sm"
                     : "bg-[#F7F9FC] border-divider border-dashed hover:border-solid hover:-translate-y-1"
                   }
                 `}
@@ -3701,26 +3717,39 @@ export const RoadmapSection = () => {
 
 export const DemoPage = () => {
   const [showBanner, setShowBanner] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
 
   return (
     <div className="min-h-screen bg-bg-primary">
       {/* Simple Nav */}
-      <MainNavigation showBanner={showBanner} onDismissBanner={() => setShowBanner(false)} />
+      <MainNavigation showBanner={showBanner} onDismissBanner={() => setShowBanner(false)} isDark={isDark} toggleTheme={() => setIsDark(!isDark)} />
 
       <main className="relative">
         <h1 className="sr-only">Ria Interactive Demo</h1>
         <WatchRiaThinkSection isDemoPage={true} />
-
-        <RoleSwitcher />
-
-        <JourneyTimeline />
 
         <VisualIntelligenceStudio />
 
         <RoadmapSection />
 
         {/* Final CTA on Demo Page */}
-        <section className="py-24 bg-white border-t border-divider">
+        <section className="py-24 bg-bg-secondary border-t border-divider">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-4xl font-bold tracking-tight mb-6">Launch a winning listing in under 5 minutes.</h2>
             <p className="text-lg text-text-secondary mb-10">Complete. Compliant. Optimized. MLS draft saved.</p>
