@@ -11,7 +11,7 @@
   --color-border-subtle: var(--border-subtle);
   --color-divider: var(--divider);
 
-  --color-brand-blue: #3B5BFF;
+  --color-brand-blue: #155DFC;
   --color-brand-cyan: #00B3E6;
 
   --color-status-success: #0F9D58;
@@ -39,7 +39,7 @@
 
   .dark {
     --bg-primary: #0F1115;
-    --bg-secondary: #131A2B;
+    --bg-secondary: #18181B;
     --bg-accent: #1E293B;
     --border-subtle: #334155;
     --divider: #1E293B;
@@ -66,7 +66,7 @@
 }
 
 .btn-primary {
-  background-color: #3B5BFF;
+  background-color: #155DFC;
   color: #FFFFFF;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
