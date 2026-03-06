@@ -767,7 +767,7 @@ const ProductDropdown = () => {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="absolute top-full left-0 pt-2 hidden md:block"
           >
-            <div className="w-[640px] bg-bg-secondary border border-[#E6EAF0] rounded-2xl p-6 shadow-xl">
+            <div className="w-[640px] bg-bg-secondary border border-border-subtle rounded-2xl p-6 shadow-xl">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest mb-6 block">
                 CORE PRODUCTS
               </span>
@@ -779,7 +779,7 @@ const ProductDropdown = () => {
                     key={i}
                     className="flex gap-4 group/item items-start p-2 -m-2 rounded-xl hover:bg-bg-primary transition-colors"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-bg-primary flex items-center justify-center shrink-0 border border-[#E6EAF0] group-hover/item:border-brand-blue/30 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-bg-primary flex items-center justify-center shrink-0 border border-border-subtle group-hover/item:border-brand-blue/30 transition-colors">
                       <item.icon className="w-5 h-5 text-brand-blue" />
                     </div>
                     <div>
@@ -2695,14 +2695,14 @@ const LiveListingAuditSection = () => {
         <div className="grid lg:grid-cols-12 gap-10 items-stretch">
           {/* Left: Ria's Live Console */}
           <div className="lg:col-span-3 flex flex-col">
-            <div className="flex-1 bg-bg-secondary border border-[#E1E6ED] rounded-[32px] p-6 relative overflow-hidden flex flex-col min-h-[440px] shadow-[0_20px_40px_rgba(0,0,0,0.02)]">
-              <div className="flex items-center gap-2 mb-6 border-b border-[#F0F2F5] pb-4">
+            <div className="flex-1 bg-bg-secondary border border-border-subtle rounded-[32px] p-6 relative overflow-hidden flex flex-col min-h-[440px] shadow-[0_20px_40px_rgba(0,0,0,0.02)]">
+              <div className="flex items-center gap-2 mb-6 border-b border-divider pb-4">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-[#E0443E]" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-[#DEA123]" />
                   <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-[#1AAB29]" />
                 </div>
-                <span className="text-[10px] font-mono text-[#4A4D55] uppercase tracking-widest ml-3 font-semibold">Ria_Audit_System</span>
+                <span className="text-[10px] font-mono text-text-secondary uppercase tracking-widest ml-3 font-semibold">Ria_Audit_System</span>
               </div>
 
               <div className="space-y-4 font-mono text-[11px] flex-1">
@@ -2712,7 +2712,7 @@ const LiveListingAuditSection = () => {
                       key={log + i}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className="flex gap-3 text-[#4A4D55]"
+                      className="flex gap-3 text-text-secondary"
                     >
                       <span className="text-brand-blue font-bold shrink-0">[{new Date().toLocaleTimeString([], { hour12: false, minute: '2-digit', second: '2-digit' })}]</span>
                       <span className={log.includes("MATCH") || log.includes("COMPLIANCE") ? "text-amber-600 font-semibold" : ""}>
@@ -2723,7 +2723,7 @@ const LiveListingAuditSection = () => {
                 </AnimatePresence>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-[#F0F2F5]">
+              <div className="mt-4 pt-4 border-t border-divider">
                 <div className="flex items-center gap-3">
                   <motion.div
                     animate={{ opacity: [1, 0.4, 1] }}
@@ -2752,7 +2752,7 @@ const LiveListingAuditSection = () => {
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-[-40px] border border-dashed border-[#E1E6ED] rounded-full"
+                className="absolute inset-[-40px] border border-dashed border-border-subtle rounded-full"
               />
 
               <svg className="w-full h-full transform -rotate-90 relative z-10 filter drop-shadow-[0_10px_20px_rgba(59,130,246,0.1)]">
@@ -2774,7 +2774,7 @@ const LiveListingAuditSection = () => {
                   key={score}
                   initial={{ scale: 0.9, opacity: 0.8 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className="text-8xl font-black text-slate-900 tracking-tighter"
+                  className="text-8xl font-black text-text-primary tracking-tighter"
                 >
                   {score}
                 </motion.span>
@@ -2789,7 +2789,7 @@ const LiveListingAuditSection = () => {
                     key={cat.id}
                     className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 ${activeCategory === i
                       ? 'bg-bg-secondary border-brand-blue/30 text-brand-blue shadow-[0_10px_30px_rgba(0,0,0,0.04)] ring-1 ring-brand-blue/5'
-                      : 'bg-bg-secondary/50 border-[#E1E6ED] text-[#4A4D55]'
+                      : 'bg-bg-secondary/50 border-border-subtle text-text-secondary'
                       }`}
                   >
                     <span className="text-[11px] font-bold uppercase tracking-wider">{cat.id}</span>
@@ -2802,7 +2802,7 @@ const LiveListingAuditSection = () => {
 
           {/* Right: AI Vision Preview */}
           <div className="lg:col-span-5 flex flex-col">
-            <div className="flex-1 bg-bg-secondary border border-[#E1E6ED] rounded-[40px] p-8 relative overflow-hidden flex flex-col shadow-[0_20px_80px_rgba(0,0,0,0.03)]">
+            <div className="flex-1 bg-bg-secondary border border-border-subtle rounded-[40px] p-8 relative overflow-hidden flex flex-col shadow-[0_20px_80px_rgba(0,0,0,0.03)]">
               {/* Scanner Line Overlay */}
               <motion.div
                 animate={{ top: ['0%', '100%', '0%'] }}
@@ -2817,8 +2817,8 @@ const LiveListingAuditSection = () => {
                       <Layout className="w-6 h-6 text-brand-blue" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-slate-900">Listing Canvas</h3>
-                      <p className="text-[10px] uppercase text-[#4A4D55] font-black tracking-widest">4821 Oakmont Dr, Charlotte</p>
+                      <h3 className="text-xl font-bold text-text-primary">Listing Canvas</h3>
+                      <p className="text-[10px] uppercase text-text-secondary font-black tracking-widest">4821 Oakmont Dr, Charlotte</p>
                     </div>
                   </div>
                   <div className="px-3 py-1.5 bg-brand-blue/10 text-brand-blue rounded-full text-[10px] font-bold border border-brand-blue/20">
@@ -2828,9 +2828,9 @@ const LiveListingAuditSection = () => {
 
                 <div className="space-y-6">
                   {/* Field: Address */}
-                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'address' ? 'bg-brand-blue/5 border-brand-blue/30 ring-1 ring-brand-blue/5' : 'bg-[#FAFBFC] border-[#F0F2F5]'}`}>
-                    <label className="text-[10px] font-black text-[#4A4D55] uppercase tracking-widest mb-2 block">Public Property Source</label>
-                    <p className="text-sm font-semibold text-slate-800">1234 Ont, Chtte, NC 2345</p>
+                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'address' ? 'bg-brand-blue/5 border-brand-blue/30 ring-1 ring-brand-blue/5' : 'bg-[#FAFBFC] border-divider'}`}>
+                    <label className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2 block">Public Property Source</label>
+                    <p className="text-sm font-semibold text-text-primary">1234 Ont, Chtte, NC 2345</p>
                     <div className="mt-3 flex items-center gap-2">
                       <CheckCircle2 className={`w-3.5 h-3.5 ${activeField === 'address' ? 'text-brand-blue' : 'text-slate-300'}`} />
                       <span className="text-[9px] font-bold text-slate-400">Verified against 4 public record sources</span>
@@ -2838,26 +2838,26 @@ const LiveListingAuditSection = () => {
                   </div>
 
                   {/* Field: Remarks */}
-                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'remarks' ? 'bg-amber-50 border-amber-200 ring-1 ring-amber-100' : 'bg-[#FAFBFC] border-[#F0F2F5]'}`}>
-                    <label className="text-[10px] font-black text-[#4A4D55] uppercase tracking-widest mb-2 block">AI Compliance Check</label>
-                    <p className="text-xs text-[#4A4D55] leading-relaxed italic pr-4">
+                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'remarks' ? 'bg-amber-50 border-amber-200 ring-1 ring-amber-100' : 'bg-[#FAFBFC] border-divider'}`}>
+                    <label className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2 block">AI Compliance Check</label>
+                    <p className="text-xs text-text-secondary leading-relaxed italic pr-4">
                       "Stunning 4-bed home with <span className={completedFixes.includes(1) ? "text-emerald-600 font-bold bg-emerald-50 px-1 rounded" : "bg-amber-200 text-amber-800 px-1 rounded"}>{completedFixes.includes(1) ? "close proximity to" : "walking distance to"}</span> Freedom Park. Brand new chef's kitchen..."
                     </p>
                   </div>
 
                   {/* Field: HOA Disclosures */}
-                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'hoa' ? 'bg-brand-blue/5 border-brand-blue/30' : 'bg-[#FAFBFC] border-[#F0F2F5]'}`}>
-                    <label className="text-[10px] font-black text-[#4A4D55] uppercase tracking-widest mb-2 block">Ownership & Encumbrances</label>
+                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'hoa' ? 'bg-brand-blue/5 border-brand-blue/30' : 'bg-[#FAFBFC] border-divider'}`}>
+                    <label className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2 block">Ownership & Encumbrances</label>
                     <div className="flex gap-4">
-                      <div className="flex-1 bg-bg-secondary border border-[#F0F2F5] rounded-xl p-3 text-[10px] text-slate-600 font-bold shadow-sm">HOA: $450/m</div>
-                      <div className="flex-1 bg-bg-secondary border border-[#F0F2F5] rounded-xl p-3 text-[10px] text-brand-blue font-bold shadow-sm">Status: Verified</div>
+                      <div className="flex-1 bg-bg-secondary border border-divider rounded-xl p-3 text-[10px] text-text-secondary font-bold shadow-sm">HOA: $450/m</div>
+                      <div className="flex-1 bg-bg-secondary border border-divider rounded-xl p-3 text-[10px] text-brand-blue font-bold shadow-sm">Status: Verified</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-10 pt-8 border-t border-[#F0F2F5] flex items-center justify-between">
-                <div className="flex items-center gap-3 text-[#4A4D55]">
+              <div className="mt-10 pt-8 border-t border-divider flex items-center justify-between">
+                <div className="flex items-center gap-3 text-text-secondary">
                   <Activity className="w-4 h-4 text-brand-blue" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Confidence: {categories[activeCategory].confidence}%</span>
                 </div>
@@ -2876,7 +2876,7 @@ const LiveListingAuditSection = () => {
             <div className="inline-block px-3 py-1 bg-amber-50 text-amber-600 rounded-lg text-[10px] font-black tracking-widest mb-4 border border-amber-100">
               URGENT ACTIONS
             </div>
-            <h3 className="text-3xl font-bold mb-8 text-slate-900 tracking-tight">Audit Checklist</h3>
+            <h3 className="text-3xl font-bold mb-8 text-text-primary tracking-tight">Audit Checklist</h3>
             <div className="space-y-4">
               {fixes.map((fix) => (
                 <motion.div
@@ -2885,13 +2885,13 @@ const LiveListingAuditSection = () => {
                   whileHover={{ x: 6, backgroundColor: "rgba(59, 130, 246, 0.02)" }}
                   className={`p-5 rounded-[20px] border flex items-center gap-4 cursor-pointer transition-all duration-300 ${completedFixes.includes(fix.id)
                     ? 'bg-emerald-50/50 border-emerald-100 opacity-60'
-                    : 'bg-bg-secondary border-[#E6EAF0] shadow-sm hover:border-brand-blue/30 hover:shadow-md'
+                    : 'bg-bg-secondary border-border-subtle shadow-sm hover:border-brand-blue/30 hover:shadow-md'
                     }`}
                 >
-                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${completedFixes.includes(fix.id) ? 'bg-emerald-500 border-emerald-500' : 'border-[#E1E6ED]'}`}>
+                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${completedFixes.includes(fix.id) ? 'bg-emerald-500 border-emerald-500' : 'border-border-subtle'}`}>
                     {completedFixes.includes(fix.id) && <Check className="w-3.5 h-3.5 text-white" />}
                   </div>
-                  <span className={`text-[13px] font-bold tracking-tight ${completedFixes.includes(fix.id) ? 'line-through text-slate-400' : 'text-slate-800'}`}>
+                  <span className={`text-[13px] font-bold tracking-tight ${completedFixes.includes(fix.id) ? 'line-through text-slate-400' : 'text-text-primary'}`}>
                     {fix.text}
                   </span>
                   {!completedFixes.includes(fix.id) && (
@@ -2904,13 +2904,13 @@ const LiveListingAuditSection = () => {
             </div>
           </div>
 
-          <div className="p-10 rounded-[40px] bg-bg-secondary border border-[#E1E6ED] shadow-[0_40px_100px_rgba(0,0,0,0.04)] relative overflow-hidden">
+          <div className="p-10 rounded-[40px] bg-bg-secondary border border-border-subtle shadow-[0_40px_100px_rgba(0,0,0,0.04)] relative overflow-hidden">
             <div className="absolute top-0 right-0 w-48 h-48 bg-brand-blue/[0.02] rounded-full blur-[60px] -mr-24 -mt-24" />
             <div className="relative z-10">
               <div className="w-12 h-12 rounded-2xl bg-brand-blue/10 flex items-center justify-center mb-8">
                 <Zap className="w-6 h-6 text-brand-blue" />
               </div>
-              <p className="text-slate-800 text-lg leading-relaxed mb-8">
+              <p className="text-text-primary text-lg leading-relaxed mb-8">
                 Your listing data has been verified against <span className="text-brand-blue font-black underline decoration-2 decoration-brand-blue/20 underline-offset-4">150+ regional sources</span>. Accuracy is currently at <span className="text-brand-blue font-black">94%</span>—putting this listing in the top 5% for completeness in your market.
               </p>
               <button className="w-full py-5 bg-brand-blue text-white rounded-2xl font-bold hover:bg-brand-blue-dark hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-xl shadow-brand-blue/20">
@@ -3061,7 +3061,7 @@ const ThreePillarsSection = () => {
                       : pillar.color === 'amber'
                         ? "bg-amber-50 border-amber-600 text-amber-600 border-2"
                         : "bg-indigo-50 border-indigo-600 text-indigo-600 border-2"
-                  : "bg-bg-secondary border-divider text-slate-500 hover:border-slate-300"
+                  : "bg-bg-secondary border-divider text-text-muted hover:border-slate-300"
                 }
               `}
             >
@@ -3091,8 +3091,8 @@ const ThreePillarsSection = () => {
                   {currentPillar.tagline}
                 </div>
 
-                <h3 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">{currentPillar.title}</h3>
-                <p className="text-lg text-slate-500 leading-relaxed mb-8 ">
+                <h3 className="text-3xl md:text-4xl font-bold mb-4 text-text-primary">{currentPillar.title}</h3>
+                <p className="text-lg text-text-muted leading-relaxed mb-8 ">
                   {currentPillar.desc}
                 </p>
 
@@ -3106,7 +3106,7 @@ const ThreePillarsSection = () => {
                       >
                         <Check className="w-4 h-4" />
                       </div>
-                      <span className="text-slate-600 font-medium">{feature}</span>
+                      <span className="text-text-secondary font-medium">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -3132,34 +3132,34 @@ const ThreePillarsSection = () => {
                       currentPillar.color === 'amber' ? 'bg-amber-500' : 'bg-indigo-500'}`}
                 />
 
-                <div className="w-full max-w-[500px] h-[500px] lg:max-w-none bg-bg-secondary border border-slate-200/60 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col">
+                <div className="w-full max-w-[500px] h-[500px] lg:max-w-none bg-bg-secondary border border-divider/60 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col">
                   {/* Browser/Desktop Top Bar */}
-                  <div className="bg-slate-50 border-b border-slate-200/60 px-4 py-3 flex items-center gap-4">
+                  <div className="bg-bg-accent border-b border-divider/60 px-4 py-3 flex items-center gap-4">
                     <div className="flex gap-1.5 opacity-80">
                       <div className="w-3 h-3 rounded-full bg-slate-300" />
                       <div className="w-3 h-3 rounded-full bg-slate-300" />
                       <div className="w-3 h-3 rounded-full bg-slate-300" />
                     </div>
-                    <div className="flex-1 bg-bg-secondary rounded-md border border-slate-200/60 text-[10px] text-slate-400 font-mono px-3 py-1.5 flex items-center justify-center shadow-sm">
+                    <div className="flex-1 bg-bg-secondary rounded-md border border-divider/60 text-[10px] text-slate-400 font-mono px-3 py-1.5 flex items-center justify-center shadow-sm">
                       ria.app/{currentPillar.title.toLowerCase().replace(/ /g, '-')}
                     </div>
                   </div>
 
                   {/* Desktop Content Area */}
-                  <div className="bg-bg-secondary p-6 md:p-8 flex-1 flex flex-col text-slate-800 overflow-hidden">
+                  <div className="bg-bg-secondary p-6 md:p-8 flex-1 flex flex-col text-text-primary overflow-hidden">
                     {/* Header */}
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b border-slate-100 pb-6 shrink-0">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b border-border-subtle pb-6 shrink-0">
                       <div>
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                           {currentPillar.preview.title}
                         </p>
-                        <h4 className="text-2xl font-bold text-slate-900">4221 Oot Dr</h4>
+                        <h4 className="text-2xl font-bold text-text-primary">4221 Oot Dr</h4>
                       </div>
 
                       {/* Overall Progress */}
-                      <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 min-w-[180px]">
+                      <div className="bg-bg-accent rounded-xl p-4 border border-border-subtle min-w-[180px]">
                         <div className="flex justify-between items-center mb-2">
-                          <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Progress</span>
+                          <span className="text-[10px] uppercase tracking-wider text-text-muted font-bold">Progress</span>
                           <span className={`text-sm font-black ${currentPillar.color === 'teal' ? 'text-emerald-600' :
                             currentPillar.color === 'amber' ? 'text-amber-600' : 'text-blue-600'}`}>
                             {currentPillar.preview.progress}%
@@ -3180,12 +3180,12 @@ const ThreePillarsSection = () => {
                     {/* Preview Items - List Layout */}
                     <div className="space-y-3 flex-1 overflow-y-auto custom-scrollbar pr-2 pb-4">
                       {currentPillar.preview.items.map((item, idx) => (
-                        <div key={idx} className="flex justify-between items-center p-3 sm:px-4 sm:py-3 border border-slate-100 rounded-lg hover:border-slate-200 transition-colors bg-bg-secondary hover:bg-slate-50">
-                          <span className="text-sm font-medium text-slate-700">{item.label}</span>
+                        <div key={idx} className="flex justify-between items-center p-3 sm:px-4 sm:py-3 border border-border-subtle rounded-lg hover:border-divider transition-colors bg-bg-secondary hover:bg-bg-accent">
+                          <span className="text-sm font-medium text-text-secondary">{item.label}</span>
                           <span className={`text-[10px] font-bold uppercase py-1 px-2.5 rounded-md
                             ${item.color === 'emerald' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' :
                               item.color === 'blue' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
-                                item.color === 'amber' ? 'bg-amber-50 text-amber-600 border border-amber-100' : 'bg-slate-50 text-slate-500 border border-slate-200'}`}
+                                item.color === 'amber' ? 'bg-amber-50 text-amber-600 border border-amber-100' : 'bg-bg-accent text-text-muted border border-divider'}`}
                           >
                             {item.status}
                           </span>
@@ -3194,7 +3194,7 @@ const ThreePillarsSection = () => {
                     </div>
 
                     {/* Desktop CTA */}
-                    <div className="flex justify-end pt-4 mt-auto border-t border-slate-100 bg-bg-secondary z-10 shrink-0">
+                    <div className="flex justify-end pt-4 mt-auto border-t border-border-subtle bg-bg-secondary z-10 shrink-0">
                       <button className={`px-5 py-2 rounded-lg text-sm font-bold shadow-sm transition-transform hover:-translate-y-0.5
                         ${currentPillar.color === 'teal' ? 'bg-emerald-600 text-white hover:bg-emerald-700' :
                           currentPillar.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700' :
@@ -3274,7 +3274,7 @@ export const VisualIntelligenceStudio = () => {
   const currentTool = tools[activeTool];
 
   return (
-    <section id="virtual-staging" className="py-24 bg-[#F7F9FC]">
+    <section id="virtual-staging" className="py-24 bg-bg-primary">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight mb-4">Transform Every Listing Photo Into a Market-Ready Asset</h2>
@@ -3618,7 +3618,7 @@ export const RoadmapSection = () => {
                 className={`overflow-hidden relative p-4 rounded-2xl border transition-all cursor-pointer group
                   ${isLive
                     ? "bg-bg-secondary border-brand-blue/20 shadow-sm"
-                    : "bg-[#F7F9FC] border-divider border-dashed hover:border-solid hover:-translate-y-1"
+                    : "bg-bg-primary border-divider border-dashed hover:border-solid hover:-translate-y-1"
                   }
                 `}
               >
