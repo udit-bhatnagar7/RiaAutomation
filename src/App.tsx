@@ -353,8 +353,8 @@ const RiaStudio = () => {
       desc: "Professional-grade clarity for every shot.",
       features: ["Color correction & balancing", "Vertical alignment", "Sky replacement"],
       price: "$1.50",
-      before: "https://picsum.photos/seed/studio-dull/1200/800",
-      after: "https://picsum.photos/seed/studio-enhanced/1200/800"
+      before: "/images/staging-after.jpg",
+      after: "/images/os-enhanced-new.jpg"
     },
     {
       id: "Day to Dusk",
@@ -362,8 +362,8 @@ const RiaStudio = () => {
       desc: "Capture the magic of twilight, anytime.",
       features: ["Atmospheric sky transition", "Window light activation", "Exterior glow enhancement"],
       price: "$15",
-      before: "https://picsum.photos/seed/studio-day/1200/800",
-      after: "https://picsum.photos/seed/studio-dusk/1200/800"
+      before: "/images/os-dusk-new.jpg",
+      after: "/images/staging-after.jpg"
     },
     {
       id: "Virtual Item Removal",
@@ -371,8 +371,8 @@ const RiaStudio = () => {
       desc: "Declutter spaces for a cleaner presentation.",
       features: ["Seamless object removal", "Background reconstruction", "Texture matching"],
       price: "$10",
-      before: "https://picsum.photos/seed/studio-clutter/1200/800",
-      after: "https://picsum.photos/seed/studio-clean/1200/800"
+      before: "/images/virtual-erase-done.png",
+      after: "/images/virtual-erase.png"
     }
   ];
 
@@ -400,7 +400,7 @@ const RiaStudio = () => {
           <FadeIn>
             <h2 className="text-4xl font-bold tracking-tight mb-4">Premium Media That Sells. Market-Ready <span className="block"> in Minutes.</span></h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
-              Virtual staging from $29. Enhancement in seconds. Day-to-dusk conversion that makes buyers stop scrolling.
+              Virtual staging Enhancement in seconds. Day-to-dusk conversion that makes buyers stop scrolling.
             </p>
           </FadeIn>
         </div>
@@ -585,10 +585,10 @@ const RiaStudio = () => {
                   </motion.div>
 
                   {/* Labels & Pricing Badge */}
-                  <div className="absolute top-6 left-6 z-20 px-3 py-1 bg-black/50 backdrop-blur text-white text-[10px] font-bold rounded-full">
+                  <div className="absolute top-6 left-6 z-20 px-3 py-1 bg-black/50 backdrop-blur text-white text-[10px] font-bold rounded-full hidden">
                     ORIGINAL
                   </div>
-                  <div className="absolute top-6 right-6 z-30 flex flex-col items-end gap-2">
+                  <div className="absolute top-6 right-6 z-30 flex flex-col items-end gap-2 hidden">
                     <div className="px-3 py-1 bg-brand-blue text-white text-[10px] font-bold rounded-full shadow-lg">
                       RIA ENHANCED
                     </div>
@@ -965,7 +965,7 @@ export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: bool
 
   return (
     <div id={isDemoPage ? undefined : "How Ria Lists Property"} ref={ref}>
-      <section className={`${isDemoPage ? 'pt-32' : 'pt-24'} pb-12 px-6`}>
+      <section className={`${isDemoPage ? 'pt-24' : 'pt-24'} pb-12 px-6`}>
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1009,7 +1009,7 @@ export const WatchRiaThinkSection = ({ isDemoPage = false }: { isDemoPage?: bool
               Operational Intelligence
             </h4>
             <p className="text-xs text-text-secondary leading-relaxed">
-              Ria doesn't just fill forms. It cross-references every data point against your uploaded documents to ensure 100% accuracy and compliance.
+              Ria doesn't just fill forms. It cross-references every data point against your uploaded documents to ensure accuracy and compliance.
             </p>
           </div>
 
@@ -1965,7 +1965,7 @@ function LandingPage() {
                         <div className="grid grid-cols-3 gap-3 w-full">
 
                           <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-sm">
-                            <img src="/images/os-staged.jpg" alt="Virtually Staged" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
+                            <img src="/images/staging-after.jpg" alt="Virtually Staged" loading="lazy" width={400} height={300} className="w-full h-full object-cover border border-border-subtle rounded-lg" referrerPolicy="no-referrer" />
 
                             <div className="absolute top-2 right-2 bg-status-success text-white p-1 rounded-full shadow-sm flex items-center justify-center">
                               <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -2623,7 +2623,7 @@ const LiveListingAuditSection = () => {
   const auditSteps = [
     "Initializing neural audit engine...",
     "Syncing with regional MLS data nodes...",
-    "Verifying tax records for 4821 Oakmont...",
+    "Verifying tax records for 4221 Oot Dr...",
     "HEURISTIC: Checking property subtype...",
     "COMPLIANCE: Scanning public remarks...",
     "MATCH: Found potential Fair Housing trigger...",
@@ -2673,7 +2673,7 @@ const LiveListingAuditSection = () => {
   ];
 
   return (
-    <section className="py-32 bg-bg-primary text-text-primary overflow-hidden relative">
+    <section className="py-24 bg-bg-primary text-text-primary overflow-hidden relative">
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-[140px] -z-10" />
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[140px] -z-10" />
@@ -2818,7 +2818,7 @@ const LiveListingAuditSection = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-text-primary">Listing Canvas</h3>
-                      <p className="text-[10px] uppercase text-text-secondary font-black tracking-widest">4821 Oakmont Dr, Charlotte</p>
+                      <p className="text-[10px] uppercase text-text-secondary font-black tracking-widest">4221 Oot Dr</p>
                     </div>
                   </div>
                   <div className="px-3 py-1.5 bg-brand-blue/10 text-brand-blue rounded-full text-[10px] font-bold border border-brand-blue/20">
@@ -2830,7 +2830,7 @@ const LiveListingAuditSection = () => {
                   {/* Field: Address */}
                   <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'address' ? 'bg-brand-blue/5 border-brand-blue/30 ring-1 ring-brand-blue/5' : 'bg-[#FAFBFC] border-divider'}`}>
                     <label className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2 block">Public Property Source</label>
-                    <p className="text-sm font-semibold text-text-primary">1234 Ont, Chtte, NC 2345</p>
+                    <p className="text-sm font-semibold text-text-primary">4221 Oot Dr</p>
                     <div className="mt-3 flex items-center gap-2">
                       <CheckCircle2 className={`w-3.5 h-3.5 ${activeField === 'address' ? 'text-brand-blue' : 'text-slate-300'}`} />
                       <span className="text-[9px] font-bold text-slate-400">Verified against 4 public record sources</span>
@@ -2871,7 +2871,7 @@ const LiveListingAuditSection = () => {
         </div>
 
         {/* Action Panel */}
-        <div className="mt-24 grid md:grid-cols-2 gap-16 items-start">
+        <div className="mt-24 grid md:grid-cols-2 gap-16 items-start hidden">
           <div>
             <div className="inline-block px-3 py-1 bg-amber-50 text-amber-600 rounded-lg text-[10px] font-black tracking-widest mb-4 border border-amber-100">
               URGENT ACTIONS
@@ -2942,7 +2942,7 @@ const ThreePillarsSection = () => {
       cta: "Automate your listing assembly",
       color: "blue",
       preview: {
-        title: "MLS Draft: 4821 Oakmont",
+        title: "MLS Draft: 4221 Oot Dr",
         progress: 92,
         items: [
           { label: "Tax record sync", status: "Completed", color: "emerald" },
@@ -2966,7 +2966,7 @@ const ThreePillarsSection = () => {
       cta: "Enhance your listing visuals",
       color: "indigo",
       preview: {
-        title: "Media Assets: 4821 Oakmont",
+        title: "Media Assets: 4221 Oot Dr",
         progress: 65,
         items: [
           { label: "Exterior enhancement", status: "Completed", color: "emerald" },
@@ -3014,7 +3014,7 @@ const ThreePillarsSection = () => {
       cta: "Audit your listing quality",
       color: "amber",
       preview: {
-        title: "Audit Score: 4821 Oakmont",
+        title: "Audit Score: 4221 Oot Dr",
         progress: 94,
         items: [
           { label: "MLS Field Accuracy", status: "98%", color: "emerald" },
@@ -3140,8 +3140,8 @@ const ThreePillarsSection = () => {
                       <div className="w-3 h-3 rounded-full bg-slate-300" />
                       <div className="w-3 h-3 rounded-full bg-slate-300" />
                     </div>
-                    <div className="flex-1 bg-bg-secondary rounded-md border border-divider/60 text-[10px] text-slate-400 font-mono px-3 py-1.5 flex items-center justify-center shadow-sm">
-                      ria.app/{currentPillar.title.toLowerCase().replace(/ /g, '-')}
+                    <div className="flex-1 bg-bg-secondary rounded-md border border-divider/60 text-[10px] text-slate-400 font-mono px-3 py-4.5 flex items-center justify-center shadow-sm">
+                      {/* ria.app/{currentPillar.title.toLowerCase().replace(/ /g, '-')} */}
                     </div>
                   </div>
 
