@@ -398,7 +398,8 @@ const RiaStudio = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <FadeIn>
-            <h2 className="text-4xl font-bold tracking-tight mb-4">Premium Media That Sells. Market-Ready <span className="block"> in Minutes.</span></h2>
+            <h2 className="text-4xl font-bold tracking-tight mb-4">Market-Ready Media
+              <span> in Minutes.</span></h2>
             <p className="text-text-secondary max-w-2xl mx-auto">
               Virtual staging Enhancement in seconds. Day-to-dusk conversion that makes buyers stop scrolling.
             </p>
@@ -812,7 +813,11 @@ const MainNavigation = ({ showBanner, onDismissBanner, isDark, toggleTheme }: { 
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-3">
               <div className="w-[53px] h-10 md:w-11 md:h-11 overflow-hidden shrink-0">
-                <img src="/images/logo.jpg" alt="RIA Logo" className="w-full h-full object-cover mix-blend-darken" />
+                <img
+                  src="/images/logo.jpg"
+                  alt="RIA Logo"
+                  className={`w-full h-full object-cover${isDark ? "" : " mix-blend-darken"}`}
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-lg leading-none tracking-tight text-text-primary">RIA</span>
@@ -2756,7 +2761,7 @@ const LiveListingAuditSection = () => {
               />
 
               <svg className="w-full h-full transform -rotate-90 relative z-10 filter drop-shadow-[0_10px_20px_rgba(59,130,246,0.1)]">
-                <circle cx="144" cy="144" r="130" stroke="#F1F4F9" strokeWidth="14" fill="#FFFFFF" />
+                <circle cx="144" cy="144" r="130" stroke="var(--divider)" strokeWidth="14" fill="var(--bg-secondary)" />
                 <motion.circle
                   cx="144" cy="144" r="130"
                   stroke="currentColor" strokeWidth="14" fill="transparent"
@@ -2778,7 +2783,7 @@ const LiveListingAuditSection = () => {
                 >
                   {score}
                 </motion.span>
-                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-2">Quality Index</span>
+                <span className="text-[11px] font-bold text-text-muted uppercase tracking-[0.2em] mt-2">Quality Index</span>
               </div>
             </motion.div>
 
@@ -2793,7 +2798,7 @@ const LiveListingAuditSection = () => {
                       }`}
                   >
                     <span className="text-[11px] font-bold uppercase tracking-wider">{cat.id}</span>
-                    <span className={`text-sm font-black ${activeCategory === i ? 'text-brand-blue' : 'text-slate-400'}`}>{cat.score}%</span>
+                    <span className={`text-sm font-black ${activeCategory === i ? 'text-brand-blue' : 'text-text-muted'}`}>{cat.score}%</span>
                   </div>
                 ))}
               </div>
@@ -2813,7 +2818,7 @@ const LiveListingAuditSection = () => {
               <div className="relative z-10 flex-1">
                 <div className="flex items-center justify-between mb-10">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#F1F4F9] flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-2xl bg-bg-accent flex items-center justify-center">
                       <Layout className="w-6 h-6 text-brand-blue" />
                     </div>
                     <div>
@@ -2828,25 +2833,25 @@ const LiveListingAuditSection = () => {
 
                 <div className="space-y-6">
                   {/* Field: Address */}
-                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'address' ? 'bg-brand-blue/5 border-brand-blue/30 ring-1 ring-brand-blue/5' : 'bg-[#FAFBFC] border-divider'}`}>
+                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'address' ? 'bg-brand-blue/5 border-brand-blue/30 ring-1 ring-brand-blue/5' : 'bg-bg-accent border-divider'}`}>
                     <label className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2 block">Public Property Source</label>
                     <p className="text-sm font-semibold text-text-primary">4221 Oot Dr</p>
                     <div className="mt-3 flex items-center gap-2">
-                      <CheckCircle2 className={`w-3.5 h-3.5 ${activeField === 'address' ? 'text-brand-blue' : 'text-slate-300'}`} />
-                      <span className="text-[9px] font-bold text-slate-400">Verified against 4 public record sources</span>
+                      <CheckCircle2 className={`w-3.5 h-3.5 ${activeField === 'address' ? 'text-brand-blue' : 'text-text-muted opacity-40'}`} />
+                      <span className="text-[9px] font-bold text-text-muted">Verified against 4 public record sources</span>
                     </div>
                   </div>
 
                   {/* Field: Remarks */}
-                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'remarks' ? 'bg-amber-50 border-amber-200 ring-1 ring-amber-100' : 'bg-[#FAFBFC] border-divider'}`}>
+                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'remarks' ? 'bg-amber-500/10 border-amber-500/20 ring-1 ring-amber-500/10' : 'bg-bg-accent border-divider'}`}>
                     <label className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2 block">AI Compliance Check</label>
                     <p className="text-xs text-text-secondary leading-relaxed italic pr-4">
-                      "Stunning 4-bed home with <span className={completedFixes.includes(1) ? "text-emerald-600 font-bold bg-emerald-50 px-1 rounded" : "bg-amber-200 text-amber-800 px-1 rounded"}>{completedFixes.includes(1) ? "close proximity to" : "walking distance to"}</span> Freedom Park. Brand new chef's kitchen..."
+                      "Stunning 4-bed home with <span className={completedFixes.includes(1) ? "text-emerald-600 font-bold bg-emerald-500/15 px-1 rounded" : "bg-amber-500/15 text-amber-700 font-bold px-1 rounded"}>{completedFixes.includes(1) ? "close proximity to" : "walking distance to"}</span> Freedom Park. Brand new chef's kitchen..."
                     </p>
                   </div>
 
                   {/* Field: HOA Disclosures */}
-                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'hoa' ? 'bg-brand-blue/5 border-brand-blue/30' : 'bg-[#FAFBFC] border-divider'}`}>
+                  <div className={`p-5 rounded-2xl border transition-all duration-500 ${activeField === 'hoa' ? 'bg-brand-blue/5 border-brand-blue/30' : 'bg-bg-accent border-divider'}`}>
                     <label className="text-[10px] font-black text-text-secondary uppercase tracking-widest mb-2 block">Ownership & Encumbrances</label>
                     <div className="flex gap-4">
                       <div className="flex-1 bg-bg-secondary border border-divider rounded-xl p-3 text-[10px] text-text-secondary font-bold shadow-sm">HOA: $450/m</div>
@@ -2861,7 +2866,7 @@ const LiveListingAuditSection = () => {
                   <Activity className="w-4 h-4 text-brand-blue" />
                   <span className="text-[10px] font-bold uppercase tracking-widest">Confidence: {categories[activeCategory].confidence}%</span>
                 </div>
-                <div className="flex gap-3 text-[#E1E6ED]">
+                <div className="flex gap-3 text-text-muted/30">
                   <FileText className="w-4 h-4" />
                   <Search className="w-4 h-4" />
                 </div>
